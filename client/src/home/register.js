@@ -13,7 +13,6 @@ const Register = () => {
   return (
     <Grid container spacing={4} id="register">
       {/* REGISTER AS DOCTOR */}
-
       <Grid item xs={12} md={6}>
         <CardActionArea component="a" href="#">
           <Card sx={{ display: "flex" }}>
@@ -44,6 +43,7 @@ const Register = () => {
               >
                 Sign Up
               </Button>
+
               <Button
                 sx={{
                   backgroundColor: "#3284be",
@@ -61,6 +61,8 @@ const Register = () => {
                 Sign In
               </Button>
             </CardContent>
+
+            {/* Image */}
             <CardMedia
               component="img"
               sx={{ width: 160, display: { xs: "none", sm: "block" } }}
@@ -72,7 +74,6 @@ const Register = () => {
       </Grid>
 
       {/* REGISTER AS PATIENT */}
-
       <Grid item xs={12} md={6}>
         <CardActionArea component="a" href="#">
           <Card sx={{ display: "flex" }}>
@@ -103,6 +104,7 @@ const Register = () => {
               >
                 Sign Up
               </Button>
+
               <Button
                 sx={{
                   backgroundColor: "#3284be",
@@ -120,6 +122,8 @@ const Register = () => {
                 Sign In
               </Button>
             </CardContent>
+
+            {/* Image */}
             <CardMedia
               component="img"
               sx={{ width: 160, display: { xs: "none", sm: "block" } }}

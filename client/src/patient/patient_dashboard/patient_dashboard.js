@@ -11,20 +11,6 @@ const Patient_Dashboard = () => {
       <Navbar />
       <Container maxWidth="lg" sx={{ mt: "12vh", ml: "5vw" }}>
         <Grid container spacing={3}>
-          {/* Chart */}
-          {/* Recent Deposits */}
-          <Grid item xs={12} md={4} lg={3}>
-            <Paper
-              sx={{
-                p: 2,
-                display: "flex",
-                flexDirection: "column",
-                height: 240,
-              }}
-            >
-              <Deposits />
-            </Paper>
-          </Grid>
           <Grid item xs={12} md={8} lg={9}>
             <Paper
               sx={{
@@ -35,13 +21,19 @@ const Patient_Dashboard = () => {
               }}
             >
               <Form />
-              Your Profile is not verified!
             </Paper>
           </Grid>
-          {/* Recent Orders */}
-          <Grid item xs={12}>
-            <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-              <Records />
+
+          <Grid item xs={12} md={4} lg={3}>
+            <Paper
+              sx={{
+                p: 2,
+                display: "flex",
+                flexDirection: "column",
+                height: 240,
+              }}
+            >
+              <Deposits />
             </Paper>
           </Grid>
         </Grid>
