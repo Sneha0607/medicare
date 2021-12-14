@@ -43,11 +43,6 @@ const App = () => {
                 <Switch>
                   <Route
                     exact
-                    path="/doctor_details"
-                    component={Doctor_Details}
-                  />
-                  <Route
-                    exact
                     path="/doctor/dashboard"
                     component={Doctor_Dashboard}
                   />

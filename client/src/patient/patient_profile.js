@@ -32,11 +32,14 @@ const Patient_Profile = () => {
                       <Typography>Name: {patient.name}</Typography>
                       <Typography>Age: {patient.age}</Typography>
                       <Typography>Gender: {patient.gender}</Typography>
-                      <Typography>Address: {patient.address}</Typography>
-                      <Typography>{patient.city}</Typography>
-                      <Typography>{patient.state}</Typography>
-                      <Typography>{patient.country}</Typography>
-                      <Typography>{patient.pincode}</Typography>
+                      <Typography>Blood Group: {patient.bloodGroup}</Typography>
+                      <Typography>
+                        Address: {patient.address1}, {patient.address2}
+                      </Typography>
+                      <Typography>City: {patient.city}</Typography>
+                      <Typography>State: {patient.state}</Typography>
+                      <Typography>Country: {patient.country}</Typography>
+                      <Typography>Pincode: {patient.pincode}</Typography>
                     </>
                   );
               })}

@@ -35,7 +35,6 @@ const Doctor_Details = () => {
   const [pincodeError, setPincodeError] = useState("");
   const [countryError, setCountryError] = useState("");
   const history = useHistory();
-  const { currentUser } = useAuth();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -77,21 +76,8 @@ const Doctor_Details = () => {
     }
 
     //PUSHING USER DATA IN DATABASE
-    const doctorRef = db.doc(`doctors/${currentUser.uid}`);
-    doctorRef.set({
-      uid: currentUser.uid,
-      name,
-      age,
-      gender,
-      address,
-      city,
-      state,
-      country,
-      pincode,
-      submittedAt: new Date(),
-    });
 
-    history.push(`/doctor/profile/${currentUser.uid}`);
+    history.push(`/doctor/profile/}`);
   };
 
   return (

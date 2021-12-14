@@ -2,8 +2,7 @@ import React from "react";
 import { Grid, Paper, Container } from "@mui/material";
 import Navbar from "../navbar";
 import Form from "./form";
-import Deposits from "./Deposits";
-import Records from "./records";
+import Upload from "./upload";
 
 const Patient_Dashboard = () => {
   return (
@@ -17,7 +16,7 @@ const Patient_Dashboard = () => {
                 p: 2,
                 display: "flex",
                 flexDirection: "column",
-                height: 240,
+                height: "100vh",
               }}
             >
               <Form />
@@ -30,10 +29,10 @@ const Patient_Dashboard = () => {
                 p: 2,
                 display: "flex",
                 flexDirection: "column",
-                height: 240,
+                height: "100vh",
               }}
             >
-              <Deposits />
+              <Upload />
             </Paper>
           </Grid>
         </Grid>
