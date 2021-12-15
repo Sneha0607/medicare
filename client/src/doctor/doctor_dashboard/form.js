@@ -1,177 +1,304 @@
-import { React, useState, useEffect, useRef } from "react";
+import { React, useState } from "react";
+import { useHistory } from "react-router-dom";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import {
+  Alert,
   Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
   Grid,
-  Paper,
-  Radio,
-  FormControlLabel,
-  FormControl,
-  FormLabel,
-  RadioGroup,
   Box,
   TextField,
-  CssBaseline,
   MenuItem,
-  InputLabel,
-  Select,
+  Typography,
 } from "@mui/material";
+import { useAuth } from "../../contexts/AuthContext";
+import { db } from "../../firebase";
+
+const theme = createTheme();
 
 const Form = () => {
-  const [open, setOpen] = useState(false);
-  const [scroll, setScroll] = useState("paper");
-
-  const handleClickOpen = (scrollType) => () => {
-    setOpen(true);
-    setScroll(scrollType);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const descriptionElementRef = useRef(null);
-  useEffect(() => {
-    if (open) {
-      const { current: descriptionElement } = descriptionElementRef;
-      if (descriptionElement !== null) {
-        descriptionElement.focus();
-      }
-    }
-  }, [open]);
-
-  const handleSubmit = () => {};
-
+  const [name, setName] = useState("");
+  const [medicalSpeciality, setMedicalSpeciality] = useState("");
   const [age, setAge] = useState("");
+  const [gender, setGender] = useState("");
+  const [degree, setDegree] = useState("");
+  const [regNumber, setRegNumber] = useState("");
+  const [yearOfReg, setYearOfReg] = useState("");
+  const [stateMedicalCouncil, setStateMedicalCouncil] = useState("");
+  const [experience, setExperience] = useState("");
+  const [address1, setAddress1] = useState("");
+  const [address2, setAddress2] = useState("");
+  const [city, setCity] = useState("");
+  const [state, setState] = useState("");
+  const [pincode, setPincode] = useState("");
+  const [country, setCountry] = useState("");
+  const [nameError, setNameError] = useState("");
+  const [medicalSpecialityError, setMedicalSpecialityError] = useState("");
+  const [ageError, setAgeError] = useState("");
+  const [genderError, setGenderError] = useState("");
+  const [addressError, setAddressError] = useState("");
+  const [cityError, setCityError] = useState("");
+  const [stateError, setStateError] = useState("");
+  const [pincodeError, setPincodeError] = useState("");
+  const [countryError, setCountryError] = useState("");
+  const { currentUser } = useAuth();
+  const history = useHistory();
 
-  const handleChange = (event) => {
-    setAge(event.target.value);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setNameError("");
+    setMedicalSpeciality("");
+    setAgeError();
+    setGenderError("");
+    setCityError("");
+    setStateError("");
+    setPincodeError();
+    setCountryError("");
+
+    //PUSHING USER DATA IN DATABASE
+    const doctorRef = db.doc(`doctors/${currentUser.uid}`);
+    doctorRef.set({
+      uid: currentUser.uid,
+      name,
+      medicalSpeciality,
+      age,
+      regNumber,
+      experience,
+      stateMedicalCouncil,
+      gender,
+      address1,
+      address2,
+      city,
+      state,
+      country,
+      pincode,
+      isVerified: "pending",
+      updatedAt: new Date(),
+    });
+
+    history.push("/doctor/profile");
+  };
+
+  const handleChangeGender = (e) => {
+    setGender(e.target.value);
   };
 
   return (
-    <div>
-      <Button onClick={handleClickOpen("paper")}>
-        Complete/Edit your basic details
-      </Button>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        scroll={scroll}
-        aria-labelledby="scroll-dialog-title"
-        aria-describedby="scroll-dialog-description"
-      >
-        <DialogTitle id="scroll-dialog-title">Patient Information</DialogTitle>
-        <DialogContent dividers={scroll === "paper"}>
-          <DialogContentText
-            id="scroll-dialog-description"
-            ref={descriptionElementRef}
-            tabIndex={-1}
-          >
-            <Grid container component="main" sx={{ height: "100vh" }}>
-              <CssBaseline />
-              <Grid
-                item
-                xs={12}
-                sm={12}
-                md={12}
-                component={Paper}
-                elevation={6}
-                square
-              >
-                <Box
-                  sx={{
-                    my: 4,
-                    mx: 4,
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                  }}
-                >
-                  <Box
-                    component="form"
-                    noValidate
-                    onSubmit={handleSubmit}
-                    sx={{ mt: 1 }}
-                  >
-                    <Grid container spacing={2}>
-                      <Grid item xs={12}>
-                        <TextField
-                          name="Name"
-                          required
-                          fullWidth
-                          label="Name"
-                          autoFocus
-                        />
-                      </Grid>
-                      <Grid item xs={12}>
-                        <Box sx={{ minWidth: 120 }}>
-                          <FormControl fullWidth>
-                            <InputLabel id="demo-simple-select-label">
-                              Age *
-                            </InputLabel>
-                            <Select
-                              labelId="demo-simple-select-label"
-                              id="demo-simple-select"
-                              value={age}
-                              label="Age"
-                              onChange={handleChange}
-                            >
-                              <MenuItem value={10}>Ten</MenuItem>
-                              <MenuItem value={20}>Twenty</MenuItem>
-                              <MenuItem value={30}>Thirty</MenuItem>
-                            </Select>
-                          </FormControl>
-                        </Box>
-                      </Grid>
-                      <Grid item xs={12}>
-                        <FormLabel component="legend">Gender</FormLabel>
-                        <RadioGroup
-                          row
-                          aria-label="gender"
-                          name="row-radio-buttons-group"
-                        >
-                          <FormControlLabel
-                            value="female"
-                            control={<Radio />}
-                            label="Female"
-                          />
-                          <FormControlLabel
-                            value="male"
-                            control={<Radio />}
-                            label="Male"
-                          />
-                          <FormControlLabel
-                            value="other"
-                            control={<Radio />}
-                            label="Other"
-                          />
-                        </RadioGroup>
-                      </Grid>
-                    </Grid>
-                    <Button
-                      type="submit"
-                      fullWidth
-                      variant="contained"
-                      sx={{ mt: 3, mb: 2 }}
-                    >
-                      Submit
-                    </Button>
-                  </Box>
-                </Box>
-              </Grid>
+    <ThemeProvider theme={theme}>
+      <form onSubmit={handleSubmit}>
+        <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+          {nameError && <Alert severity="error">{nameError}</Alert>}
+          {ageError && <Alert severity="error">{ageError}</Alert>}
+          {genderError && <Alert severity="error">{genderError}</Alert>}
+          {addressError && <Alert severity="error">{addressError}</Alert>}
+          {cityError && <Alert severity="error">{cityError}</Alert>}
+          {stateError && <Alert severity="error">{stateError}</Alert>}
+          {countryError && <Alert severity="error">{countryError}</Alert>}
+          {pincodeError && <Alert severity="error">{pincodeError}</Alert>}
+          <Grid container spacing={1}>
+            <Grid item xs={12}>
+              <Typography>Complete/Edit Your Details</Typography>
+              <Typography>Changes will be reflected in your profile</Typography>
             </Grid>
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose}>Save</Button>
-        </DialogActions>
-      </Dialog>
-    </div>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                required
+                id="Name"
+                name="Name"
+                label="Name"
+                fullWidth
+                size="small"
+                onChange={(e) => setName(e.target.value)}
+                error={nameError}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                required
+                id="Medical Speciality"
+                name="Medical Speciality"
+                label="Medical Speciality"
+                fullWidth
+                size="small"
+                onChange={(e) => setMedicalSpeciality(e.target.value)}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                required
+                id="age"
+                name="age"
+                label="Age (in Years)"
+                fullWidth
+                autoComplete="age"
+                size="small"
+                onChange={(e) => setAge(e.target.value)}
+                error={ageError}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                required
+                id="gender"
+                name="gender"
+                label="Gender"
+                fullWidth
+                select
+                autoComplete="gender"
+                size="small"
+                onChange={handleChangeGender}
+                error={genderError}
+              >
+                <MenuItem value="Female">Female</MenuItem>
+                <MenuItem value="Male">Male</MenuItem>
+                <MenuItem value="Other">Other</MenuItem>
+              </TextField>
+            </Grid>
+            <Grid item xs={12} sm={12}>
+              <TextField
+                required
+                id="Degrees"
+                name="Degrees"
+                label="Degrees (separated by comma)"
+                fullWidth
+                size="small"
+                onChange={(e) => setDegree(e.target.value)}
+                error={ageError}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                required
+                id="Registration Number"
+                name="Registration Number"
+                label="Registration Number"
+                fullWidth
+                size="small"
+                onChange={(e) => setRegNumber(e.target.value)}
+                error={ageError}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                required
+                id="Year of Registration"
+                name="Year of Registration"
+                label="Year of Registration"
+                fullWidth
+                size="small"
+                onChange={(e) => setYearOfReg(e.target.value)}
+                error={ageError}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                required
+                id="State Medical Council"
+                name="State Medical Council"
+                label="State Medical Council"
+                fullWidth
+                size="small"
+                onChange={(e) => setStateMedicalCouncil(e.target.value)}
+                error={ageError}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                required
+                id="Experience"
+                name="Experience"
+                label="Experience (Years)"
+                fullWidth
+                size="small"
+                onChange={(e) => setExperience(e.target.value)}
+                error={ageError}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                required
+                id="address1"
+                name="address1"
+                label="Address Line 1"
+                fullWidth
+                autoComplete="shipping address-line1"
+                size="small"
+                onChange={(e) => setAddress1(e.target.value)}
+                error={addressError}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                required
+                id="address2"
+                name="address2"
+                label="Address Line 2"
+                fullWidth
+                autoComplete="shipping address-line2"
+                size="small"
+                onChange={(e) => setAddress2(e.target.value)}
+                error={addressError}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                required
+                id="city"
+                name="city"
+                label="City"
+                fullWidth
+                autoComplete="shipping address-level2"
+                size="small"
+                onChange={(e) => setCity(e.target.value)}
+                error={cityError}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                required
+                id="state"
+                name="state"
+                label="State/Province/Region"
+                fullWidth
+                size="small"
+                onChange={(e) => setState(e.target.value)}
+                error={stateError}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                required
+                id="country"
+                name="country"
+                label="Country"
+                fullWidth
+                autoComplete="shipping country"
+                size="small"
+                onChange={(e) => setCountry(e.target.value)}
+                error={countryError}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                required
+                id="zip"
+                name="zip"
+                label="Zip / Postal code"
+                fullWidth
+                autoComplete="shipping postal-code"
+                size="small"
+                onChange={(e) => setPincode(e.target.value)}
+                error={pincodeError}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <Button type="submit" variant="contained">
+                Update
+              </Button>
+            </Grid>
+          </Grid>
+        </Box>
+      </form>
+    </ThemeProvider>
   );
 };
 

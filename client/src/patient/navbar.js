@@ -111,7 +111,7 @@ const Navbar = () => {
           </ListItem>
 
           {/* VIEW DOCTORS */}
-          <ListItem button component="a" href="/patient/doctor/profiles">
+          <ListItem button component="a" href="/patient/view_doctors">
             <Tooltip title="View Doctors" placement="right">
               <ListItemIcon>
                 <PeopleIcon />
@@ -121,7 +121,7 @@ const Navbar = () => {
           </ListItem>
 
           {/* BOOK APPOINTMENTS */}
-          <ListItem button component="a" href="/patient/book_appointment/">
+          <ListItem button component="a" href="/patient/book_appointment">
             <Tooltip title="Book Appointment" placement="right">
               <ListItemIcon>
                 <CreateIcon />
@@ -141,7 +141,7 @@ const Navbar = () => {
           </ListItem>
 
           {/* SCHEDULED MEETINGS */}
-          <ListItem button component="a" href="/patient/meetings/new/">
+          <ListItem button component="a" href="/patient/meetings/new">
             <Tooltip title="Scheduled Meetings" placement="right">
               <ListItemIcon>
                 <DateRangeIcon />
@@ -151,7 +151,7 @@ const Navbar = () => {
           </ListItem>
 
           {/* YOUR MEETINGS */}
-          <ListItem button component="a" href="/patient/meetings/old/">
+          <ListItem button component="a" href="/patient/meetings/old">
             <Tooltip title="Your Meetings" placement="right">
               <ListItemIcon>
                 <VideocamIcon />

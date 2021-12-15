@@ -26,18 +26,41 @@ const Doctor_Profile = () => {
           <Grid item xs={12}>
             <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
               <Title>Profile</Title>
+              <Typography sx={{ fontStyle: "italic" }}>
+                (You can update these details by going to the dashboard tab)
+              </Typography>
+              <br />
               {doctors.map((doctor) => {
                 if (doctor.uid === currentUser.uid)
                   return (
                     <>
                       <Typography>Name: {doctor.name}</Typography>
+                      <Typography>
+                        Medical Speciality: {doctor.medicalSpeciality}
+                      </Typography>
+                      <Typography>
+                        Experience: {doctor.experience} years
+                      </Typography>
                       <Typography>Age: {doctor.age}</Typography>
                       <Typography>Gender: {doctor.gender}</Typography>
-                      <Typography>Address: {doctor.address}</Typography>
-                      <Typography>{doctor.city}</Typography>
-                      <Typography>{doctor.state}</Typography>
-                      <Typography>{doctor.country}</Typography>
-                      <Typography>{doctor.pincode}</Typography>
+                      <Typography>Degree: {doctor.degree}</Typography>
+                      <Typography>
+                        Address: {doctor.address1}, {doctor.address2}
+                      </Typography>
+                      <Typography>City: {doctor.city}</Typography>
+                      <Typography>State: {doctor.state}</Typography>
+                      <Typography>Country: {doctor.country}</Typography>
+                      <Typography>Pincode: {doctor.pincode}</Typography>
+                      <Typography>
+                        Last updated at:{" "}
+                        {new Date(
+                          doctor.updatedAt.seconds * 1000
+                        ).toLocaleDateString("en-US")}
+                        , at{" "}
+                        {new Date(doctor.updatedAt.seconds * 1000).getHours()}:
+                        {new Date(doctor.updatedAt.seconds * 1000).getMinutes()}{" "}
+                        hrs
+                      </Typography>
                     </>
                   );
               })}

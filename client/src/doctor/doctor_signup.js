@@ -69,6 +69,7 @@ const Doctor_Signup = () => {
           name,
           email,
           uid: user.uid,
+          isVerified: false,
         });
       })
       .then(() => {

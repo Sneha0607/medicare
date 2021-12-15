@@ -10,7 +10,7 @@ import Doctor_Details from "../doctor/doctor_details/doctor_details";
 import Doctor_Dashboard from "../doctor/doctor_dashboard/doctor_dashboard";
 import Doctor_Profile from "../doctor/doctor_profile";
 
-const App = () => {
+const Doctor_Routes = () => {
   const [user, setUser] = useState("");
 
   //SETTING THE USER IF HE IS AUTHENTICATED
@@ -70,4 +70,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Doctor_Routes;

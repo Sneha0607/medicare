@@ -97,6 +97,7 @@ const Form = () => {
       state,
       country,
       pincode,
+      isVerified: "pending",
       updatedAt: new Date(),
     });
 

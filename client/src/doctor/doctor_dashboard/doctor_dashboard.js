@@ -11,34 +11,29 @@ const Doctor_Dashboard = () => {
       <Navbar />
       <Container maxWidth="lg" sx={{ mt: "12vh", ml: "5vw" }}>
         <Grid container spacing={3}>
-          <Grid item xs={12} md={4} lg={3}>
-            <Paper
-              sx={{
-                p: 2,
-                display: "flex",
-                flexDirection: "column",
-                height: 240,
-              }}
-            >
-              <Upload />
-            </Paper>
-          </Grid>
           <Grid item xs={12} md={8} lg={9}>
             <Paper
               sx={{
                 p: 2,
                 display: "flex",
                 flexDirection: "column",
-                height: 240,
+                height: "100vh",
               }}
             >
               <Form />
-              Your Profile is not verified!
             </Paper>
           </Grid>
-          <Grid item xs={12}>
-            <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-              <Records />
+
+          <Grid item xs={12} md={4} lg={3}>
+            <Paper
+              sx={{
+                p: 2,
+                display: "flex",
+                flexDirection: "column",
+                height: "100vh",
+              }}
+            >
+              <Upload />
             </Paper>
           </Grid>
         </Grid>

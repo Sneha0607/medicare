@@ -113,6 +113,7 @@ const Patient_Signup = () => {
           name: cred.user.displayName,
           email: cred.user.email,
           uid: cred.user.uid,
+          isVerified: false,
         });
       })
       .then(() => {
