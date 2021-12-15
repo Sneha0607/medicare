@@ -3,12 +3,13 @@ import Navbar from "./navbar";
 import { useAuth } from "../contexts/AuthContext";
 import { db } from "../firebase";
 import { Container, Grid, Paper, Typography } from "@mui/material";
-import Title from "./patient_dashboard/Title";
+import Title from "./patient_dashboard/title";
 
 const Patient_Profile = () => {
   const { currentUser } = useAuth();
   const [patients, setPatients] = useState([]);
 
+  // FETCHING PATIENT'S DATA FROM DB
   useEffect(() => {
     db.collection("patients").onSnapshot((snapshot) => {
       setPatients(snapshot.docs.map((doc) => doc.data()));

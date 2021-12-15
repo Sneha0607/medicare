@@ -26,6 +26,7 @@ const Doctor_Signin = () => {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
 
+  // SIGN IN WITH EMAIL AND PASSWORD FUNCTION
   const handleSignin = (e) => {
     e.preventDefault();
     if (email === "" || password === "") {
@@ -35,7 +36,7 @@ const Doctor_Signin = () => {
     auth
       .signInWithEmailAndPassword(email, password)
       .then(() => {
-        history.push(`/doctor/dashboard`);
+        history.push("/doctor/profile");
       })
       .catch((err) => {
         switch (err.code) {
@@ -52,6 +53,7 @@ const Doctor_Signin = () => {
       });
   };
 
+  // SIGN IN WITH GOOGLE FUNCTION
   const signInWithGoogle = () => {
     const provider = new firebase.auth.GoogleAuthProvider();
     firebase
@@ -106,8 +108,11 @@ const Doctor_Signin = () => {
               onSubmit={handleSignin}
               sx={{ mt: 1 }}
             >
+              {/* ERROR ALERTS */}
               {emailError && <Alert severity="error">{emailError}</Alert>}
               {passwordError && <Alert severity="error">{passwordError}</Alert>}
+
+              {/* EMAIL TEXTFIELD */}
               <TextField
                 margin="normal"
                 required
@@ -121,6 +126,8 @@ const Doctor_Signin = () => {
                 onChange={(e) => setEmail(e.target.value)}
                 error={emailError}
               />
+
+              {/* PASSWORD TEXTFIELD */}
               <TextField
                 margin="normal"
                 required
@@ -134,6 +141,7 @@ const Doctor_Signin = () => {
                 error={passwordError}
               />
 
+              {/* SIGN IN BUTTON */}
               <Button
                 type="submit"
                 fullWidth
@@ -152,6 +160,7 @@ const Doctor_Signin = () => {
                 OR
               </Typography>
 
+              {/* SIGN IN WITH GOOGLE */}
               <Grid item xs={12}>
                 <Button
                   variant="outline"
@@ -161,7 +170,7 @@ const Doctor_Signin = () => {
                   startIcon={<GoogleIcon />}
                   onClick={() => signInWithGoogle()}
                 >
-                  Sign up with Google
+                  Sign in with Google
                 </Button>
               </Grid>
 

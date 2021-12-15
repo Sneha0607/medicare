@@ -29,7 +29,7 @@ const Patient_Signup = () => {
   const [nameError, setNameError] = useState("");
   const history = useHistory();
 
-  //SIGNUP FUNCTION
+  // SIGNUP WITH EMAIL AND PASSWORD FUNCTION
   const handleSignup = (e) => {
     e.preventDefault();
     setPasswordError("");
@@ -43,7 +43,7 @@ const Patient_Signup = () => {
       return;
     }
 
-    //Check authentication
+    // CHECK AUTHENTICATION
     auth
       .createUserWithEmailAndPassword(email, password)
       .then((cred) => {
@@ -54,7 +54,7 @@ const Patient_Signup = () => {
           uid: cred.user.uid,
         };
 
-        //PUSHING USER DATA IN DATABASE
+        // PUSHING USER DATA IN DB
         const userRef = db.doc(`users/${user.uid}`);
         userRef.set({
           name,
@@ -63,6 +63,7 @@ const Patient_Signup = () => {
           uid: user.uid,
         });
 
+        // PUSHING PATIENT DATA IN DB
         const patientRef = db.doc(`patients/${user.uid}`);
         patientRef.set({
           name,
@@ -88,6 +89,7 @@ const Patient_Signup = () => {
       });
   };
 
+  // SIGN UP WITH GOOGLE FUNCTION
   const signInWithGoogle = () => {
     const provider = new firebase.auth.GoogleAuthProvider();
     firebase
@@ -95,7 +97,8 @@ const Patient_Signup = () => {
       .signInWithPopup(provider)
       .then((cred) => {
         console.log(cred);
-        //PUSHING USER DATA IN DATABASE
+
+        // PUSHING USER DATA IN DB
         const userRef = db.doc(`users/${cred.user.uid}`);
         userRef.set({
           name: cred.user.displayName,
@@ -104,6 +107,7 @@ const Patient_Signup = () => {
           uid: cred.user.uid,
         });
 
+        // PUSHING PATIENT DATA IN DB
         const patientRef = db.doc(`patients/${cred.user.uid}`);
         patientRef.set({
           name: cred.user.displayName,
@@ -154,12 +158,15 @@ const Patient_Signup = () => {
               Patient Sign Up
             </Typography>
             <Box component="form" noValidate onSubmit={handleSignup}>
+              {/* ERROR ALERTS */}
               {nameError && <Alert severity="error">{nameError}</Alert>}
               {emailError && <Alert severity="error">{emailError}</Alert>}
               {passwordError && <Alert severity="error">{passwordError}</Alert>}
               <br />
+
               <Grid container spacing={1}>
                 <Grid item xs={12}>
+                  {/* NAME TEXTFIELD */}
                   <TextField
                     name="Name"
                     required
@@ -172,6 +179,8 @@ const Patient_Signup = () => {
                     error={nameError}
                   />
                 </Grid>
+
+                {/* EMAIL TEXTFIELD */}
                 <Grid item xs={12}>
                   <TextField
                     required
@@ -186,6 +195,8 @@ const Patient_Signup = () => {
                     error={emailError}
                   />
                 </Grid>
+
+                {/* PASSWORD TEXTFIELD */}
                 <Grid item xs={12}>
                   <TextField
                     required
@@ -201,6 +212,8 @@ const Patient_Signup = () => {
                     error={passwordError}
                   />
                 </Grid>
+
+                {/* CONFIRM PASSWORD TEXTFIELD */}
                 <Grid item xs={12}>
                   <TextField
                     required
@@ -216,6 +229,8 @@ const Patient_Signup = () => {
                   />
                 </Grid>
               </Grid>
+
+              {/* SIGN UP BUTTON */}
               <Button
                 type="submit"
                 fullWidth
@@ -234,6 +249,7 @@ const Patient_Signup = () => {
                 OR
               </Typography>
 
+              {/* SIGN UP WITH GOOGLE */}
               <Grid item xs={12}>
                 <Button
                   variant="outline"

@@ -30,78 +30,12 @@ import DateRangeIcon from "@mui/icons-material/DateRange";
 import VideocamIcon from "@mui/icons-material/Videocam";
 import LogoutIcon from "@mui/icons-material/Logout";
 
-const drawerWidth = 240;
-
-const openedMixin = (theme) => ({
-  width: drawerWidth,
-  transition: theme.transitions.create("width", {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.enteringScreen,
-  }),
-  overflowX: "hidden",
-});
-
-const closedMixin = (theme) => ({
-  transition: theme.transitions.create("width", {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  overflowX: "hidden",
-  width: `calc(${theme.spacing(7)} + 1px)`,
-  [theme.breakpoints.up("sm")]: {
-    width: `calc(${theme.spacing(9)} + 1px)`,
-  },
-});
-
-const DrawerHeader = styled("div")(({ theme }) => ({
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "flex-end",
-  padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
-  ...theme.mixins.toolbar,
-}));
-
-const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== "open",
-})(({ theme, open }) => ({
-  zIndex: theme.zIndex.drawer + 1,
-  transition: theme.transitions.create(["width", "margin"], {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  ...(open && {
-    marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(["width", "margin"], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  }),
-}));
-
-const Drawer = styled(MuiDrawer, {
-  shouldForwardProp: (prop) => prop !== "open",
-})(({ theme, open }) => ({
-  width: drawerWidth,
-  flexShrink: 0,
-  whiteSpace: "nowrap",
-  boxSizing: "border-box",
-  ...(open && {
-    ...openedMixin(theme),
-    "& .MuiDrawer-paper": openedMixin(theme),
-  }),
-  ...(!open && {
-    ...closedMixin(theme),
-    "& .MuiDrawer-paper": closedMixin(theme),
-  }),
-}));
-
 const Navbar = () => {
   const history = useHistory();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
+  // OPEN AND CLOSE DRAWER FUNCTIONS
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -110,7 +44,8 @@ const Navbar = () => {
     setOpen(false);
   };
 
-  const handleLogout = () => {
+  // SIGN OUT FUNCTION
+  const handleSignout = () => {
     firebase.auth().signOut();
     history.push("/");
   };
@@ -118,6 +53,8 @@ const Navbar = () => {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
+
+      {/* APPBAR */}
       <AppBar position="fixed" open={open} sx={{ backgroundColor: "#ff669e" }}>
         <Toolbar>
           <IconButton
@@ -137,6 +74,8 @@ const Navbar = () => {
           </Typography>
         </Toolbar>
       </AppBar>
+
+      {/* LEFT DRAWER */}
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
@@ -148,7 +87,10 @@ const Navbar = () => {
           </IconButton>
         </DrawerHeader>
         <Divider />
+
+        {/* LIST OF NAVIGATIONS */}
         <List>
+          {/* DASHBOARD */}
           <ListItem button component="a" href="/patient/dashboard">
             <Tooltip title="Dashboard" placement="right">
               <ListItemIcon>
@@ -158,6 +100,7 @@ const Navbar = () => {
             <ListItemText>Dashboard</ListItemText>
           </ListItem>
 
+          {/* PROFILE */}
           <ListItem button component="a" href="/patient/profile">
             <Tooltip title="Profile" placement="right">
               <ListItemIcon>
@@ -167,6 +110,7 @@ const Navbar = () => {
             <ListItemText>Profile</ListItemText>
           </ListItem>
 
+          {/* VIEW DOCTORS */}
           <ListItem button component="a" href="/patient/doctor/profiles">
             <Tooltip title="View Doctors" placement="right">
               <ListItemIcon>
@@ -176,6 +120,7 @@ const Navbar = () => {
             <ListItemText>View Doctors</ListItemText>
           </ListItem>
 
+          {/* BOOK APPOINTMENTS */}
           <ListItem button component="a" href="/patient/book_appointment/">
             <Tooltip title="Book Appointment" placement="right">
               <ListItemIcon>
@@ -185,6 +130,7 @@ const Navbar = () => {
             <ListItemText>Book Appointment</ListItemText>
           </ListItem>
 
+          {/* NOTIFICATIONS */}
           <ListItem button component="a" href="/patient/notifications">
             <Tooltip title="Notifications" placement="right">
               <ListItemIcon>
@@ -194,6 +140,7 @@ const Navbar = () => {
             <ListItemText>Notifications</ListItemText>
           </ListItem>
 
+          {/* SCHEDULED MEETINGS */}
           <ListItem button component="a" href="/patient/meetings/new/">
             <Tooltip title="Scheduled Meetings" placement="right">
               <ListItemIcon>
@@ -203,6 +150,7 @@ const Navbar = () => {
             <ListItemText>Scheduled Meetings</ListItemText>
           </ListItem>
 
+          {/* YOUR MEETINGS */}
           <ListItem button component="a" href="/patient/meetings/old/">
             <Tooltip title="Your Meetings" placement="right">
               <ListItemIcon>
@@ -212,6 +160,7 @@ const Navbar = () => {
             <ListItemText>Your Meetings</ListItemText>
           </ListItem>
 
+          {/* PAST APPOINTMENTS */}
           <ListItem button component="a" href="/patient/past_appointments">
             <Tooltip title="Past Appointments" placement="right">
               <ListItemIcon>
@@ -221,7 +170,8 @@ const Navbar = () => {
             <ListItemText>Past Appointments</ListItemText>
           </ListItem>
 
-          <ListItem button onClick={handleLogout}>
+          {/* SIGN OUT */}
+          <ListItem button onClick={handleSignout}>
             <Tooltip title="Sign Out" placement="right">
               <ListItemIcon>
                 <LogoutIcon />
@@ -239,3 +189,75 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+const drawerWidth = 240;
+
+// OPENED DRAWER STYLING
+const openedMixin = (theme) => ({
+  width: drawerWidth,
+  transition: theme.transitions.create("width", {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.enteringScreen,
+  }),
+  overflowX: "hidden",
+});
+
+// CLOSED DRAWER STYLING
+const closedMixin = (theme) => ({
+  transition: theme.transitions.create("width", {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+  }),
+  overflowX: "hidden",
+  width: `calc(${theme.spacing(7)} + 1px)`,
+  [theme.breakpoints.up("sm")]: {
+    width: `calc(${theme.spacing(9)} + 1px)`,
+  },
+});
+
+// DRAWER HEADER STYLING
+const DrawerHeader = styled("div")(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "flex-end",
+  padding: theme.spacing(0, 1),
+  // necessary for content to be below app bar
+  ...theme.mixins.toolbar,
+}));
+
+// APPBAR STYLING
+const AppBar = styled(MuiAppBar, {
+  shouldForwardProp: (prop) => prop !== "open",
+})(({ theme, open }) => ({
+  zIndex: theme.zIndex.drawer + 1,
+  transition: theme.transitions.create(["width", "margin"], {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+  }),
+  ...(open && {
+    marginLeft: drawerWidth,
+    width: `calc(100% - ${drawerWidth}px)`,
+    transition: theme.transitions.create(["width", "margin"], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  }),
+}));
+
+// DRAWER STYLING
+const Drawer = styled(MuiDrawer, {
+  shouldForwardProp: (prop) => prop !== "open",
+})(({ theme, open }) => ({
+  width: drawerWidth,
+  flexShrink: 0,
+  whiteSpace: "nowrap",
+  boxSizing: "border-box",
+  ...(open && {
+    ...openedMixin(theme),
+    "& .MuiDrawer-paper": openedMixin(theme),
+  }),
+  ...(!open && {
+    ...closedMixin(theme),
+    "& .MuiDrawer-paper": closedMixin(theme),
+  }),
+}));
