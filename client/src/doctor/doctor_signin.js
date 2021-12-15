@@ -58,7 +58,7 @@ const Doctor_Signin = () => {
       .auth()
       .signInWithPopup(provider)
       .then(() => {
-        history.push("doctor/dashboard");
+        history.push("doctor/profile");
       })
       .catch((e) => console.log(e.message));
   };
