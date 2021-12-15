@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Avatar, Link } from "@mui/material";
-import Title from "./Title";
+import Title from "./title";
 
 function preventDefault(event) {
   event.preventDefault();

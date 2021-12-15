@@ -26,6 +26,10 @@ const Patient_Profile = () => {
           <Grid item xs={12}>
             <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
               <Title>Profile</Title>
+              <Typography sx={{ fontStyle: "italic" }}>
+                (You can update these details by going to the dashboard tab)
+              </Typography>
+              <br />
               {patients.map((patient) => {
                 if (patient.uid === currentUser.uid)
                   return (
