@@ -15,6 +15,8 @@ import Patient_Profile from "./patient/patient_profile";
 import View_Doctors from "./patient/view_doctors";
 import Book_Appointment from "./patient/book_appointment";
 import Doctor from "./patient/doctor";
+import Admin_Signin from "./admin/admin_signin";
+import Admin_Dashboard from "./admin/admin_dashboard";
 
 const App = () => {
   const [user, setUser] = useState("");
@@ -74,6 +76,11 @@ const App = () => {
                     component={Book_Appointment}
                   />
                   <Route exact path="/doctor/:uid" component={Doctor} />
+                  <Route
+                    exact
+                    path="/admin/dashboard"
+                    component={Admin_Dashboard}
+                  />
                 </Switch>
               </AuthProvider>
             </Router>
@@ -99,6 +106,7 @@ const App = () => {
                   path="/patient_signin"
                   component={Patient_Signin}
                 />
+                <Route exact path="/admin_signin" component={Admin_Signin} />
               </Switch>
             </Router>
           </CssBaseline>

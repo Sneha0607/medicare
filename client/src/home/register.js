@@ -133,6 +133,52 @@ const Register = () => {
           </Card>
         </CardActionArea>
       </Grid>
+
+      {/* ADMIN LOGIN */}
+      <Grid item xs={12}>
+        <CardActionArea component="a" href="#">
+          <Card sx={{ display: "flex" }}>
+            <CardContent sx={{ flex: 1 }}>
+              <Typography
+                component="h1"
+                variant="h4"
+                sx={{ fontFamily: "Raleway", fontWeight: "bold" }}
+              >
+                Sign in as an Admin
+              </Typography>
+              <Typography variant="h5" paragraph sx={{ fontFamily: "Raleway" }}>
+                Only verified admins of Medicare can login using the email ID
+                provided to them
+              </Typography>
+
+              <Button
+                sx={{
+                  backgroundColor: "#3284be",
+                  color: "#ffffff",
+                  margin: "1%",
+                  fontFamily: "Raleway",
+                  fontWeight: "bold",
+                  "&:hover": {
+                    backgroundColor: "#d7e8f4",
+                    color: "#3284be",
+                  },
+                }}
+                href="/admin_signin"
+              >
+                Sign In
+              </Button>
+            </CardContent>
+
+            {/* Image */}
+            <CardMedia
+              component="img"
+              sx={{ width: 160, display: { xs: "none", sm: "block" } }}
+              image="images/admin.jpg"
+              alt="Admin"
+            />
+          </Card>
+        </CardActionArea>
+      </Grid>
     </Grid>
   );
 };
