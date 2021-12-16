@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import {
   Avatar,
@@ -14,8 +14,7 @@ import {
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import GoogleIcon from "@mui/icons-material/Google";
-import firebase, { auth } from "../firebase";
+import firebase, { auth, db } from "../firebase";
 
 const theme = createTheme();
 
@@ -25,6 +24,13 @@ const Admin_Signin = () => {
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [admins, setAdmins] = useState([]);
+
+  useEffect(() => {
+    db.collection("admins").onSnapshot((snapshot) => {
+      setAdmins(snapshot.docs.map((doc) => doc.data()));
+    });
+  }, []);
 
   // SIGN IN WITH EMAIL AND PASSWORD FUNCTION
   const handleSignin = (e) => {
@@ -33,24 +39,32 @@ const Admin_Signin = () => {
       return setEmailError("All fields are required!");
     }
 
-    auth
-      .signInWithEmailAndPassword(email, password)
-      .then(() => {
-        history.push("/admin/dashboard");
-      })
-      .catch((err) => {
-        switch (err.code) {
-          case "auth/user-not-found":
-          case "auth/invalid-email":
-            setEmailError(err.message);
-            break;
-          case "auth/wrong-password":
-            setPasswordError(err.message);
-            break;
-          default:
-            break;
+    {
+      admins.map((admin) => {
+        if (admin.email === email) {
+          auth
+            .signInWithEmailAndPassword(email, password)
+            .then(() => {
+              history.push("/admin/dashboard");
+            })
+            .catch((err) => {
+              switch (err.code) {
+                case "auth/user-not-found":
+                case "auth/invalid-email":
+                  setEmailError(err.message);
+                  break;
+                case "auth/wrong-password":
+                  setPasswordError(err.message);
+                  break;
+                default:
+                  break;
+              }
+            });
+        } else {
+          setEmailError("Email is not authenticated!");
         }
       });
+    }
   };
 
   return (

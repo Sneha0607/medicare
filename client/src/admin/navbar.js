@@ -24,10 +24,8 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import PeopleIcon from "@mui/icons-material/People";
 import CreateIcon from "@mui/icons-material/Create";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import AssignmentIcon from "@mui/icons-material/Assignment";
-import PersonIcon from "@mui/icons-material/Person";
-import DateRangeIcon from "@mui/icons-material/DateRange";
-import VideocamIcon from "@mui/icons-material/Videocam";
+import EmailIcon from "@mui/icons-material/Email";
+import MedicalServicesIcon from "@mui/icons-material/MedicalServices";
 import LogoutIcon from "@mui/icons-material/Logout";
 
 const Navbar = () => {
@@ -101,37 +99,27 @@ const Navbar = () => {
           </ListItem>
 
           {/* PROFILE */}
-          <ListItem button component="a" href="/doctor/profile">
-            <Tooltip title="Profile" placement="right">
+          <ListItem button component="a" href="/doctors">
+            <Tooltip title="Doctors" placement="right">
               <ListItemIcon>
-                <PersonIcon />
+                <MedicalServicesIcon />
               </ListItemIcon>
             </Tooltip>
-            <ListItemText>Profile</ListItemText>
-          </ListItem>
-
-          {/* APPOINTMENTS */}
-          <ListItem button component="a" href="/doctor/dashboard">
-            <Tooltip title="Appointments" placement="right">
-              <ListItemIcon>
-                <AssignmentIcon />
-              </ListItemIcon>
-            </Tooltip>
-            <ListItemText>Appointments</ListItemText>
+            <ListItemText>Doctors</ListItemText>
           </ListItem>
 
           {/* YOUR PATIENTS */}
-          <ListItem button component="a" href="/doctor/patients/">
-            <Tooltip title="Your Patients" placement="right">
+          <ListItem button component="a" href="/patients">
+            <Tooltip title="Patients" placement="right">
               <ListItemIcon>
                 <PeopleIcon />
               </ListItemIcon>
             </Tooltip>
-            <ListItemText>Your Patients</ListItemText>
+            <ListItemText>Patients</ListItemText>
           </ListItem>
 
           {/* NOTIFICATIONS */}
-          <ListItem button component="a" href="/doctor/notifications/">
+          <ListItem button component="a" href="/notifications">
             <Tooltip title="Notifications" placement="right">
               <ListItemIcon>
                 <NotificationsIcon />
@@ -141,13 +129,13 @@ const Navbar = () => {
           </ListItem>
 
           {/* QUICK NOTES */}
-          <ListItem button component="a" href="/doctor/notes/">
-            <Tooltip title="Quick Notes" placement="right">
+          <ListItem button component="a" href="/feedbacks">
+            <Tooltip title="Read Feedbacks" placement="right">
               <ListItemIcon>
-                <CreateIcon />
+                <EmailIcon />
               </ListItemIcon>
             </Tooltip>
-            <ListItemText>Quick Notes</ListItemText>
+            <ListItemText>Read Feedbacks</ListItemText>
           </ListItem>
 
           {/* SIGN OUT */}
