@@ -10,6 +10,7 @@ import {
   Paper,
   Typography,
 } from "@mui/material";
+import Book_Appointment from "./book_appointment";
 
 const Doctor = () => {
   const [doctors, setDoctors] = useState([]);
@@ -47,7 +48,7 @@ const Doctor = () => {
                 src="images/testimonial1.jpg"
                 sx={{ width: 100, height: 100, m: 2 }}
               />
-              <Button variant="contained">Book Appointment</Button>
+              <Book_Appointment doctorUID={uid} />
             </Paper>
           </Grid>
           <Grid item xs={12} md={8} lg={9}>

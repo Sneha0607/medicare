@@ -89,7 +89,7 @@ const Navbar = () => {
         {/* LIST OF NAVIGATIONS */}
         <List>
           {/* DASHBOARD */}
-          <ListItem button component="a" href="/doctor/dashboard">
+          <ListItem button component="a" href="/admin/dashboard">
             <Tooltip title="Dashboard" placement="right">
               <ListItemIcon>
                 <DashboardIcon />
