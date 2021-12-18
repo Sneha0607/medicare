@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import firebase from "../firebase";
 import { styled, useTheme } from "@mui/material/styles";
@@ -33,7 +33,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 const Navbar = () => {
   const history = useHistory();
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   // OPEN AND CLOSE DRAWER FUNCTIONS
   const handleDrawerOpen = () => {
@@ -111,7 +111,7 @@ const Navbar = () => {
           </ListItem>
 
           {/* APPOINTMENTS */}
-          <ListItem button component="a" href="/doctor/dashboard">
+          <ListItem button component="a" href="/doctor/appointments">
             <Tooltip title="Appointments" placement="right">
               <ListItemIcon>
                 <AssignmentIcon />
@@ -141,7 +141,7 @@ const Navbar = () => {
           </ListItem>
 
           {/* SCHEDULED MEETINGS */}
-          <ListItem button component="a" href="/doctor/meetings/new/">
+          <ListItem button component="a" href="/doctor/schedule_meeting">
             <Tooltip title="Scheduled Meetings" placement="right">
               <ListItemIcon>
                 <DateRangeIcon />

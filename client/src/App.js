@@ -8,6 +8,9 @@ import Doctor_Signup from "./doctor/doctor_signup";
 import Doctor_Signin from "./doctor/doctor_signin";
 import Doctor_Dashboard from "./doctor/doctor_dashboard/doctor_dashboard";
 import Doctor_Profile from "./doctor/doctor_profile";
+import Appointments from "./doctor/appointments";
+import Schedule_Meeting from "./doctor/schedule_meeting";
+import Room from "./doctor/room";
 import Patient_Signup from "./patient/patient_signup";
 import Patient_Signin from "./patient/patient_signin";
 import Patient_Dashboard from "./patient/patient_dashboard/patient_dashboard";
@@ -47,6 +50,7 @@ const App = () => {
             <Router>
               <AuthProvider>
                 <Switch>
+                  {/* DOCTOR ROUTES */}
                   <Route
                     exact
                     path="/doctor/dashboard"
@@ -57,6 +61,18 @@ const App = () => {
                     path="/doctor/profile"
                     component={Doctor_Profile}
                   />
+                  <Route
+                    exact
+                    path="/doctor/appointments"
+                    component={Appointments}
+                  />
+                  <Route
+                    exact
+                    path="/doctor/schedule_meeting"
+                    component={Schedule_Meeting}
+                  />
+                  <Route exact path="/room/:roomID" component={Room} />
+                  {/* PATIENT ROUTES */}
                   <Route
                     exact
                     path="/patient/dashboard"
@@ -77,7 +93,7 @@ const App = () => {
                     path="/patient/book_appointment"
                     component={Book_Appointment}
                   />
-                  <Route exact path="/doctor/:uid" component={Doctor} />
+                  <Route exact path="/doctor_profile/:uid" component={Doctor} />
                   <Route
                     exact
                     path="/admin/dashboard"

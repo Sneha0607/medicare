@@ -27,7 +27,7 @@ const View_Doctors = () => {
                   <p>{doctor.medicalSpeciality}</p>
                   {doctor.experience}
                   <br />
-                  <a href={`/doctor/${doctor.uid}`} target="_blank">
+                  <a href={`/doctor_profile/${doctor.uid}`} target="_blank">
                     See more details
                   </a>
                 </Typography>
