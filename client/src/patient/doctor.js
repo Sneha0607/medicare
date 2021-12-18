@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation, useHistory } from "react-router";
+import { useLocation } from "react-router-dom";
 import Navbar from "./navbar";
 import { db } from "../firebase";
 import {

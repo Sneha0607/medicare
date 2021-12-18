@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import {
@@ -10,12 +10,12 @@ import {
   MenuItem,
   Typography,
 } from "@mui/material";
-import { useAuth } from "../../contexts/AuthContext";
+
 import { db } from "../../firebase";
 
 const theme = createTheme();
 
-const Form = () => {
+const Form = (props) => {
   const [name, setName] = useState("");
   const [bloodGroup, setBloodGroup] = useState("");
   const [age, setAge] = useState("");
@@ -35,7 +35,7 @@ const Form = () => {
   const [stateError, setStateError] = useState("");
   const [pincodeError, setPincodeError] = useState("");
   const [countryError, setCountryError] = useState("");
-  const { currentUser } = useAuth();
+
   const history = useHistory();
 
   const handleSubmit = (e) => {
@@ -84,9 +84,9 @@ const Form = () => {
     }
 
     //PUSHING USER DATA IN DATABASE
-    const patientRef = db.doc(`patients/${currentUser.uid}`);
+    const patientRef = db.doc("patients/props.uid");
     patientRef.set({
-      uid: currentUser.uid,
+      uid: props.uid,
       name,
       bloodGroup,
       age,
@@ -97,6 +97,7 @@ const Form = () => {
       state,
       country,
       pincode,
+      imageURL: null,
       isVerified: "pending",
       updatedAt: new Date(),
     });

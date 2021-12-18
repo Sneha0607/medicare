@@ -60,7 +60,7 @@ const Room = (props) => {
   useEffect(() => {
     socketRef.current = io.connect("/");
     navigator.mediaDevices
-      .getUserMedia({ video: videoConstraints, audio: true })
+      .getUserMedia({ video: true, audio: true })
       .then((stream) => {
         userVideo.current.srcObject = stream;
         setStream(stream);
@@ -242,7 +242,7 @@ const Room = (props) => {
           <Tooltip title="End Call" placement="top">
             <IconButton
               onClick={leaveMeeting}
-              href="/teams"
+              href="/doctor/profile"
               style={{ color: "#9d2f42" }}
             >
               <CallEndIcon />

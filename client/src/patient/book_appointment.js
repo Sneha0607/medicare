@@ -22,8 +22,7 @@ const Book_Appointment = (props) => {
   const [open, setOpen] = useState(false);
   const [scroll, setScroll] = useState("");
   const [mode, setMode] = useState("");
-  const [slotStart, setSlotStart] = useState("");
-  const [slotEnd, setSlotEnd] = useState("");
+  const [timeSlot, setTimeSlot] = useState("");
   const [symptoms, setSymptoms] = useState("");
   const { currentUser } = useAuth();
 
@@ -49,39 +48,10 @@ const Book_Appointment = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    //PUSHING APPOINTMENT DATA IN PATIENT'S COLLECTION
-    db.collection("patients")
-      .doc(currentUser.uid)
-      .collection("appointments")
-      .add({
-        mode: mode,
-        slotStart: slotStart,
-        slotEnd: slotEnd,
-        symptoms: symptoms,
-        isConfirmed: "pending",
-        doctorUID: props.doctorUID,
-        bookedAt: new Date(),
-      });
-
-    //PUSHING APPOINTMENT DATA IN DOCTOR'S COLLECTION
-    db.collection("doctors")
-      .doc(props.doctorUID)
-      .collection("appointments")
-      .add({
-        mode: mode,
-        slotStart: slotStart,
-        slotEnd: slotEnd,
-        symptoms: symptoms,
-        isConfirmed: "pending",
-        patientUID: currentUser.uid,
-        bookedAt: new Date(),
-      });
-
     //PUSHING APPOINTMENT DATA IN DB
     db.collection("appointments").add({
       mode: mode,
-      slotStart: slotStart,
-      slotEnd: slotEnd,
+      timeSlot: timeSlot,
       symptoms: symptoms,
       isConfirmed: "pending",
       doctorUID: props.doctorUID,
@@ -115,6 +85,7 @@ const Book_Appointment = (props) => {
               tabIndex={-1}
             >
               <Grid container spacing={1}>
+                {/* MODE OF CONSULTATION */}
                 <Grid item xs={12}>
                   <TextField
                     required
@@ -130,53 +101,35 @@ const Book_Appointment = (props) => {
                     <MenuItem value="Offline">Offline</MenuItem>
                   </TextField>
                 </Grid>
+
+                {/* DATE AND TIME SLOT */}
                 <Grid item xs={12}>
-                  <Typography>Enter Preferred Time Slot (From - To)</Typography>
+                  <Typography>Preferred Date and Time Slot </Typography>
                 </Grid>
+
                 <Grid item xs={12}>
                   <LocalizationProvider dateAdapter={AdapterDateFns}>
                     <DesktopDateTimePicker
-                      value={slotStart}
-                      size="small"
+                      value={timeSlot}
                       onChange={(newValue) => {
-                        setSlotStart(newValue);
+                        setTimeSlot(newValue);
                       }}
                       renderInput={(params) => (
                         <TextField
                           required
-                          id="slotStartTime"
-                          name="slotStartTime"
+                          id="timeSlot"
+                          name="timeSlot"
                           fullWidth
                           size="small"
-                          onChange={(e) => setSlotStart(e.target.value)}
+                          onChange={(e) => setTimeSlot(e.target.value)}
                           {...params}
                         />
                       )}
                     />
                   </LocalizationProvider>
                 </Grid>
-                <Grid item xs={12}>
-                  <LocalizationProvider dateAdapter={AdapterDateFns}>
-                    <DesktopDateTimePicker
-                      value={slotEnd}
-                      size="small"
-                      onChange={(newValue) => {
-                        setSlotEnd(newValue);
-                      }}
-                      renderInput={(params) => (
-                        <TextField
-                          required
-                          id="slotEndTime"
-                          name="slotEndTime"
-                          fullWidth
-                          size="small"
-                          onChange={(e) => setSlotEnd(e.target.value)}
-                          {...params}
-                        />
-                      )}
-                    />
-                  </LocalizationProvider>
-                </Grid>
+
+                {/* SYMPTOMS */}
                 <Grid item xs={12}>
                   <TextField
                     id="symptoms"

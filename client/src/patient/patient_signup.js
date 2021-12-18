@@ -68,6 +68,7 @@ const Patient_Signup = () => {
         patientRef.set({
           name,
           email,
+          imageURL: null,
           uid: user.uid,
         });
       })

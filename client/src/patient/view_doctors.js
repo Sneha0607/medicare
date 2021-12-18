@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import Navbar from "./navbar";
 import { db } from "../firebase";
 import { Container, List, ListItem, Typography } from "@mui/material";

@@ -1,11 +1,13 @@
 import React from "react";
 import { Grid, Paper, Container } from "@mui/material";
+import { useAuth } from "../../contexts/AuthContext";
 import Navbar from "../navbar";
 import Form from "./form";
 import Upload from "./upload";
-import Records from "./records";
 
 const Doctor_Dashboard = () => {
+  const { currentUser } = useAuth();
+
   return (
     <>
       <Navbar />
@@ -20,7 +22,7 @@ const Doctor_Dashboard = () => {
                 height: "100vh",
               }}
             >
-              <Form />
+              <Form uid={currentUser.uid} />
             </Paper>
           </Grid>
 
@@ -33,7 +35,7 @@ const Doctor_Dashboard = () => {
                 height: "100vh",
               }}
             >
-              <Upload />
+              <Upload uid={currentUser.uid} />
             </Paper>
           </Grid>
         </Grid>
