@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "./navbar";
 import { db } from "../firebase";
-import { Container, List, ListItem, Typography } from "@mui/material";
+import {
+  Button,
+  Container,
+  Grid,
+  List,
+  ListItem,
+  Typography,
+} from "@mui/material";
 
 const View_Doctors = () => {
   const [doctors, setDoctors] = useState([]);
@@ -19,19 +26,29 @@ const View_Doctors = () => {
       <Container maxWidth="lg" sx={{ mt: "12vh", ml: "5vw" }}>
         <List>
           {doctors.map((doctor) => {
-            return (
-              <ListItem>
-                <Typography>
-                  {doctor.name} <br />
-                  <p>{doctor.medicalSpeciality}</p>
-                  {doctor.experience}
-                  <br />
-                  <a href={`/doctor_profile/${doctor.uid}`} target="_blank">
-                    See more details
-                  </a>
-                </Typography>
-              </ListItem>
-            );
+            if (doctor.isVerified === "true")
+              return (
+                <ListItem sx={{ border: "1px solid", margin: "2px" }}>
+                  <Grid container spacing={3}>
+                    <Grid item xs={12} sm={6} md={9}>
+                      <Typography>
+                        {doctor.name} <br />
+                        <p>{doctor.medicalSpeciality}</p>
+                        {doctor.experience}
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={12} sm={6} md={3}>
+                      <Button
+                        variant="contained"
+                        href={`/doctor_profile/${doctor.uid}`}
+                        target="_blank"
+                      >
+                        See more details
+                      </Button>
+                    </Grid>
+                  </Grid>
+                </ListItem>
+              );
           })}
         </List>
       </Container>

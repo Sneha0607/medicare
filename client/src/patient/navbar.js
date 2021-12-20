@@ -47,7 +47,7 @@ const Navbar = () => {
   // SIGN OUT FUNCTION
   const handleSignout = () => {
     firebase.auth().signOut();
-    history.push("/");
+    history.push("/#");
   };
 
   return (
@@ -110,18 +110,8 @@ const Navbar = () => {
             <ListItemText>Profile</ListItemText>
           </ListItem>
 
-          {/* VIEW DOCTORS */}
+          {/* VIEW DOCTORS/BOOK APPOINTMENTS */}
           <ListItem button component="a" href="/patient/view_doctors">
-            <Tooltip title="View Doctors" placement="right">
-              <ListItemIcon>
-                <PeopleIcon />
-              </ListItemIcon>
-            </Tooltip>
-            <ListItemText>View Doctors</ListItemText>
-          </ListItem>
-
-          {/* BOOK APPOINTMENTS */}
-          <ListItem button component="a" href="/patient/book_appointment">
             <Tooltip title="Book Appointment" placement="right">
               <ListItemIcon>
                 <CreateIcon />
@@ -141,7 +131,7 @@ const Navbar = () => {
           </ListItem>
 
           {/* SCHEDULED MEETINGS */}
-          <ListItem button component="a" href="/patient/meetings/new">
+          <ListItem button component="a" href="/patient/scheduled_meetings">
             <Tooltip title="Scheduled Meetings" placement="right">
               <ListItemIcon>
                 <DateRangeIcon />

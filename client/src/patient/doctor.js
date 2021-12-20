@@ -30,32 +30,34 @@ const Doctor = () => {
     <div>
       <Navbar />
       <Container maxWidth="lg" sx={{ mt: "12vh", ml: "5vw" }}>
-        <Grid container spacing={3}>
-          <Grid item xs={12}>
-            <Typography align="center">DOCTOR PROFILE</Typography>
-          </Grid>
+        {doctors.map((doctor) => {
+          if (doctor.uid === uid)
+            return (
+              <Grid container spacing={3}>
+                <Grid item xs={12}>
+                  <Typography align="center">DOCTOR PROFILE</Typography>
+                </Grid>
 
-          <Grid item xs={12} md={4} lg={3}>
-            <Paper
-              sx={{
-                p: 2,
-                display: "flex",
-                flexDirection: "column",
-              }}
-            >
-              <Avatar
-                alt="Remy Sharp"
-                src="images/testimonial1.jpg"
-                sx={{ width: 100, height: 100, m: 2 }}
-              />
-              <Book_Appointment doctorUID={uid} />
-            </Paper>
-          </Grid>
-          <Grid item xs={12} md={8} lg={9}>
-            <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-              {doctors.map((doctor) => {
-                if (doctor.uid === uid)
-                  return (
+                <Grid item xs={12} md={4} lg={3}>
+                  <Paper
+                    sx={{
+                      p: 2,
+                      display: "flex",
+                      flexDirection: "column",
+                    }}
+                  >
+                    <Avatar
+                      alt="Remy Sharp"
+                      src={doctor.imageURL}
+                      sx={{ width: 100, height: 100, m: 2 }}
+                    />
+                    <Book_Appointment doctorUID={uid} />
+                  </Paper>
+                </Grid>
+                <Grid item xs={12} md={8} lg={9}>
+                  <Paper
+                    sx={{ p: 2, display: "flex", flexDirection: "column" }}
+                  >
                     <>
                       <Typography>Name: {doctor.name}</Typography>
                       <Typography>Age: {doctor.age}</Typography>
@@ -71,11 +73,11 @@ const Doctor = () => {
                       <Typography>Country: {doctor.country}</Typography>
                       <Typography>Pincode: {doctor.pincode}</Typography>
                     </>
-                  );
-              })}
-            </Paper>
-          </Grid>
-        </Grid>
+                  </Paper>
+                </Grid>
+              </Grid>
+            );
+        })}
       </Container>
     </div>
   );

@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { Box, Grid, Paper, Typography } from "@mui/material";
 
 const Header = () => {

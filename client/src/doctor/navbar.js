@@ -47,7 +47,7 @@ const Navbar = () => {
   // SIGN OUT FUNCTION
   const handleSignout = () => {
     firebase.auth().signOut();
-    history.push("/");
+    history.push("/#");
   };
 
   return (

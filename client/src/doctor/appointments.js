@@ -10,8 +10,14 @@ import {
   List,
   ListItem,
   Button,
+  ButtonGroup,
 } from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { db } from "../firebase";
+import DoneIcon from "@mui/icons-material/Done";
+import CloseIcon from "@mui/icons-material/Close";
+
+const theme = createTheme();
 
 const Appointments = () => {
   const [appointments, setAppointments] = useState([]);
@@ -28,17 +34,30 @@ const Appointments = () => {
       });
   }, []);
 
-  const handleConfirm = (id) => {
-    db.collection("appointments").doc(id).update({
+  const handleConfirm = (docID, patientUID) => {
+    db.collection("appointments").doc(docID).update({
       isConfirmed: "true",
+    });
+
+    db.collection("meetings").doc(docID).set({});
+
+    db.collection("patients").doc(patientUID).collection("notifications").add({
+      message:
+        "Your appointment has been confirmed! You can check its details in the scheduled meetings section.",
+      sentAt: new Date(),
     });
 
     history.push("/doctor/schedule_meeting");
   };
 
-  const handleCancel = (id) => {
-    db.collection("appointments").doc(id).update({
+  const handleCancel = (docID, patientUID) => {
+    db.collection("appointments").doc(docID).update({
       isConfirmed: "false",
+    });
+
+    db.collection("patients").doc(patientUID).collection("notifications").add({
+      message: "Your appointment has been cancelled!",
+      sentAt: new Date(),
     });
   };
 
@@ -65,7 +84,7 @@ const Appointments = () => {
                     return (
                       <ListItem sx={{ border: "1px solid", margin: "2px" }}>
                         <Grid container>
-                          <Grid item xs={12} sm={9}>
+                          <Grid item xs={12} sm={6} md={9}>
                             <Typography>
                               Mode: {appointment.mode} <br />
                               Slot:{" "}
@@ -84,20 +103,64 @@ const Appointments = () => {
                               Symptoms: {appointment.symptoms}
                             </Typography>
                           </Grid>
-                          <Grid item xs={12} sm={3}>
-                            <Button
-                              variant="contained"
-                              onClick={() => handleConfirm(appointment.id)}
-                            >
-                              Confirm
-                            </Button>
 
-                            <Button
+                          <Grid item xs={12} sm={6} md={3}>
+                            <ButtonGroup
                               variant="contained"
-                              onClick={() => handleCancel(appointment.id)}
+                              sx={{
+                                [theme.breakpoints.down("md")]: {
+                                  size: "small",
+                                },
+                              }}
                             >
-                              Cancel
-                            </Button>
+                              <div
+                                onClick={(e) =>
+                                  db.doc(`meetings/${appointment.id}`).set({
+                                    meetingID: appointment.id,
+                                    doctorUID: appointment.doctorUID,
+                                    patientUID: appointment.patientUID,
+                                    scheduledAt: appointment.timeSlot,
+                                    mode: appointment.mode,
+                                  })
+                                }
+                              >
+                                <Button
+                                  startIcon={<DoneIcon />}
+                                  sx={{
+                                    backgroundColor: "#009900",
+                                    "&:hover": {
+                                      backgroundColor: "#006600",
+                                    },
+                                  }}
+                                  onClick={() =>
+                                    handleConfirm(
+                                      appointment.id,
+                                      appointment.patientUID
+                                    )
+                                  }
+                                >
+                                  Confirm
+                                </Button>
+                              </div>
+
+                              <Button
+                                startIcon={<CloseIcon />}
+                                sx={{
+                                  backgroundColor: "#e60000",
+                                  "&:hover": {
+                                    backgroundColor: "#b30000",
+                                  },
+                                }}
+                                onClick={() =>
+                                  handleCancel(
+                                    appointment.id,
+                                    appointment.patientUID
+                                  )
+                                }
+                              >
+                                Cancel
+                              </Button>
+                            </ButtonGroup>
                           </Grid>
                         </Grid>
                       </ListItem>

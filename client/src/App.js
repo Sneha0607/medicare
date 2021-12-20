@@ -18,6 +18,8 @@ import Patient_Profile from "./patient/patient_profile";
 import View_Doctors from "./patient/view_doctors";
 import Book_Appointment from "./patient/book_appointment";
 import Doctor from "./patient/doctor";
+import Patient_Notifications from "./patient/patient_notifications";
+import Patient_Scheduled_Meetings from "./patient/patient_scheduled_meetings";
 import Admin_Signin from "./admin/admin_signin";
 import Admin_Dashboard from "./admin/admin_dashboard";
 import Doctors from "./admin/doctors";
@@ -94,6 +96,18 @@ const App = () => {
                     component={Book_Appointment}
                   />
                   <Route exact path="/doctor_profile/:uid" component={Doctor} />
+                  <Route
+                    exact
+                    path="/patient/notifications"
+                    component={Patient_Notifications}
+                  />
+                  <Route
+                    exact
+                    path="/patient/scheduled_meetings"
+                    component={Patient_Scheduled_Meetings}
+                  />
+
+                  {/* ADMIN ROUTES */}
                   <Route
                     exact
                     path="/admin/dashboard"
