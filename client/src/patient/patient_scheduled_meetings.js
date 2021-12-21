@@ -26,7 +26,18 @@ const Patient_Scheduled_Meetings = () => {
   return (
     <>
       <Navbar />
-      <Container maxWidth="lg" sx={{ mt: "12vh", ml: "5vw" }}>
+      <Container
+        maxWidth="lg"
+        sx={{
+          mt: "12vh",
+          ml: "5vw",
+          height: "100vh",
+          backgroundImage: `url('../images/blue2.jpg')`,
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+        }}
+      >
         <List>
           {meetings.map((meeting) => {
             if (meeting.patientUID === currentUser.uid)
@@ -55,7 +66,8 @@ const Patient_Scheduled_Meetings = () => {
                     <Grid item xs={12} sm={3}>
                       <Button
                         variant="contained"
-                        onClick={`/room/${meeting.meetingID}`}
+                        target="_blank"
+                        href={`/room/${meeting.meetingID}`}
                       >
                         Join
                       </Button>

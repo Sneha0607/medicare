@@ -141,24 +141,16 @@ const Navbar = () => {
           </ListItem>
 
           {/* SCHEDULED MEETINGS */}
-          <ListItem button component="a" href="/doctor/schedule_meeting">
+          <ListItem button component="a" href="/doctor/scheduled_meetings">
             <Tooltip title="Scheduled Meetings" placement="right">
               <ListItemIcon>
-                <DateRangeIcon />
+                <VideocamIcon />
               </ListItemIcon>
             </Tooltip>
             <ListItemText>Scheduled Meetings</ListItemText>
           </ListItem>
 
           {/* PAST MEETINGS */}
-          <ListItem button component="a" href="/doctor/meetings/old/">
-            <Tooltip title="Your Past Meetings" placement="right">
-              <ListItemIcon>
-                <VideocamIcon />
-              </ListItemIcon>
-            </Tooltip>
-            <ListItemText>Your Past Meetings</ListItemText>
-          </ListItem>
 
           {/* QUICK NOTES */}
           <ListItem button component="a" href="/doctor/notes/">

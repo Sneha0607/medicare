@@ -9,7 +9,7 @@ import Doctor_Signin from "./doctor/doctor_signin";
 import Doctor_Dashboard from "./doctor/doctor_dashboard/doctor_dashboard";
 import Doctor_Profile from "./doctor/doctor_profile";
 import Appointments from "./doctor/appointments";
-import Schedule_Meeting from "./doctor/schedule_meeting";
+import Doctor_Scheduled_Meetings from "./doctor/doctor_scheduled_meetings";
 import Room from "./doctor/room";
 import Patient_Signup from "./patient/patient_signup";
 import Patient_Signin from "./patient/patient_signin";
@@ -70,8 +70,8 @@ const App = () => {
                   />
                   <Route
                     exact
-                    path="/doctor/schedule_meeting"
-                    component={Schedule_Meeting}
+                    path="/doctor/scheduled_meetings"
+                    component={Doctor_Scheduled_Meetings}
                   />
                   <Route exact path="/room/:roomID" component={Room} />
                   {/* PATIENT ROUTES */}

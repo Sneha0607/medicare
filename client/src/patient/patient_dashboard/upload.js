@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Avatar, Button } from "@mui/material";
+import { Avatar, Button, LinearProgress } from "@mui/material";
+import { styled } from "@mui/material/styles";
 import Title from "./title";
 import { db, storage } from "../../firebase";
+
+const Input = styled("input")({
+  display: "none",
+});
 
 const Upload = (props) => {
   const [patients, setPatients] = useState([]);
@@ -56,24 +61,29 @@ const Upload = (props) => {
 
   return (
     <React.Fragment>
-      <Title>Profile Photograph</Title>
       {patients.map((patient) => {
         if (patient.uid === props.uid)
           return (
-            <Avatar
-              alt="Patient_Profile_Image"
-              src={`${patient.imageURL}`}
-              sx={{ width: 100, height: 100 }}
-            />
+            <>
+              <Title>{patient.name}</Title>
+
+              <Avatar
+                alt="Patient_Profile_Image"
+                src={`${patient.imageURL}`}
+                sx={{ width: 200, height: 200 }}
+              />
+
+              <br />
+              <LinearProgress variant="determinate" value={progress} />
+              <br />
+              <input type="file" onChange={handleChange} />
+              <br />
+              <Button variant="contained" onClick={handleUpload}>
+                Upload
+              </Button>
+            </>
           );
       })}
-
-      <progress value={progress} max="100" />
-      <br />
-      <input type="file" onChange={handleChange} />
-      <Button variant="contained" onClick={handleUpload}>
-        Upload
-      </Button>
     </React.Fragment>
   );
 };

@@ -64,7 +64,18 @@ const Appointments = () => {
   return (
     <>
       <Navbar />
-      <Container maxWidth="lg" sx={{ mt: "12vh", ml: "5vw" }}>
+      <Container
+        maxWidth="lg"
+        sx={{
+          mt: "12vh",
+          ml: "5vw",
+          height: "100vh",
+          backgroundImage: `url('../images/blue2.jpg')`,
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+        }}
+      >
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <Typography>New Appointments</Typography>

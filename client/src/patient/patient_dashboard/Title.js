@@ -4,7 +4,13 @@ import Typography from "@mui/material/Typography";
 
 const Title = (props) => {
   return (
-    <Typography component="h2" variant="h6" color="primary" gutterBottom>
+    <Typography
+      component="h2"
+      variant="h5"
+      color="primary"
+      gutterBottom
+      sx={{ fontWeight: "bold" }}
+    >
       {props.children}
     </Typography>
   );

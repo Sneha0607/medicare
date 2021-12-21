@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import firebase from "../firebase";
 import { styled, useTheme } from "@mui/material/styles";
 import {
+  Badge,
   Box,
   Tooltip,
   ListItem,
@@ -23,7 +24,7 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import PeopleIcon from "@mui/icons-material/People";
 import CreateIcon from "@mui/icons-material/Create";
-import NotificationsIcon from "@mui/icons-material/Notifications";
+import Notifications from "./notifications";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import PersonIcon from "@mui/icons-material/Person";
 import DateRangeIcon from "@mui/icons-material/DateRange";
@@ -124,7 +125,7 @@ const Navbar = () => {
           <ListItem button component="a" href="/patient/notifications">
             <Tooltip title="Notifications" placement="right">
               <ListItemIcon>
-                <NotificationsIcon />
+                <Notifications />
               </ListItemIcon>
             </Tooltip>
             <ListItemText>Notifications</ListItemText>
@@ -134,20 +135,10 @@ const Navbar = () => {
           <ListItem button component="a" href="/patient/scheduled_meetings">
             <Tooltip title="Scheduled Meetings" placement="right">
               <ListItemIcon>
-                <DateRangeIcon />
-              </ListItemIcon>
-            </Tooltip>
-            <ListItemText>Scheduled Meetings</ListItemText>
-          </ListItem>
-
-          {/* YOUR MEETINGS */}
-          <ListItem button component="a" href="/patient/meetings/old">
-            <Tooltip title="Your Meetings" placement="right">
-              <ListItemIcon>
                 <VideocamIcon />
               </ListItemIcon>
             </Tooltip>
-            <ListItemText>Your Meetings</ListItemText>
+            <ListItemText>Scheduled Meetings</ListItemText>
           </ListItem>
 
           {/* PAST APPOINTMENTS */}
