@@ -12,6 +12,7 @@ import {
 import { useHistory } from "react-router-dom";
 import { v1 as uuid } from "uuid";
 import { db } from "../firebase";
+import { container, listItem } from "./styles";
 
 const Doctor_Schedule_Meeting = () => {
   const history = useHistory();
@@ -36,18 +37,7 @@ const Doctor_Schedule_Meeting = () => {
   return (
     <>
       <Navbar />
-      <Container
-        maxWidth="lg"
-        sx={{
-          mt: "12vh",
-          ml: "5vw",
-          height: "100vh",
-          backgroundImage: `url('../images/blue2.jpg')`,
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-        }}
-      >
+      <Container maxWidth="lg" sx={container}>
         <Button onClick={create} variant="contained" target="_blank">
           Meet
         </Button>
@@ -55,7 +45,7 @@ const Doctor_Schedule_Meeting = () => {
           {meetings.map((meeting) => {
             if (meeting.doctorUID === currentUser.uid)
               return (
-                <ListItem sx={{ border: "1px solid", margin: "2px" }}>
+                <ListItem sx={listItem}>
                   <Grid container spacing={3}>
                     <Grid item xs={12} sm={9}>
                       <Typography>

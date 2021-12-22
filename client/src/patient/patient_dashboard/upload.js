@@ -1,12 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Avatar, Button, LinearProgress } from "@mui/material";
-import { styled } from "@mui/material/styles";
 import Title from "./title";
 import { db, storage } from "../../firebase";
-
-const Input = styled("input")({
-  display: "none",
-});
+import { avatar } from "../styles";
 
 const Upload = (props) => {
   const [patients, setPatients] = useState([]);
@@ -70,7 +66,7 @@ const Upload = (props) => {
               <Avatar
                 alt="Patient_Profile_Image"
                 src={`${patient.imageURL}`}
-                sx={{ width: 200, height: 200 }}
+                sx={avatar}
               />
 
               <br />

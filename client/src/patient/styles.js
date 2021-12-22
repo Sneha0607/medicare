@@ -31,22 +31,8 @@ export const listItem = {
   margin: "2px",
 };
 
-export const confirmButton = {
-  backgroundColor: "#009900",
-  "&:hover": {
-    backgroundColor: "#006600",
-  },
-};
-
-export const cancelButton = {
-  backgroundColor: "#e60000",
-  "&:hover": {
-    backgroundColor: "#b30000",
-  },
-};
-
 export const signinGrid = {
-  backgroundImage: `url('images/Doctor_Signin.png')`,
+  backgroundImage: `url('images/Patient_Signin.jpg')`,
   backgroundRepeat: "no-repeat",
   backgroundColor: (t) =>
     t.palette.mode === "light" ? t.palette.grey[50] : t.palette.grey[900],
@@ -55,7 +41,7 @@ export const signinGrid = {
 };
 
 export const signupGrid = {
-  backgroundImage: `url("images/Doctor_Signup.jpg")`,
+  backgroundImage: `url('images/Patient_Signup.png')`,
   backgroundRepeat: "no-repeat",
   backgroundColor: (t) =>
     t.palette.mode === "light" ? t.palette.grey[50] : t.palette.grey[900],

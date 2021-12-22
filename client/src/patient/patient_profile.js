@@ -4,6 +4,7 @@ import { useAuth } from "../contexts/AuthContext";
 import { db } from "../firebase";
 import { Container, Grid, Paper, Typography } from "@mui/material";
 import Title from "./patient_dashboard/title";
+import { container, paper } from "./styles";
 
 const Patient_Profile = () => {
   const { currentUser } = useAuth();
@@ -19,21 +20,10 @@ const Patient_Profile = () => {
   return (
     <>
       <Navbar />
-      <Container
-        maxWidth="lg"
-        sx={{
-          mt: "12vh",
-          ml: "5vw",
-          height: "100vh",
-          backgroundImage: `url('../images/blue2.jpg')`,
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-        }}
-      >
+      <Container maxWidth="lg" sx={container}>
         <Grid container spacing={3}>
           <Grid item xs={12}>
-            <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
+            <Paper sx={paper}>
               <Title>Profile</Title>
               <Typography sx={{ fontStyle: "italic" }}>
                 (You can update these details by going to the dashboard tab)

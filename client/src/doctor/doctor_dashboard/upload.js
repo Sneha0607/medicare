@@ -1,26 +1,30 @@
 import React, { useState, useEffect } from "react";
-import { Avatar, Button } from "@mui/material";
+import { Avatar, Button, LinearProgress } from "@mui/material";
 import Title from "./title";
 import { db, storage } from "../../firebase";
+import { avatar } from "../styles";
 
 const Upload = (props) => {
-  const [doctors, setPatients] = useState([]);
+  const [doctors, setDoctors] = useState([]);
   const [image, setImage] = useState(null);
   const [url, setUrl] = useState("");
   const [progress, setProgress] = useState(0);
 
+  // FETCHING DOCTOR'S DATA FROM DB
   useEffect(() => {
     db.collection("doctors").onSnapshot((snapshot) => {
-      setPatients(snapshot.docs.map((doc) => doc.data()));
+      setDoctors(snapshot.docs.map((doc) => doc.data()));
     });
   }, []);
 
+  // FUNCTION TO HANDLE CHANGE IN IMAGE SELECTED TO UPLOAD
   const handleChange = (e) => {
     if (e.target.files[0]) {
       setImage(e.target.files[0]);
     }
   };
 
+  // FUNCTION TO HANDLE UPLOAD OF IMAGE TO DB AND STORAGE
   const handleUpload = () => {
     const uploadTask = storage
       .ref(`doctor_profile_images/${image.name}`)
@@ -56,24 +60,34 @@ const Upload = (props) => {
 
   return (
     <React.Fragment>
-      <Title>Profile Photograph</Title>
       {doctors.map((doctor) => {
         if (doctor.uid === props.uid)
           return (
-            <Avatar
-              alt="Patient_Profile_Image"
-              src={`${doctor.imageURL}`}
-              sx={{ width: 100, height: 100 }}
-            />
+            <>
+              {/* DOCTOR'S NAME */}
+              <Title>{doctor.name}</Title>
+
+              {/* DOCTOR'S PROFILE PICTURE */}
+              <Avatar
+                alt="Doctor_Profile_Image"
+                src={`${doctor.imageURL}`}
+                sx={avatar}
+              />
+
+              <br />
+              {/* UPLOADING IMAGE PROGRESS BAR */}
+              <LinearProgress variant="determinate" value={progress} />
+              <br />
+              {/* FILE INPUT OPTION */}
+              <input type="file" onChange={handleChange} />
+              <br />
+              {/* UPLOAD IMAGE BUTTON */}
+              <Button variant="contained" onClick={handleUpload}>
+                Upload
+              </Button>
+            </>
           );
       })}
-
-      <progress value={progress} max="100" />
-      <br />
-      <input type="file" onChange={handleChange} />
-      <Button variant="contained" onClick={handleUpload}>
-        Upload
-      </Button>
     </React.Fragment>
   );
 };

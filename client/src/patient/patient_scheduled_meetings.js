@@ -10,6 +10,7 @@ import {
   ListItem,
   Typography,
 } from "@mui/material";
+import { container, listItem } from "./styles";
 
 const Patient_Scheduled_Meetings = () => {
   const [meetings, setMeetings] = useState([]);
@@ -26,23 +27,12 @@ const Patient_Scheduled_Meetings = () => {
   return (
     <>
       <Navbar />
-      <Container
-        maxWidth="lg"
-        sx={{
-          mt: "12vh",
-          ml: "5vw",
-          height: "100vh",
-          backgroundImage: `url('../images/blue2.jpg')`,
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-        }}
-      >
+      <Container maxWidth="lg" sx={container}>
         <List>
           {meetings.map((meeting) => {
             if (meeting.patientUID === currentUser.uid)
               return (
-                <ListItem sx={{ border: "1px solid", margin: "2px" }}>
+                <ListItem sx={listItem}>
                   <Grid container spacing={3}>
                     <Grid item xs={12} sm={9}>
                       <Typography>

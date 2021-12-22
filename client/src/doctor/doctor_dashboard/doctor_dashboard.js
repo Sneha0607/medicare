@@ -4,6 +4,8 @@ import { useAuth } from "../../contexts/AuthContext";
 import Navbar from "../navbar";
 import Form from "./form";
 import Upload from "./upload";
+import { container, paper } from "../styles";
+import { upload } from "../../patient/styles";
 
 const Doctor_Dashboard = () => {
   const { currentUser } = useAuth();
@@ -11,39 +13,18 @@ const Doctor_Dashboard = () => {
   return (
     <>
       <Navbar />
-      <Container
-        maxWidth="lg"
-        sx={{
-          mt: "12vh",
-          ml: "5vw",
-          height: "100vh",
-          backgroundImage: `url('../images/blue2.jpg')`,
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-        }}
-      >
+      <Container maxWidth="lg" sx={container}>
         <Grid container spacing={3}>
+          {/* UPLOAD PROFILE IMAGE */}
           <Grid item xs={12} md={4} lg={3}>
-            <Paper
-              sx={{
-                p: 2,
-                display: "flex",
-                flexDirection: "column",
-              }}
-            >
+            <Paper sx={upload}>
               <Upload uid={currentUser.uid} />
             </Paper>
           </Grid>
 
+          {/* FORM TO UPDATE DETAILS */}
           <Grid item xs={12} md={8} lg={9}>
-            <Paper
-              sx={{
-                p: 2,
-                display: "flex",
-                flexDirection: "column",
-              }}
-            >
+            <Paper sx={paper}>
               <Form uid={currentUser.uid} />
             </Paper>
           </Grid>

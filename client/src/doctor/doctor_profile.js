@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import Navbar from "./navbar";
 import { useAuth } from "../contexts/AuthContext";
 import { db } from "../firebase";
-import { Container, Grid, Paper, Typography } from "@mui/material";
+import { Avatar, Container, Grid, Paper, Typography } from "@mui/material";
 import Title from "./doctor_dashboard/title";
+import { container, paper, avatar, upload } from "./styles";
 
 const Doctor_Profile = () => {
   const { currentUser } = useAuth();
@@ -16,68 +17,68 @@ const Doctor_Profile = () => {
     });
   }, []);
 
-  console.log(doctors);
-
   return (
     <>
       <Navbar />
-      <Container
-        maxWidth="lg"
-        sx={{
-          mt: "12vh",
-          ml: "5vw",
-          height: "100vh",
-          backgroundImage: `url('../images/blue2.jpg')`,
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-        }}
-      >
-        <Grid container spacing={3}>
-          <Grid item xs={12}>
-            <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-              <Title>Profile</Title>
-              <Typography sx={{ fontStyle: "italic" }}>
-                (You can update these details by going to the dashboard tab)
-              </Typography>
-              <br />
-              {doctors.map((doctor) => {
-                if (doctor.uid === currentUser.uid)
-                  return (
-                    <>
-                      <Typography>Name: {doctor.name}</Typography>
-                      <Typography>
-                        Medical Speciality: {doctor.medicalSpeciality}
-                      </Typography>
-                      <Typography>
-                        Experience: {doctor.experience} years
-                      </Typography>
-                      <Typography>Age: {doctor.age}</Typography>
-                      <Typography>Gender: {doctor.gender}</Typography>
-                      <Typography>Degree: {doctor.degree}</Typography>
-                      <Typography>
-                        Address: {doctor.address1}, {doctor.address2}
-                      </Typography>
-                      <Typography>City: {doctor.city}</Typography>
-                      <Typography>State: {doctor.state}</Typography>
-                      <Typography>Country: {doctor.country}</Typography>
-                      <Typography>Pincode: {doctor.pincode}</Typography>
-                      <Typography>
-                        Last updated at:{" "}
-                        {new Date(
-                          doctor.updatedAt.seconds * 1000
-                        ).toLocaleDateString("en-US")}
-                        , at{" "}
-                        {new Date(doctor.updatedAt.seconds * 1000).getHours()}:
-                        {new Date(doctor.updatedAt.seconds * 1000).getMinutes()}{" "}
-                        hrs
-                      </Typography>
-                    </>
-                  );
-              })}
-            </Paper>
-          </Grid>
-        </Grid>
+      <Container maxWidth="lg" sx={container}>
+        {doctors.map((doctor) => {
+          if (doctor.uid === currentUser.uid)
+            return (
+              <Grid container spacing={3}>
+                {/* DOCTOR'S PROFILE IMAGE */}
+                <Grid item xs={12} md={4} lg={3}>
+                  <Paper sx={upload}>
+                    <Title>{doctor.name}</Title>
+                    <Avatar
+                      alt="Doctor_Profile_Image"
+                      src={`${doctor.imageURL}`}
+                      sx={avatar}
+                    />
+                  </Paper>
+                </Grid>
+
+                {/* DOCTOR'S PROFILE */}
+                <Grid item xs={12} md={8} lg={9}>
+                  <Paper sx={paper}>
+                    <Title>Profile</Title>
+                    <Typography sx={{ fontStyle: "italic" }}>
+                      (You can update these details by going to the dashboard
+                      tab)
+                    </Typography>
+                    <br />
+
+                    <Typography>Name: {doctor.name}</Typography>
+                    <Typography>
+                      Medical Speciality: {doctor.medicalSpeciality}
+                    </Typography>
+                    <Typography>
+                      Experience: {doctor.experience} years
+                    </Typography>
+                    <Typography>Age: {doctor.age}</Typography>
+                    <Typography>Gender: {doctor.gender}</Typography>
+                    <Typography>Degree: {doctor.degree}</Typography>
+                    <Typography>
+                      Address: {doctor.address1}, {doctor.address2}
+                    </Typography>
+                    <Typography>City: {doctor.city}</Typography>
+                    <Typography>State: {doctor.state}</Typography>
+                    <Typography>Country: {doctor.country}</Typography>
+                    <Typography>Pincode: {doctor.pincode}</Typography>
+                    <Typography>
+                      Last updated at:{" "}
+                      {new Date(
+                        doctor.updatedAt.seconds * 1000
+                      ).toLocaleDateString("en-US")}
+                      , at{" "}
+                      {new Date(doctor.updatedAt.seconds * 1000).getHours()}:
+                      {new Date(doctor.updatedAt.seconds * 1000).getMinutes()}{" "}
+                      hrs
+                    </Typography>
+                  </Paper>
+                </Grid>
+              </Grid>
+            );
+        })}
       </Container>
     </>
   );

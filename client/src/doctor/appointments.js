@@ -12,10 +12,17 @@ import {
   Button,
   ButtonGroup,
 } from "@mui/material";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { createTheme } from "@mui/material/styles";
 import { db } from "../firebase";
 import DoneIcon from "@mui/icons-material/Done";
 import CloseIcon from "@mui/icons-material/Close";
+import {
+  container,
+  paper,
+  listItem,
+  confirmButton,
+  cancelButton,
+} from "./styles";
 
 const theme = createTheme();
 
@@ -24,6 +31,7 @@ const Appointments = () => {
   const history = useHistory();
   const { currentUser } = useAuth();
 
+  // FETCHING APPOINTMENTS' DATA FROM DB
   useEffect(() => {
     db.collection("appointments")
       .orderBy("timeSlot", "asc")
@@ -34,6 +42,7 @@ const Appointments = () => {
       });
   }, []);
 
+  // HANDLE APPOINTMENT CONFIRM BUTTON
   const handleConfirm = (docID, patientUID) => {
     db.collection("appointments").doc(docID).update({
       isConfirmed: "true",
@@ -50,6 +59,7 @@ const Appointments = () => {
     history.push("/doctor/schedule_meeting");
   };
 
+  // HANDLE APPOINTMENT CANCEL BUTTON
   const handleCancel = (docID, patientUID) => {
     db.collection("appointments").doc(docID).update({
       isConfirmed: "false",
@@ -64,28 +74,12 @@ const Appointments = () => {
   return (
     <>
       <Navbar />
-      <Container
-        maxWidth="lg"
-        sx={{
-          mt: "12vh",
-          ml: "5vw",
-          height: "100vh",
-          backgroundImage: `url('../images/blue2.jpg')`,
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-        }}
-      >
+      <Container maxWidth="lg" sx={container}>
         <Grid container spacing={3}>
+          {/* LIST OF NEW APPOINTMENTS */}
           <Grid item xs={12}>
             <Typography>New Appointments</Typography>
-            <Paper
-              sx={{
-                p: 2,
-                display: "flex",
-                flexDirection: "column",
-              }}
-            >
+            <Paper sx={paper}>
               <List>
                 {appointments.map((appointment) => {
                   if (
@@ -93,7 +87,7 @@ const Appointments = () => {
                     appointment.doctorUID === currentUser.uid
                   )
                     return (
-                      <ListItem sx={{ border: "1px solid", margin: "2px" }}>
+                      <ListItem sx={listItem}>
                         <Grid container>
                           <Grid item xs={12} sm={6} md={9}>
                             <Typography>
@@ -115,6 +109,7 @@ const Appointments = () => {
                             </Typography>
                           </Grid>
 
+                          {/* CONFIRM BUTTON */}
                           <Grid item xs={12} sm={6} md={3}>
                             <ButtonGroup
                               variant="contained"
@@ -137,12 +132,7 @@ const Appointments = () => {
                               >
                                 <Button
                                   startIcon={<DoneIcon />}
-                                  sx={{
-                                    backgroundColor: "#009900",
-                                    "&:hover": {
-                                      backgroundColor: "#006600",
-                                    },
-                                  }}
+                                  sx={confirmButton}
                                   onClick={() =>
                                     handleConfirm(
                                       appointment.id,
@@ -154,14 +144,10 @@ const Appointments = () => {
                                 </Button>
                               </div>
 
+                              {/* CANCEL BUTTON */}
                               <Button
                                 startIcon={<CloseIcon />}
-                                sx={{
-                                  backgroundColor: "#e60000",
-                                  "&:hover": {
-                                    backgroundColor: "#b30000",
-                                  },
-                                }}
+                                sx={cancelButton}
                                 onClick={() =>
                                   handleCancel(
                                     appointment.id,
@@ -181,15 +167,10 @@ const Appointments = () => {
             </Paper>
           </Grid>
 
+          {/* LIST OF CONFIRMED APPOINTMENTS */}
           <Grid item xs={12}>
             <Typography>Confirmed Appointments</Typography>
-            <Paper
-              sx={{
-                p: 2,
-                display: "flex",
-                flexDirection: "column",
-              }}
-            >
+            <Paper sx={paper}>
               <List>
                 {appointments.map((appointment) => {
                   if (
@@ -197,7 +178,7 @@ const Appointments = () => {
                     appointment.doctorUID === currentUser.uid
                   )
                     return (
-                      <ListItem sx={{ border: "1px solid", margin: "2px" }}>
+                      <ListItem sx={listItem}>
                         <Grid container>
                           <Grid item xs={12} sm={9}>
                             <Typography>

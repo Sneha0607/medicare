@@ -9,6 +9,7 @@ import {
   ListItem,
   Typography,
 } from "@mui/material";
+import { container, listItem } from "./styles";
 
 const View_Doctors = () => {
   const [doctors, setDoctors] = useState([]);
@@ -23,23 +24,12 @@ const View_Doctors = () => {
   return (
     <>
       <Navbar />
-      <Container
-        maxWidth="lg"
-        sx={{
-          mt: "12vh",
-          ml: "5vw",
-          height: "100vh",
-          backgroundImage: `url('../images/blue2.jpg')`,
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-        }}
-      >
+      <Container maxWidth="lg" sx={container}>
         <List>
           {doctors.map((doctor) => {
             if (doctor.isVerified === "true")
               return (
-                <ListItem sx={{ border: "1px solid", margin: "2px" }}>
+                <ListItem sx={listItem}>
                   <Grid container spacing={3}>
                     <Grid item xs={12} sm={6} md={9}>
                       <Typography>

@@ -11,6 +11,7 @@ import {
   Typography,
 } from "@mui/material";
 import Book_Appointment from "./book_appointment";
+import { container, paper } from "./styles";
 
 const Doctor = () => {
   const [doctors, setDoctors] = useState([]);
@@ -29,7 +30,7 @@ const Doctor = () => {
   return (
     <div>
       <Navbar />
-      <Container maxWidth="lg" sx={{ mt: "12vh", ml: "5vw" }}>
+      <Container maxWidth="lg" sx={container}>
         {doctors.map((doctor) => {
           if (doctor.uid === uid)
             return (
@@ -39,15 +40,9 @@ const Doctor = () => {
                 </Grid>
 
                 <Grid item xs={12} md={4} lg={3}>
-                  <Paper
-                    sx={{
-                      p: 2,
-                      display: "flex",
-                      flexDirection: "column",
-                    }}
-                  >
+                  <Paper sx={paper}>
                     <Avatar
-                      alt="Remy Sharp"
+                      alt="Doctor's Profile Picture"
                       src={doctor.imageURL}
                       sx={{ width: 100, height: 100, m: 2 }}
                     />
@@ -55,9 +50,7 @@ const Doctor = () => {
                   </Paper>
                 </Grid>
                 <Grid item xs={12} md={8} lg={9}>
-                  <Paper
-                    sx={{ p: 2, display: "flex", flexDirection: "column" }}
-                  >
+                  <Paper sx={paper}>
                     <>
                       <Typography>Name: {doctor.name}</Typography>
                       <Typography>Age: {doctor.age}</Typography>

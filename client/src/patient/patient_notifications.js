@@ -3,6 +3,7 @@ import { useAuth } from "../contexts/AuthContext";
 import Navbar from "./navbar";
 import { db } from "../firebase";
 import { Container, List, ListItem, Typography } from "@mui/material";
+import { container, listItem } from "./styles";
 
 const Patient_Notifications = () => {
   const [notifications, setNotifications] = useState([]);
@@ -22,22 +23,11 @@ const Patient_Notifications = () => {
   return (
     <>
       <Navbar />
-      <Container
-        maxWidth="lg"
-        sx={{
-          mt: "12vh",
-          ml: "5vw",
-          height: "100vh",
-          backgroundImage: `url('../images/blue2.jpg')`,
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-        }}
-      >
+      <Container maxWidth="lg" sx={container}>
         <List>
           {notifications.map((notification) => {
             return (
-              <ListItem sx={{ border: "1px solid", margin: "2px" }}>
+              <ListItem sx={listItem}>
                 <Typography>
                   {notification.message} <br />{" "}
                   {new Date(
