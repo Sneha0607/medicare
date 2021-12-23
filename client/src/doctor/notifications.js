@@ -5,22 +5,22 @@ import { Badge } from "@mui/material";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 
 const Notifications = () => {
-  const [patients, setPatients] = useState([]);
+  const [doctors, setDoctors] = useState([]);
   const { currentUser } = useAuth();
 
   // FETCHING PATIENT'S DATA FROM DB
   useEffect(() => {
-    db.collection("patients").onSnapshot((snapshot) => {
-      setPatients(snapshot.docs.map((doc) => doc.data()));
+    db.collection("doctors").onSnapshot((snapshot) => {
+      setDoctors(snapshot.docs.map((doc) => doc.data()));
     });
   }, []);
 
   return (
     <>
-      {patients.map((patient) => {
-        if (patient.uid === currentUser.uid)
+      {doctors.map((doctor) => {
+        if (doctor.uid === currentUser.uid)
           return (
-            <Badge badgeContent={patient.unreadCount} color="error">
+            <Badge badgeContent={doctor.unreadCount} color="error">
               <NotificationsIcon />
             </Badge>
           );

@@ -88,6 +88,7 @@ const Complete_Details = (props) => {
     const patientRef = db.doc("patients/props.uid");
     patientRef.set({
       uid: props.uid,
+      email: props.email,
       name,
       bloodGroup,
       age,

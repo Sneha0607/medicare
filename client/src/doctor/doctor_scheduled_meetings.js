@@ -30,7 +30,7 @@ const Doctor_Schedule_Meeting = () => {
   const create = () => {
     const id = uuid();
 
-    history.push(`/room/${id}`);
+    history.push(`/doctor/room/${id}`);
     alert(`Copy your meeting code : ${id}`);
   };
 
@@ -70,7 +70,7 @@ const Doctor_Schedule_Meeting = () => {
                       <Button
                         variant="contained"
                         target="_blank"
-                        href={`/room/${meeting.meetingID}`}
+                        href={`/doctor/room/${meeting.meetingID}`}
                       >
                         Join
                       </Button>

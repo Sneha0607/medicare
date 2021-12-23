@@ -11,13 +11,13 @@ export const container = {
   backgroundRepeat: "no-repeat",
   backgroundSize: "cover",
   [theme.breakpoints.down("md")]: {
-    mt: "8vh",
+    mt: "10vh",
     ml: "10vw",
-    backgroundPosition: "center",
-    backgroundSize: "cover",
+    width: "90vw",
   },
-  [theme.breakpoints.down("md")]: {
-    ml: "10vw",
+  [theme.breakpoints.down("sm")]: {
+    ml: "12vw",
+    width: "80vw",
   },
 };
 
@@ -40,9 +40,19 @@ export const avatar = {
 };
 
 export const listItem = {
-  border: "1px solid",
+  border: "2px solid #0d7da5",
+  borderRadius: "25px",
   margin: "2px",
+  boxShadow: 2,
+  backgroundColor: "#e6f7fd",
+  "&:hover": {
+    backgroundColor: "#d0f0fb",
+    boxShadow: 3,
+    border: "3px solid #0d7da5",
+  },
 };
+
+export const typography = { fontWeight: "bold", color: "#063547" };
 
 export const confirmButton = {
   backgroundColor: "#009900",
@@ -82,4 +92,19 @@ export const box = {
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
+};
+
+export const controls = {
+  top: "auto",
+  bottom: 0,
+  backgroundColor: "#393838",
+  alignItems: "center",
+};
+
+export const controlsToolbar = {
+  alignItems: "center",
+  [theme.breakpoints.down("md")]: {
+    paddingLeft: "0",
+    marginLeft: "0",
+  },
 };

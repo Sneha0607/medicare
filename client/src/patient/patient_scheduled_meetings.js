@@ -60,7 +60,7 @@ const Patient_Scheduled_Meetings = () => {
                       <Button
                         variant="contained"
                         target="_blank"
-                        href={`/room/${meeting.meetingID}`}
+                        href={`/patient/room/${meeting.meetingID}`}
                       >
                         Join
                       </Button>

@@ -79,3 +79,18 @@ export const box = {
   flexDirection: "column",
   alignItems: "center",
 };
+
+export const controls = {
+  top: "auto",
+  bottom: 0,
+  backgroundColor: "#393838",
+  alignItems: "center",
+};
+
+export const controlsToolbar = {
+  alignItems: "center",
+  [theme.breakpoints.down("md")]: {
+    paddingLeft: "0",
+    marginLeft: "0",
+  },
+};

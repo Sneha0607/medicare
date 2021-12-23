@@ -23,11 +23,12 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import PeopleIcon from "@mui/icons-material/People";
 import CreateIcon from "@mui/icons-material/Create";
-import NotificationsIcon from "@mui/icons-material/Notifications";
+import Notifications from "./notifications";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import PersonIcon from "@mui/icons-material/Person";
 import DateRangeIcon from "@mui/icons-material/DateRange";
 import VideocamIcon from "@mui/icons-material/Videocam";
+import NewspaperIcon from "@mui/icons-material/Newspaper";
 import LogoutIcon from "@mui/icons-material/Logout";
 
 const Navbar = () => {
@@ -134,7 +135,7 @@ const Navbar = () => {
           <ListItem button component="a" href="/doctor/notifications/">
             <Tooltip title="Notifications" placement="right">
               <ListItemIcon>
-                <NotificationsIcon />
+                <Notifications />
               </ListItemIcon>
             </Tooltip>
             <ListItemText>Notifications</ListItemText>
@@ -160,6 +161,16 @@ const Navbar = () => {
               </ListItemIcon>
             </Tooltip>
             <ListItemText>Quick Notes</ListItemText>
+          </ListItem>
+
+          {/* LATEST UPDATES */}
+          <ListItem button component="a" href="/">
+            <Tooltip title="Latest Updates" placement="right">
+              <ListItemIcon>
+                <NewspaperIcon />
+              </ListItemIcon>
+            </Tooltip>
+            <ListItemText>Latest Updates</ListItemText>
           </ListItem>
 
           {/* SIGN OUT */}

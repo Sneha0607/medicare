@@ -8,22 +8,22 @@ import MicOffIcon from "@mui/icons-material/MicOff";
 import VideocamIcon from "@mui/icons-material/Videocam";
 import VideocamOffIcon from "@mui/icons-material/VideocamOff";
 import CallEndIcon from "@mui/icons-material/CallEnd";
-
+import { controls, controlsToolbar } from "../styles";
 // import Participants from "./participants";
-// import Chat from "./chat";
-// import Share from "./share";
+import Chat from "./chat";
+import Share from "./share";
 // import WhiteBoard from "./whiteBoard/whiteBoard";
 
 const Container = styled.div`
   padding: 2vw;
   display: flex;
-  height: 85vh;
+  height: 100vh;
   width: 100%;
   flex-wrap: wrap;
 `;
 
 const StyledVideo = styled.video`
-  height: 45%;
+  height: 80%;
   width: 50%;
   marginleft: 5%;
 `;
@@ -45,7 +45,7 @@ const videoConstraints = {
   width: window.innerWidth / 2,
 };
 
-const Room = (props) => {
+const Doctor_Room = (props) => {
   const [peers, setPeers] = useState([]);
   const [stream, setStream] = useState();
   const [audioMuted, setAudioMuted] = useState(false);
@@ -221,9 +221,7 @@ const Room = (props) => {
   };
 
   return (
-    <Container
-      style={{ marginTop: "10vh", backgroundColor: "#1b1a1a", width: "100vw" }}
-    >
+    <Container style={{ backgroundColor: "#1b1a1a", width: "100vw" }}>
       <StyledVideo controls muted ref={userVideo} autoPlay playsInline />
       {peers.map((peer) => {
         return <Video key={peer.peerID} peer={peer.peer} />;
@@ -231,14 +229,15 @@ const Room = (props) => {
 
       {/* CONTROLS */}
 
-      <AppBar position="fixed">
-        <Toolbar>
+      <AppBar position="fixed" sx={controls}>
+        <Toolbar sx={controlsToolbar}>
           {audioControl}
           {videoControl}
-          {/* <Participants />
           <Chat />
+          <Share />
+          {/* <Participants />
           <WhiteBoard />
-          <Share /> */}
+           */}
           <Tooltip title="End Call" placement="top">
             <IconButton
               onClick={leaveMeeting}
@@ -254,4 +253,4 @@ const Room = (props) => {
   );
 };
 
-export default Room;
+export default Doctor_Room;

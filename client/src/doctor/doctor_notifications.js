@@ -6,13 +6,13 @@ import { Button, Container, List, ListItem, Typography } from "@mui/material";
 import MarkChatReadIcon from "@mui/icons-material/MarkChatRead";
 import { container, listItem, typography } from "./styles";
 
-const Patient_Notifications = () => {
+const Doctor_Notifications = () => {
   const [notifications, setNotifications] = useState([]);
   const { currentUser } = useAuth();
 
-  // FETCHING PATIENT'S DATA FROM DB
+  // FETCHING DOCTOR'S DATA FROM DB
   useEffect(() => {
-    db.collection("patients")
+    db.collection("doctors")
       .doc(currentUser.uid)
       .collection("notifications")
       .orderBy("sentAt", "desc")
@@ -23,7 +23,7 @@ const Patient_Notifications = () => {
 
   // READ NOTIFICATIONS BUTTON
   const handleReadNotifications = () => {
-    db.collection("patients").doc(currentUser.uid).update({
+    db.collection("doctors").doc(currentUser.uid).update({
       unreadCount: 0,
     });
   };
@@ -65,4 +65,4 @@ const Patient_Notifications = () => {
   );
 };
 
-export default Patient_Notifications;
+export default Doctor_Notifications;

@@ -58,6 +58,7 @@ const Complete_Details = (props) => {
     doctorRef.set({
       uid: props.uid,
       name,
+      email: props.email,
       medicalSpeciality,
       age,
       regNumber,

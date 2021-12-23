@@ -3,14 +3,18 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import firebase from "./firebase";
 import { AuthProvider } from "./contexts/AuthContext";
 import { CssBaseline } from "@mui/material";
+// HOMEPAGE
 import Home from "./home/home";
+// DOCTOR'S PAGES
 import Doctor_Signup from "./doctor/doctor_signup";
 import Doctor_Signin from "./doctor/doctor_signin";
 import Doctor_Dashboard from "./doctor/doctor_dashboard/doctor_dashboard";
 import Doctor_Profile from "./doctor/doctor_profile";
 import Appointments from "./doctor/appointments";
 import Doctor_Scheduled_Meetings from "./doctor/doctor_scheduled_meetings";
-import Room from "./doctor/room";
+import Doctor_Notifications from "./doctor/doctor_notifications";
+import Doctor_Room from "./doctor/videoMeeting/room";
+// PATIENT'S PAGES
 import Patient_Signup from "./patient/patient_signup";
 import Patient_Signin from "./patient/patient_signin";
 import Patient_Dashboard from "./patient/patient_dashboard/patient_dashboard";
@@ -20,6 +24,8 @@ import Book_Appointment from "./patient/book_appointment";
 import Doctor from "./patient/doctor";
 import Patient_Notifications from "./patient/patient_notifications";
 import Patient_Scheduled_Meetings from "./patient/patient_scheduled_meetings";
+import Patient_Room from "./patient/videoMeeting/room";
+// ADMIN'S PAGES
 import Admin_Signin from "./admin/admin_signin";
 import Admin_Dashboard from "./admin/admin_dashboard";
 import Doctors from "./admin/doctors";
@@ -70,10 +76,19 @@ const App = () => {
                   />
                   <Route
                     exact
+                    path="/doctor/notifications"
+                    component={Doctor_Notifications}
+                  />
+                  <Route
+                    exact
                     path="/doctor/scheduled_meetings"
                     component={Doctor_Scheduled_Meetings}
                   />
-                  <Route exact path="/room/:roomID" component={Room} />
+                  <Route
+                    exact
+                    path="/doctor/room/:roomID"
+                    component={Doctor_Room}
+                  />
                   {/* PATIENT ROUTES */}
                   <Route
                     exact
@@ -105,6 +120,11 @@ const App = () => {
                     exact
                     path="/patient/scheduled_meetings"
                     component={Patient_Scheduled_Meetings}
+                  />
+                  <Route
+                    exact
+                    path="/patient/room/:roomID"
+                    component={Patient_Room}
                   />
 
                   {/* ADMIN ROUTES */}

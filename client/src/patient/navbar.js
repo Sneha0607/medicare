@@ -152,7 +152,7 @@ const Navbar = () => {
             <ListItemText>Past Appointments</ListItemText>
           </ListItem>
 
-          {/* PAST APPOINTMENTS */}
+          {/* LATEST UPDATES */}
           <ListItem button component="a" href="/">
             <Tooltip title="Latest Updates" placement="right">
               <ListItemIcon>
