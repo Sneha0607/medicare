@@ -8,6 +8,7 @@ import {
   CardContent,
   Typography,
 } from "@mui/material";
+import { boldRaleway, button, cardMedia, raleway } from "./styles";
 
 const Register = () => {
   return (
@@ -17,47 +18,17 @@ const Register = () => {
         <CardActionArea component="a" href="#">
           <Card sx={{ display: "flex" }}>
             <CardContent sx={{ flex: 1, fontFamily: "Raleway" }}>
-              <Typography
-                component="h1"
-                variant="h4"
-                sx={{ fontFamily: "Raleway", fontWeight: "bold" }}
-              >
+              <Typography component="h1" variant="h4" sx={boldRaleway}>
                 Register as a Doctor
               </Typography>
-              <Typography variant="h5" paragraph sx={{ fontFamily: "Raleway" }}>
+              <Typography variant="h5" paragraph sx={raleway}>
                 Sign Up to provide consultations to patients
               </Typography>
-              <Button
-                sx={{
-                  backgroundColor: "#3284be",
-                  color: "#ffffff",
-                  margin: "1%",
-                  fontFamily: "Raleway",
-                  fontWeight: "bold",
-                  "&:hover": {
-                    backgroundColor: "#d7e8f4",
-                    color: "#3284be",
-                  },
-                }}
-                href="/doctor_signup"
-              >
+              <Button sx={button} href="/doctor_signup">
                 Sign Up
               </Button>
 
-              <Button
-                sx={{
-                  backgroundColor: "#3284be",
-                  color: "#ffffff",
-                  margin: "1%",
-                  fontFamily: "Raleway",
-                  fontWeight: "bold",
-                  "&:hover": {
-                    backgroundColor: "#d7e8f4",
-                    color: "#3284be",
-                  },
-                }}
-                href="/doctor_signin"
-              >
+              <Button sx={button} href="/doctor_signin">
                 Sign In
               </Button>
             </CardContent>
@@ -65,7 +36,7 @@ const Register = () => {
             {/* Image */}
             <CardMedia
               component="img"
-              sx={{ width: 160, display: { xs: "none", sm: "block" } }}
+              sx={cardMedia}
               image="images/doctor.jpg"
               alt="Doctor"
             />
@@ -78,47 +49,17 @@ const Register = () => {
         <CardActionArea component="a" href="#">
           <Card sx={{ display: "flex" }}>
             <CardContent sx={{ flex: 1 }}>
-              <Typography
-                component="h1"
-                variant="h4"
-                sx={{ fontFamily: "Raleway", fontWeight: "bold" }}
-              >
+              <Typography component="h1" variant="h4" sx={boldRaleway}>
                 Register as a Patient
               </Typography>
-              <Typography variant="h5" paragraph sx={{ fontFamily: "Raleway" }}>
+              <Typography variant="h5" paragraph sx={raleway}>
                 Sign Up to book appointments with doctors
               </Typography>
-              <Button
-                sx={{
-                  backgroundColor: "#3284be",
-                  color: "#ffffff",
-                  margin: "1%",
-                  fontFamily: "Raleway",
-                  fontWeight: "bold",
-                  "&:hover": {
-                    backgroundColor: "#d7e8f4",
-                    color: "#3284be",
-                  },
-                }}
-                href="/patient_signup"
-              >
+              <Button sx={button} href="/patient_signup">
                 Sign Up
               </Button>
 
-              <Button
-                sx={{
-                  backgroundColor: "#3284be",
-                  color: "#ffffff",
-                  margin: "1%",
-                  fontFamily: "Raleway",
-                  fontWeight: "bold",
-                  "&:hover": {
-                    backgroundColor: "#d7e8f4",
-                    color: "#3284be",
-                  },
-                }}
-                href="/patient_signin"
-              >
+              <Button sx={button} href="/patient_signin">
                 Sign In
               </Button>
             </CardContent>
@@ -126,7 +67,7 @@ const Register = () => {
             {/* Image */}
             <CardMedia
               component="img"
-              sx={{ width: 160, display: { xs: "none", sm: "block" } }}
+              sx={cardMedia}
               image="images/patient.jpg"
               alt="Patient"
             />
@@ -139,32 +80,15 @@ const Register = () => {
         <CardActionArea component="a" href="#">
           <Card sx={{ display: "flex" }}>
             <CardContent sx={{ flex: 1 }}>
-              <Typography
-                component="h1"
-                variant="h4"
-                sx={{ fontFamily: "Raleway", fontWeight: "bold" }}
-              >
+              <Typography component="h1" variant="h4" sx={boldRaleway}>
                 Sign in as an Admin
               </Typography>
-              <Typography variant="h5" paragraph sx={{ fontFamily: "Raleway" }}>
+              <Typography variant="h5" paragraph sx={raleway}>
                 Only verified admins of Medicare can login using the email ID
                 provided to them
               </Typography>
 
-              <Button
-                sx={{
-                  backgroundColor: "#3284be",
-                  color: "#ffffff",
-                  margin: "1%",
-                  fontFamily: "Raleway",
-                  fontWeight: "bold",
-                  "&:hover": {
-                    backgroundColor: "#d7e8f4",
-                    color: "#3284be",
-                  },
-                }}
-                href="/admin_signin"
-              >
+              <Button sx={button} href="/admin_signin">
                 Sign In
               </Button>
             </CardContent>
@@ -172,7 +96,7 @@ const Register = () => {
             {/* Image */}
             <CardMedia
               component="img"
-              sx={{ width: 160, display: { xs: "none", sm: "block" } }}
+              sx={cardMedia}
               image="images/admin.jpg"
               alt="Admin"
             />

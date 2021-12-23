@@ -3,7 +3,6 @@ import { useHistory } from "react-router-dom";
 import firebase from "../firebase";
 import { styled, useTheme } from "@mui/material/styles";
 import {
-  Badge,
   Box,
   Tooltip,
   ListItem,

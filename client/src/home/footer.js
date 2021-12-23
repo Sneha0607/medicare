@@ -15,15 +15,17 @@ import EmailIcon from "@mui/icons-material/Email";
 import PhoneIcon from "@mui/icons-material/Phone";
 import SendIcon from "@mui/icons-material/Send";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
+import {
+  footerBox,
+  footerTitle,
+  iconButton,
+  raleway,
+  sendButton,
+} from "./styles";
 
 const Copyright = () => {
   return (
-    <Typography
-      variant="body2"
-      color="#ffffff"
-      align="center"
-      sx={{ fontFamily: "Raleway" }}
-    >
+    <Typography variant="body2" color="#ffffff" align="center" sx={raleway}>
       {"Copyright © "} {new Date().getFullYear()}
       {"."}
     </Typography>
@@ -38,104 +40,57 @@ const Footer = () => {
   };
 
   return (
-    <Box
-      component="footer"
-      sx={{
-        py: 1,
-        backgroundColor: "#3284be",
-        color: "#ffffff",
-      }}
-      id="contact"
-    >
+    <Box component="footer" sx={footerBox} id="contact">
       {/* COPYRIGHT */}
       <Container maxWidth="lg">
-        <Typography
-          variant="h5"
-          align="center"
-          gutterBottom
-          sx={{ fontFamily: "Raleway" }}
-        >
+        <Typography variant="h5" align="center" gutterBottom sx={raleway}>
           Medicare
         </Typography>
         <Copyright />
-        <Typography
-          variant="subtitle1"
-          align="center"
-          sx={{ fontFamily: "Raleway" }}
-        >
+        <Typography variant="subtitle1" align="center" sx={raleway}>
           Developed by Sneha Singh
         </Typography>
 
         <Grid container>
           {/* CONNECT WITH US */}
           <Grid item xs={12} md={4}>
-            <Typography
-              variant="h6"
-              gutterBottom
-              sx={{ mt: 1, fontFamily: "Raleway", fontWeight: "bold" }}
-            >
+            <Typography variant="h6" gutterBottom sx={footerTitle}>
               Connect with us
             </Typography>
 
-            <IconButton
-              href="https://github.com/Sneha0607"
-              sx={{ color: "#ffffff", "&:hover": { fontWeight: "bold" } }}
-            >
+            <IconButton href="https://github.com/Sneha0607" sx={iconButton}>
               <GitHubIcon />
             </IconButton>
 
-            <IconButton
-              href="https://twitter.com/sneha_0607"
-              sx={{ color: "#ffffff", "&:hover": { fontWeight: "bold" } }}
-            >
+            <IconButton href="https://twitter.com/sneha_0607" sx={iconButton}>
               <TwitterIcon />
             </IconButton>
 
-            <IconButton
-              href="#"
-              sx={{ color: "#ffffff", "&:hover": { fontWeight: "bold" } }}
-            >
+            <IconButton href="#" sx={iconButton}>
               <FacebookIcon />
             </IconButton>
 
-            <Typography
-              variant="h6"
-              gutterBottom
-              sx={{ mt: 1, fontFamily: "Raleway", fontWeight: "bold" }}
-            >
+            <Typography variant="h6" gutterBottom sx={footerTitle}>
               Go back to top
             </Typography>
-            <IconButton
-              href="#"
-              sx={{ color: "#ffffff", "&:hover": { fontWeight: "bold" } }}
-            >
+            <IconButton href="#" sx={iconButton}>
               <ArrowUpwardIcon />
             </IconButton>
           </Grid>
 
           {/* CONTACTS */}
           <Grid xs={12} md={4}>
-            <Typography
-              variant="h6"
-              gutterBottom
-              sx={{ mt: 1, fontFamily: "Raleway", fontWeight: "bold" }}
-            >
+            <Typography variant="h6" gutterBottom sx={footerTitle}>
               Contact us
             </Typography>
-            <IconButton
-              href="#"
-              sx={{ color: "#ffffff", "&:hover": { fontWeight: "bold" } }}
-            >
+            <IconButton href="#" sx={iconButton}>
               <EmailIcon />
               <Typography variant="body2">
                 {" "}
                 sneha.20198023@mnnit.ac.in{" "}
               </Typography>
             </IconButton>
-            <IconButton
-              href="#"
-              sx={{ color: "#ffffff", "&:hover": { fontWeight: "bold" } }}
-            >
+            <IconButton href="#" sx={iconButton}>
               <PhoneIcon />
               <Typography variant="body2"> +91-9999 999 999 </Typography>
             </IconButton>
@@ -143,11 +98,7 @@ const Footer = () => {
 
           {/* NEWSLETTER SUBSCRIPTION */}
           <Grid>
-            <Typography
-              variant="h6"
-              gutterBottom
-              sx={{ mt: 1, fontFamily: "Raleway", fontWeight: "bold" }}
-            >
+            <Typography variant="h6" gutterBottom sx={footerTitle}>
               Subscribe to our newsletter
             </Typography>
             <form onSubmit={handleSubmit}>
@@ -172,12 +123,7 @@ const Footer = () => {
                 type="submit"
                 variant="contained"
                 startIcon={<SendIcon />}
-                sx={{
-                  color: "#3284be",
-                  backgroundColor: "#ffffff",
-                  fontFamily: "Raleway",
-                  fontWeight: "bold",
-                }}
+                sx={sendButton}
               >
                 Send
               </Button>

@@ -122,7 +122,7 @@ const Navbar = () => {
           </ListItem>
 
           {/* YOUR PATIENTS */}
-          <ListItem button component="a" href="/doctor/patients/">
+          <ListItem button component="a" href="/doctor/patients">
             <Tooltip title="Your Patients" placement="right">
               <ListItemIcon>
                 <PeopleIcon />
@@ -132,7 +132,7 @@ const Navbar = () => {
           </ListItem>
 
           {/* NOTIFICATIONS */}
-          <ListItem button component="a" href="/doctor/notifications/">
+          <ListItem button component="a" href="/doctor/notifications">
             <Tooltip title="Notifications" placement="right">
               <ListItemIcon>
                 <Notifications />
@@ -154,7 +154,7 @@ const Navbar = () => {
           {/* PAST MEETINGS */}
 
           {/* QUICK NOTES */}
-          <ListItem button component="a" href="/doctor/notes/">
+          <ListItem button component="a" href="/doctor/notes">
             <Tooltip title="Quick Notes" placement="right">
               <ListItemIcon>
                 <CreateIcon />

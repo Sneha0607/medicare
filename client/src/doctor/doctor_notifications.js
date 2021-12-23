@@ -5,6 +5,9 @@ import { db } from "../firebase";
 import { Button, Container, List, ListItem, Typography } from "@mui/material";
 import MarkChatReadIcon from "@mui/icons-material/MarkChatRead";
 import { container, listItem, typography } from "./styles";
+import { createTheme } from "@mui/material/styles";
+
+const theme = createTheme();
 
 const Doctor_Notifications = () => {
   const [notifications, setNotifications] = useState([]);
