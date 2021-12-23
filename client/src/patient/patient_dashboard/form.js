@@ -3,6 +3,7 @@ import { db } from "../../firebase";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Complete_Details from "./complete_details";
 import { Typography } from "@mui/material";
+import Edit_Details from "./edit_details/edit_details";
 
 const theme = createTheme();
 
@@ -20,11 +21,10 @@ const Form = (props) => {
     <ThemeProvider theme={theme}>
       {patients.map((patient) => {
         if (patient.uid === props.uid) {
-          if (patient.isVerified === "false") return <Complete_Details />;
-          else if (patient.isVerified === "pending")
-            return <Typography>Verification is pending by Admin</Typography>;
+          if (patient.isVerified === "false")
+            return <Complete_Details uid={props.uid} />;
           else if (patient.isVerified === "true")
-            return <Typography>Your profile has been verified!</Typography>;
+            return <Edit_Details uid={props.uid} />;
         }
       })}
     </ThemeProvider>

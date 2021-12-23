@@ -29,6 +29,7 @@ import AssignmentIcon from "@mui/icons-material/Assignment";
 import PersonIcon from "@mui/icons-material/Person";
 import DateRangeIcon from "@mui/icons-material/DateRange";
 import VideocamIcon from "@mui/icons-material/Videocam";
+import NewspaperIcon from "@mui/icons-material/Newspaper";
 import LogoutIcon from "@mui/icons-material/Logout";
 
 const Navbar = () => {
@@ -149,6 +150,16 @@ const Navbar = () => {
               </ListItemIcon>
             </Tooltip>
             <ListItemText>Past Appointments</ListItemText>
+          </ListItem>
+
+          {/* PAST APPOINTMENTS */}
+          <ListItem button component="a" href="/">
+            <Tooltip title="Latest Updates" placement="right">
+              <ListItemIcon>
+                <NewspaperIcon />
+              </ListItemIcon>
+            </Tooltip>
+            <ListItemText>Latest Updates</ListItemText>
           </ListItem>
 
           {/* SIGN OUT */}

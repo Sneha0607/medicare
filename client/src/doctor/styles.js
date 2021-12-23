@@ -1,3 +1,7 @@
+import { createTheme } from "@mui/material/styles";
+
+const theme = createTheme();
+
 export const container = {
   mt: "12vh",
   ml: "5vw",
@@ -6,6 +10,15 @@ export const container = {
   backgroundPosition: "center",
   backgroundRepeat: "no-repeat",
   backgroundSize: "cover",
+  [theme.breakpoints.down("md")]: {
+    mt: "8vh",
+    ml: "10vw",
+    backgroundPosition: "center",
+    backgroundSize: "cover",
+  },
+  [theme.breakpoints.down("md")]: {
+    ml: "10vw",
+  },
 };
 
 export const paper = {

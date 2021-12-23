@@ -26,7 +26,7 @@ const Book_Appointment = (props) => {
   const [symptoms, setSymptoms] = useState("");
   const { currentUser } = useAuth();
 
-  const handleClickOpen = () => () => {
+  const handleClickOpen = () => {
     setOpen(true);
     setScroll("paper");
   };
@@ -64,8 +64,7 @@ const Book_Appointment = (props) => {
 
   return (
     <>
-      <Navbar />
-      <Button variant="contained" onClick={handleClickOpen()}>
+      <Button variant="contained" onClick={() => handleClickOpen()}>
         Book Appointment
       </Button>
       <Dialog
@@ -77,7 +76,7 @@ const Book_Appointment = (props) => {
         PaperProps={{ sx: { position: "fixed", top: 0, m: 0 } }}
       >
         <DialogTitle id="scroll-dialog-title">Book Appointment</DialogTitle>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={(e) => handleSubmit()}>
           <DialogContent dividers={scroll === "paper"}>
             <DialogContentText
               id="scroll-dialog-description"
@@ -144,10 +143,8 @@ const Book_Appointment = (props) => {
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleClose}>Cancel</Button>
-            <Button type="submit" onClick={handleClose}>
-              Book
-            </Button>
+            <Button onClick={() => handleClose()}>Cancel</Button>
+            <Button type="submit">Book</Button>
           </DialogActions>
         </form>
       </Dialog>

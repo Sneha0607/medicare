@@ -10,7 +10,7 @@ import {
   ListItem,
   Typography,
 } from "@mui/material";
-import { container, listItem } from "./styles";
+import { container, listItem, typography } from "./styles";
 
 const Patient_Scheduled_Meetings = () => {
   const [meetings, setMeetings] = useState([]);
@@ -28,6 +28,9 @@ const Patient_Scheduled_Meetings = () => {
     <>
       <Navbar />
       <Container maxWidth="lg" sx={container}>
+        <Typography align="center" variant="h4" sx={typography}>
+          Your Scheduled Appointments
+        </Typography>
         <List>
           {meetings.map((meeting) => {
             if (meeting.patientUID === currentUser.uid)

@@ -11,7 +11,7 @@ import {
   Typography,
 } from "@mui/material";
 import Book_Appointment from "./book_appointment";
-import { container, paper } from "./styles";
+import { container, paper, typography } from "./styles";
 
 const Doctor = () => {
   const [doctors, setDoctors] = useState([]);
@@ -36,7 +36,9 @@ const Doctor = () => {
             return (
               <Grid container spacing={3}>
                 <Grid item xs={12}>
-                  <Typography align="center">DOCTOR PROFILE</Typography>
+                  <Typography align="center" variant="h4" sx={typography}>
+                    {doctor.name}
+                  </Typography>
                 </Grid>
 
                 <Grid item xs={12} md={4} lg={3}>
@@ -49,6 +51,7 @@ const Doctor = () => {
                     <Book_Appointment doctorUID={uid} />
                   </Paper>
                 </Grid>
+
                 <Grid item xs={12} md={8} lg={9}>
                   <Paper sx={paper}>
                     <>
@@ -59,12 +62,10 @@ const Doctor = () => {
                         Speciality: {doctor.medicalSpeciality}
                       </Typography>
                       <Typography>
-                        Address: {doctor.address1}, {doctor.address2}
+                        Address: {doctor.address1}, {doctor.address2},{" "}
+                        {doctor.city}, {doctor.state}, {doctor.country},{" "}
+                        {doctor.pincode}
                       </Typography>
-                      <Typography>City: {doctor.city}</Typography>
-                      <Typography>State: {doctor.state}</Typography>
-                      <Typography>Country: {doctor.country}</Typography>
-                      <Typography>Pincode: {doctor.pincode}</Typography>
                     </>
                   </Paper>
                 </Grid>
