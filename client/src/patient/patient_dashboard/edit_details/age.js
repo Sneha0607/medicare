@@ -56,7 +56,7 @@ const Age = (props) => {
           <DialogContent>
             <DialogContentText ref={descriptionElementRef} tabIndex={-1}>
               <Grid container spacing={1}>
-                {/* EDIT NAME */}
+                {/* EDIT AGE */}
                 <Grid item xs={12}>
                   <TextField
                     required

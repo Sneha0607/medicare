@@ -17,6 +17,7 @@
     "@testing-library/user-event": "^12.1.10",
     "date-fns": "^2.27.0",
     "firebase": "^8.6.8",
+    "jspdf": "^2.5.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-icons": "^4.3.1",

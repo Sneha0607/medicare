@@ -12,9 +12,9 @@ import {
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 
-const BloodGroup = (props) => {
+const Age = (props) => {
   const [open, setOpen] = useState(false);
-  const [bloodGroup, setBloodGroup] = useState("");
+  const [age, setAge] = useState("");
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -36,8 +36,8 @@ const BloodGroup = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    db.collection("patients").doc(props.uid).update({
-      bloodGroup: bloodGroup,
+    db.collection("doctors").doc(props.uid).update({
+      age: age,
       updatedAt: new Date(),
     });
     setOpen(false);
@@ -51,21 +51,21 @@ const BloodGroup = (props) => {
         onClose={handleClose}
         PaperProps={{ sx: { position: "fixed", top: 0, m: 0 } }}
       >
-        <DialogTitle>Edit BloodGroup</DialogTitle>
+        <DialogTitle>Edit Age</DialogTitle>
         <form onSubmit={handleSubmit}>
           <DialogContent>
             <DialogContentText ref={descriptionElementRef} tabIndex={-1}>
               <Grid container spacing={1}>
-                {/* EDIT BLOOD GROUP */}
+                {/* EDIT AGE */}
                 <Grid item xs={12}>
                   <TextField
                     required
-                    id="BloodGroup"
-                    name="BloodGroup"
-                    label="BloodGroup"
+                    id="Age"
+                    name="Age"
+                    label="Age"
                     fullWidth
                     size="small"
-                    onChange={(e) => setBloodGroup(e.target.value)}
+                    onChange={(e) => setAge(e.target.value)}
                   />
                 </Grid>
               </Grid>
@@ -81,4 +81,4 @@ const BloodGroup = (props) => {
   );
 };
 
-export default BloodGroup;
+export default Age;

@@ -71,7 +71,14 @@ const Doctor_Signup = () => {
           email,
           uid: user.uid,
           imageURL: null,
-          isVerified: false,
+          isVerified: "false",
+          unreadCount: 1,
+        });
+
+        // PUSHING NEW NOTIFICATION
+        db.doc(`doctors/${cred.user.uid}`).collection("notifications").add({
+          message: "Complete your profile by going to the dashboard section!",
+          sentAt: new Date(),
         });
       })
       .then(() => {
@@ -99,7 +106,7 @@ const Doctor_Signup = () => {
       .auth()
       .signInWithPopup(provider)
       .then((cred) => {
-        console.log(cred);
+        //console.log(cred);
 
         // PUSHING USER DATA IN DB
         const userRef = db.doc(`users/${cred.user.uid}`);
@@ -116,6 +123,15 @@ const Doctor_Signup = () => {
           name: cred.user.displayName,
           email: cred.user.email,
           uid: cred.user.uid,
+          isVerified: "false",
+          imageURL: null,
+          unreadCount: 1,
+        });
+
+        // PUSHING NEW NOTIFICATION
+        db.doc(`doctors/${cred.user.uid}`).collection("notifications").add({
+          message: "Complete your profile by going to the dashboard section!",
+          sentAt: new Date(),
         });
       })
       .then(() => {

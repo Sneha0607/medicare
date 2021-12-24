@@ -14,6 +14,7 @@ import Appointments from "./doctor/appointments";
 import Doctor_Scheduled_Meetings from "./doctor/doctor_scheduled_meetings";
 import Doctor_Notifications from "./doctor/doctor_notifications";
 import Doctor_Room from "./doctor/videoMeeting/room";
+import Your_Patients from "./doctor/your_patients";
 // PATIENT'S PAGES
 import Patient_Signup from "./patient/patient_signup";
 import Patient_Signin from "./patient/patient_signin";
@@ -30,6 +31,8 @@ import Admin_Signin from "./admin/admin_signin";
 import Admin_Dashboard from "./admin/admin_dashboard";
 import Doctors from "./admin/doctors";
 import Patients from "./admin/patients";
+import Create_Post from "./admin/create_post";
+import Latest_Updates from "./admin/latest_updates";
 
 const App = () => {
   const [user, setUser] = useState("");
@@ -89,6 +92,11 @@ const App = () => {
                     path="/doctor/room/:roomID"
                     component={Doctor_Room}
                   />
+                  <Route
+                    exact
+                    path="/doctor/your_patients"
+                    component={Your_Patients}
+                  />
                   {/* PATIENT ROUTES */}
                   <Route
                     exact
@@ -135,6 +143,12 @@ const App = () => {
                   />
                   <Route exact path="/doctors" component={Doctors} />
                   <Route exact path="/patients" component={Patients} />
+                  <Route exact path="/create_post" component={Create_Post} />
+                  <Route
+                    exact
+                    path="/latest_updates"
+                    component={Latest_Updates}
+                  />
                 </Switch>
               </AuthProvider>
             </Router>

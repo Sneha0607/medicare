@@ -58,13 +58,11 @@ const Doctor_Profile = () => {
                     <Typography>Gender: {doctor.gender}</Typography>
                     <Typography>Degree: {doctor.degree}</Typography>
                     <Typography>
-                      Address: {doctor.address1}, {doctor.address2}
+                      Address: {doctor.address1}, {doctor.address2},{" "}
+                      {doctor.city}, {doctor.state}, {doctor.country}
                     </Typography>
-                    <Typography>City: {doctor.city}</Typography>
-                    <Typography>State: {doctor.state}</Typography>
-                    <Typography>Country: {doctor.country}</Typography>
                     <Typography>Pincode: {doctor.pincode}</Typography>
-                    <Typography>
+                    <Typography variant="subtitle2">
                       Last updated at:{" "}
                       {new Date(
                         doctor.updatedAt.seconds * 1000

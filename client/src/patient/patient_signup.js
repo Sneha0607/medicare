@@ -71,6 +71,14 @@ const Patient_Signup = () => {
           email,
           imageURL: null,
           uid: user.uid,
+          isVerified: "false",
+          unreadCount: 1,
+        });
+
+        // PUSHING NEW NOTIFICATION
+        db.doc(`patients/${cred.user.uid}`).collection("notifications").add({
+          message: "Complete your profile by going to the dashboard section!",
+          sentAt: new Date(),
         });
       })
       .then(() => {
@@ -98,7 +106,7 @@ const Patient_Signup = () => {
       .auth()
       .signInWithPopup(provider)
       .then((cred) => {
-        console.log(cred);
+        //console.log(cred);
 
         // PUSHING USER DATA IN DB
         const userRef = db.doc(`users/${cred.user.uid}`);
@@ -115,7 +123,15 @@ const Patient_Signup = () => {
           name: cred.user.displayName,
           email: cred.user.email,
           uid: cred.user.uid,
-          isVerified: false,
+          isVerified: "false",
+          imageURL: null,
+          unreadCount: 1,
+        });
+
+        // PUSHING NEW NOTIFICATION
+        db.doc(`patients/${cred.user.uid}`).collection("notifications").add({
+          message: "Complete your profile by going to the dashboard section!",
+          sentAt: new Date(),
         });
       })
       .then(() => {

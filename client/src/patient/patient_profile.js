@@ -50,12 +50,20 @@ const Patient_Profile = () => {
                     <Typography>Gender: {patient.gender}</Typography>
                     <Typography>Blood Group: {patient.bloodGroup}</Typography>
                     <Typography>
-                      Address: {patient.address1}, {patient.address2}
+                      Address: {patient.address1}, {patient.address2},{" "}
+                      {patient.city}, {patient.state}, {patient.country}
                     </Typography>
-                    <Typography>City: {patient.city}</Typography>
-                    <Typography>State: {patient.state}</Typography>
-                    <Typography>Country: {patient.country}</Typography>
                     <Typography>Pincode: {patient.pincode}</Typography>
+                    <Typography variant="subtitle2">
+                      Last updated at:{" "}
+                      {new Date(
+                        patient.updatedAt.seconds * 1000
+                      ).toLocaleDateString("en-US")}
+                      , at{" "}
+                      {new Date(patient.updatedAt.seconds * 1000).getHours()}:
+                      {new Date(patient.updatedAt.seconds * 1000).getMinutes()}{" "}
+                      hrs
+                    </Typography>
                   </Paper>
                 </Grid>
               </Grid>

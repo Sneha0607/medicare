@@ -48,7 +48,13 @@ const Appointments = () => {
       isConfirmed: "true",
     });
 
-    db.collection("meetings").doc(docID).set({});
+    db.collection("doctors")
+      .doc(currentUser.uid)
+      .collection("patients")
+      .doc(patientUID)
+      .set({
+        patientUID: patientUID,
+      });
 
     db.collection("patients").doc(patientUID).collection("notifications").add({
       message:
@@ -56,7 +62,7 @@ const Appointments = () => {
       sentAt: new Date(),
     });
 
-    history.push("/doctor/schedule_meeting");
+    history.push("/doctor/scheduled_meetings");
   };
 
   // HANDLE APPOINTMENT CANCEL BUTTON

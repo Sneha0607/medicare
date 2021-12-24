@@ -12,6 +12,7 @@ import { controls, controlsToolbar } from "../styles";
 // import Participants from "./participants";
 import Chat from "./chat";
 import Share from "./share";
+import Prescription from "./prescription";
 // import WhiteBoard from "./whiteBoard/whiteBoard";
 
 const Container = styled.div`
@@ -234,6 +235,7 @@ const Doctor_Room = (props) => {
           {audioControl}
           {videoControl}
           <Chat />
+          <Prescription />
           <Share />
           {/* <Participants />
           <WhiteBoard />

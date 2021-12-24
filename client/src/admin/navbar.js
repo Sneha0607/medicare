@@ -22,10 +22,11 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import PeopleIcon from "@mui/icons-material/People";
-import CreateIcon from "@mui/icons-material/Create";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import EmailIcon from "@mui/icons-material/Email";
 import MedicalServicesIcon from "@mui/icons-material/MedicalServices";
+import PostAddIcon from "@mui/icons-material/PostAdd";
+import NewspaperIcon from "@mui/icons-material/Newspaper";
 import LogoutIcon from "@mui/icons-material/Logout";
 
 const Navbar = () => {
@@ -118,6 +119,26 @@ const Navbar = () => {
             <ListItemText>Patients</ListItemText>
           </ListItem>
 
+          {/* CREATE POST */}
+          <ListItem button component="a" href="/create_post">
+            <Tooltip title="Create Post" placement="right">
+              <ListItemIcon>
+                <PostAddIcon />
+              </ListItemIcon>
+            </Tooltip>
+            <ListItemText>Create Post</ListItemText>
+          </ListItem>
+
+          {/* LATEST UPDATES */}
+          <ListItem button component="a" href="/latest_updates">
+            <Tooltip title="Latest Updates" placement="right">
+              <ListItemIcon>
+                <NewspaperIcon />
+              </ListItemIcon>
+            </Tooltip>
+            <ListItemText>Latest Updates</ListItemText>
+          </ListItem>
+
           {/* NOTIFICATIONS */}
           <ListItem button component="a" href="/notifications">
             <Tooltip title="Notifications" placement="right">
@@ -128,7 +149,7 @@ const Navbar = () => {
             <ListItemText>Notifications</ListItemText>
           </ListItem>
 
-          {/* QUICK NOTES */}
+          {/* READ FEEDBACKS */}
           <ListItem button component="a" href="/feedbacks">
             <Tooltip title="Read Feedbacks" placement="right">
               <ListItemIcon>

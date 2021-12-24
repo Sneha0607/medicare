@@ -19,7 +19,7 @@ import {
 } from "@mui/material";
 import ChatIcon from "@mui/icons-material/Chat";
 import SendIcon from "@mui/icons-material/Send";
-//import jsPDF from "jspdf";
+import { jsPDF } from "jspdf";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 
 const Chat = () => {

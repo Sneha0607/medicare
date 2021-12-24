@@ -73,6 +73,7 @@ const Complete_Details = (props) => {
       pincode,
       imageURL: null,
       isVerified: "pending",
+      unreadCount: 0,
       updatedAt: new Date(),
     });
 

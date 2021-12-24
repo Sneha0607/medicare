@@ -122,7 +122,7 @@ const Navbar = () => {
           </ListItem>
 
           {/* YOUR PATIENTS */}
-          <ListItem button component="a" href="/doctor/patients">
+          <ListItem button component="a" href="/doctor/your_patients">
             <Tooltip title="Your Patients" placement="right">
               <ListItemIcon>
                 <PeopleIcon />

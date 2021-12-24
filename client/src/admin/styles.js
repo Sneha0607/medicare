@@ -6,6 +6,7 @@ export const container = {
   mt: "12vh",
   ml: "5vw",
   height: "100vh",
+  backgroundColor: "#e6f7fd",
   backgroundImage: `url('../images/blue2.jpg')`,
   backgroundPosition: "center",
   backgroundRepeat: "no-repeat",
@@ -25,7 +26,7 @@ export const paper = {
   p: 2,
   display: "flex",
   flexDirection: "column",
-  backgroundColor: "transparent",
+  //backgroundColor: "transparent",
 };
 
 export const listItem = {
