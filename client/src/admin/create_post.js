@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import {
   Grid,
   Paper,
@@ -18,6 +19,7 @@ const Create_Post = () => {
   const [image, setImage] = useState(null);
   const [url, setUrl] = useState("");
   const [progress, setProgress] = useState(0);
+  const history = useHistory();
 
   const handleChange = (e) => {
     if (e.target.files[0]) {
@@ -55,6 +57,8 @@ const Create_Post = () => {
           });
       }
     );
+
+    history.push("/latest_updates");
   };
 
   return (

@@ -11,7 +11,7 @@ import CallEndIcon from "@mui/icons-material/CallEnd";
 import { controls, controlsToolbar } from "../styles";
 // import Participants from "./participants";
 import Chat from "./chat";
-import Share from "./share";
+import Prescription from "./prescription";
 // import WhiteBoard from "./whiteBoard/whiteBoard";
 
 const Container = styled.div`
@@ -234,7 +234,7 @@ const Patient_Room = (props) => {
           {audioControl}
           {videoControl}
           <Chat />
-          <Share />
+          <Prescription />
           {/* <Participants />
           <WhiteBoard />
            */}

@@ -11,7 +11,7 @@ import {
   Typography,
 } from "@mui/material";
 import { container, listItem, typography } from "./styles";
-import Title from "./patient_dashboard/title";
+import Title from "./dashboard/title";
 
 const View_Doctors = () => {
   const [doctors, setDoctors] = useState([]);

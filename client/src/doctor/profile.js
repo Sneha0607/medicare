@@ -3,7 +3,7 @@ import Navbar from "./navbar";
 import { useAuth } from "../contexts/AuthContext";
 import { db } from "../firebase";
 import { Avatar, Container, Grid, Paper, Typography } from "@mui/material";
-import Title from "./doctor_dashboard/title";
+import Title from "./dashboard/title";
 import { container, paper, avatar, upload } from "./styles";
 
 const Doctor_Profile = () => {

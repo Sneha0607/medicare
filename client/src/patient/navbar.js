@@ -152,7 +152,7 @@ const Navbar = () => {
           </ListItem>
 
           {/* LATEST UPDATES */}
-          <ListItem button component="a" href="/">
+          <ListItem button component="a" href="/patient/latest_updates">
             <Tooltip title="Latest Updates" placement="right">
               <ListItemIcon>
                 <NewspaperIcon />

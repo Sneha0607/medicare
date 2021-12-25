@@ -6,29 +6,31 @@ import { CssBaseline } from "@mui/material";
 // HOMEPAGE
 import Home from "./home/home";
 // DOCTOR'S PAGES
-import Doctor_Signup from "./doctor/doctor_signup";
-import Doctor_Signin from "./doctor/doctor_signin";
-import Doctor_Dashboard from "./doctor/doctor_dashboard/doctor_dashboard";
-import Doctor_Profile from "./doctor/doctor_profile";
+import Doctor_Signup from "./doctor/signup";
+import Doctor_Signin from "./doctor/signin";
+import Doctor_Dashboard from "./doctor/dashboard/dashboard";
+import Doctor_Profile from "./doctor/profile";
 import Appointments from "./doctor/appointments";
-import Doctor_Scheduled_Meetings from "./doctor/doctor_scheduled_meetings";
+import Doctor_Scheduled_Meetings from "./doctor/scheduled_meetings";
 import Doctor_Notifications from "./doctor/doctor_notifications";
 import Doctor_Room from "./doctor/videoMeeting/room";
 import Your_Patients from "./doctor/your_patients";
+import Doctor_Latest_Updates from "./doctor/latest_updates";
 // PATIENT'S PAGES
-import Patient_Signup from "./patient/patient_signup";
-import Patient_Signin from "./patient/patient_signin";
-import Patient_Dashboard from "./patient/patient_dashboard/patient_dashboard";
-import Patient_Profile from "./patient/patient_profile";
+import Patient_Signup from "./patient/signup";
+import Patient_Signin from "./patient/signin";
+import Patient_Dashboard from "./patient/dashboard/dashboard";
+import Patient_Profile from "./patient/profile";
 import View_Doctors from "./patient/view_doctors";
 import Book_Appointment from "./patient/book_appointment";
 import Doctor from "./patient/doctor";
 import Patient_Notifications from "./patient/patient_notifications";
-import Patient_Scheduled_Meetings from "./patient/patient_scheduled_meetings";
+import Patient_Scheduled_Meetings from "./patient/scheduled_meetings";
 import Patient_Room from "./patient/videoMeeting/room";
+import Patient_Latest_Updates from "./patient/latest_updates";
 // ADMIN'S PAGES
-import Admin_Signin from "./admin/admin_signin";
-import Admin_Dashboard from "./admin/admin_dashboard";
+import Admin_Signin from "./admin/signin";
+import Admin_Dashboard from "./admin/dashboard";
 import Doctors from "./admin/doctors";
 import Patients from "./admin/patients";
 import Create_Post from "./admin/create_post";
@@ -97,6 +99,12 @@ const App = () => {
                     path="/doctor/your_patients"
                     component={Your_Patients}
                   />
+                  <Route
+                    exact
+                    path="/doctor/latest_updates"
+                    component={Doctor_Latest_Updates}
+                  />
+
                   {/* PATIENT ROUTES */}
                   <Route
                     exact
@@ -133,6 +141,11 @@ const App = () => {
                     exact
                     path="/patient/room/:roomID"
                     component={Patient_Room}
+                  />
+                  <Route
+                    exact
+                    path="/patient/latest_updates"
+                    component={Patient_Latest_Updates}
                   />
 
                   {/* ADMIN ROUTES */}

@@ -13,7 +13,7 @@ import Navbar from "./navbar";
 import { db } from "../firebase";
 import { container, paper, typography } from "./styles";
 
-const Latest_Updates = () => {
+const Patient_Latest_Updates = () => {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
@@ -85,4 +85,4 @@ const Latest_Updates = () => {
   );
 };
 
-export default Latest_Updates;
+export default Patient_Latest_Updates;
