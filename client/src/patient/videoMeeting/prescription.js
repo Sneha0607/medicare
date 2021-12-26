@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
 import { db } from "../../firebase";
-import { useAuth } from "../../contexts/AuthContext";
 import {
   IconButton,
   Button,
@@ -20,24 +18,18 @@ import MedicationIcon from "@mui/icons-material/Medication";
 import DownloadIcon from "@mui/icons-material/Download";
 import { jsPDF } from "jspdf";
 
-const Prescription = () => {
+const Prescription = (props) => {
   const [open, setOpen] = useState(false);
   const [prescriptions, setPrescriptions] = useState([]);
 
-  //FETCHING MEETING CODE FROM URL
-  const location = useLocation();
-  const meetingCode = location.pathname.substring(
-    location.pathname.lastIndexOf("/") + 1
-  );
-
   //FETCHING ALL PRESCRIPTIONS FROM DATABASE
   useEffect(() => {
-    db.collection(`meetings/${meetingCode}/prescriptions`)
+    db.collection(`meetings/${props.meetingID}/prescriptions`)
       .orderBy("sentAt", "asc")
       .onSnapshot((snapshot) => {
         setPrescriptions(snapshot.docs.map((doc) => doc.data()));
       });
-  }, [meetingCode]);
+  }, [props.meetingCode]);
 
   //FUNCTIONS TO OPEN AND CLOSE DIALOG BOX
   const handleClickOpen = () => {

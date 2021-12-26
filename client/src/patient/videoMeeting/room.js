@@ -10,8 +10,7 @@ import VideocamOffIcon from "@mui/icons-material/VideocamOff";
 import CallEndIcon from "@mui/icons-material/CallEnd";
 import { controls, controlsToolbar } from "../styles";
 // import Participants from "./participants";
-import Chat from "./chat";
-import Prescription from "./prescription";
+import Controls from "./controls";
 // import WhiteBoard from "./whiteBoard/whiteBoard";
 
 const Container = styled.div`
@@ -233,15 +232,14 @@ const Patient_Room = (props) => {
         <Toolbar sx={controlsToolbar}>
           {audioControl}
           {videoControl}
-          <Chat />
-          <Prescription />
+          <Controls />
           {/* <Participants />
           <WhiteBoard />
            */}
           <Tooltip title="End Call" placement="top">
             <IconButton
               onClick={leaveMeeting}
-              href="/patient/profile"
+              href="/patient/scheduled_meetings"
               style={{ color: "#9d2f42" }}
             >
               <CallEndIcon />
