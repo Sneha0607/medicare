@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import Navbar from "./navbar";
-import { useAuth } from "../contexts/AuthContext";
 import { db } from "../firebase";
 import { Avatar, Container, Grid, Paper, Typography } from "@mui/material";
 import Title from "./dashboard/title";
 import { container, paper, avatar, upload } from "./styles";
 import Graph from "./graph";
 
-const Patient_Profile = () => {
-  const { currentUser } = useAuth();
+const Patient = () => {
   const [patients, setPatients] = useState([]);
+
+  const location = useLocation();
+  const uid = location.pathname.substring(
+    location.pathname.lastIndexOf("/") + 1
+  );
 
   // FETCHING PATIENT'S DATA FROM DB
   useEffect(() => {
@@ -23,7 +27,7 @@ const Patient_Profile = () => {
       <Navbar />
       <Container maxWidth="lg" sx={container}>
         {patients.map((patient) => {
-          if (patient.uid === currentUser.uid)
+          if (patient.uid === uid)
             return (
               <Grid container spacing={3}>
                 {/* PATIENT'S PROFILE IMAGE */}
@@ -40,30 +44,23 @@ const Patient_Profile = () => {
 
                 {/* PATIENT'S PROFILE */}
                 <Grid item xs={12} md={8} lg={9}>
-                  <Paper sx={paper}>
+                  <Paper
+                    sx={{
+                      height: "100%",
+                      p: 2,
+                      display: "flex",
+                      flexDirection: "column",
+                    }}
+                  >
                     <Title>Profile</Title>
-                    <Typography sx={{ fontStyle: "italic" }}>
-                      (You can update these details by going to the dashboard
-                      tab)
-                    </Typography>
                     <Typography>Name: {patient.name}</Typography>
                     <Typography>Age: {patient.age}</Typography>
                     <Typography>Gender: {patient.gender}</Typography>
                     <Typography>Blood Group: {patient.bloodGroup}</Typography>
                     <Typography>
                       Address: {patient.address1}, {patient.address2},{" "}
-                      {patient.city}, {patient.state}, {patient.country}
-                    </Typography>
-                    <Typography>Pincode: {patient.pincode}</Typography>
-                    <Typography variant="subtitle2">
-                      Last updated at:{" "}
-                      {new Date(
-                        patient.updatedAt.seconds * 1000
-                      ).toLocaleDateString("en-US")}
-                      , at{" "}
-                      {new Date(patient.updatedAt.seconds * 1000).getHours()}:
-                      {new Date(patient.updatedAt.seconds * 1000).getMinutes()}{" "}
-                      hrs
+                      {patient.city}, {patient.state}, {patient.country},{" "}
+                      {patient.pincode}
                     </Typography>
                   </Paper>
                 </Grid>
@@ -89,4 +86,4 @@ const Patient_Profile = () => {
   );
 };
 
-export default Patient_Profile;
+export default Patient;

@@ -12,6 +12,7 @@ import Doctor_Dashboard from "./doctor/dashboard/dashboard";
 import Doctor_Profile from "./doctor/profile";
 import Appointments from "./doctor/appointments";
 import Doctor_Scheduled_Meetings from "./doctor/scheduled_meetings";
+import Patient from "./doctor/patient";
 import Doctor_Notifications from "./doctor/doctor_notifications";
 import Doctor_Room from "./doctor/videoMeeting/room";
 import Your_Patients from "./doctor/your_patients";
@@ -98,6 +99,11 @@ const App = () => {
                     exact
                     path="/doctor/your_patients"
                     component={Your_Patients}
+                  />
+                  <Route
+                    exact
+                    path="/patient_profile/:uid"
+                    component={Patient}
                   />
                   <Route
                     exact

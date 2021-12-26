@@ -4,6 +4,7 @@ import { db } from "../../firebase";
 import Chat from "./chat";
 import Prescription from "./prescription";
 import Update from "./update";
+import View_Profile from "./view_profile";
 
 const Controls = () => {
   const [meetings, setMeetings] = useState([]);
@@ -39,6 +40,7 @@ const Controls = () => {
           return (
             <>
               <Chat {...props} />
+              <View_Profile {...props} />
               <Prescription {...props} />
               <Update {...props} />
             </>

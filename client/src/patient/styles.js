@@ -18,7 +18,7 @@ export const container = {
   },
   [theme.breakpoints.down("sm")]: {
     ml: "12vw",
-    maxWidth: "80vw",
+    maxWidth: "85vw",
   },
 };
 
@@ -26,7 +26,6 @@ export const paper = {
   p: 2,
   display: "flex",
   flexDirection: "column",
-  height: "100%",
 };
 
 export const upload = {

@@ -2,14 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import Navbar from "./navbar";
 import { db } from "../firebase";
-import { Button, Container, List, ListItem, Typography } from "@mui/material";
+import { Container, List, ListItem, Typography } from "@mui/material";
 import { container, listItem, typography } from "./styles";
-import { createTheme } from "@mui/material/styles";
-
-const theme = createTheme();
+import Patient_List from "./patient_list";
 
 const Your_Patients = () => {
-  const [patients, setPatients] = useState([]);
   const [yourPatients, setYourPatients] = useState([]);
   const { currentUser } = useAuth();
 
@@ -21,14 +18,9 @@ const Your_Patients = () => {
       .onSnapshot((snapshot) => {
         setYourPatients(snapshot.docs.map((doc) => doc.data()));
       });
-
-    db.collection("patients").onSnapshot((snapshot) => {
-      setPatients(snapshot.docs.map((doc) => doc.data()));
-    });
   }, []);
 
   console.log(yourPatients);
-  console.log(patients);
 
   return (
     <>
@@ -40,14 +32,11 @@ const Your_Patients = () => {
         <List>
           {yourPatients.map((yourPatient) => {
             {
-              patients.map((patient) => {
-                if (yourPatient.patientUID === patient.uid)
-                  return (
-                    <ListItem sx={listItem} key={patient.uid}>
-                      <Typography>{patient.name}</Typography>
-                    </ListItem>
-                  );
-              });
+              return (
+                <ListItem sx={listItem} key={yourPatient.patientUID}>
+                  <Patient_List uid={yourPatient.patientUID} />
+                </ListItem>
+              );
             }
           })}
         </List>
