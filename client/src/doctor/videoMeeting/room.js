@@ -10,9 +10,7 @@ import VideocamOffIcon from "@mui/icons-material/VideocamOff";
 import CallEndIcon from "@mui/icons-material/CallEnd";
 import { controls, controlsToolbar } from "../styles";
 // import Participants from "./participants";
-import Chat from "./chat";
-import Share from "./share";
-import Prescription from "./prescription";
+import Controls from "./controls";
 // import WhiteBoard from "./whiteBoard/whiteBoard";
 
 const Container = styled.div`
@@ -234,9 +232,7 @@ const Doctor_Room = (props) => {
         <Toolbar sx={controlsToolbar}>
           {audioControl}
           {videoControl}
-          <Chat />
-          <Prescription />
-          <Share />
+          <Controls />
           {/* <Participants />
           <WhiteBoard />
            */}

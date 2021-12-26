@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
 import { db } from "../../firebase";
 import { useAuth } from "../../contexts/AuthContext";
 import {
@@ -22,26 +21,22 @@ import SendIcon from "@mui/icons-material/Send";
 import DownloadIcon from "@mui/icons-material/Download";
 import { jsPDF } from "jspdf";
 
-const Prescription = () => {
+const Prescription = (props) => {
   const [open, setOpen] = useState(false);
   const { currentUser } = useAuth();
   const [prescription, setPrescription] = useState("");
   const [prescriptions, setPrescriptions] = useState([]);
 
-  //FETCHING MEETING CODE FROM URL
-  const location = useLocation();
-  const meetingCode = location.pathname.substring(
-    location.pathname.lastIndexOf("/") + 1
-  );
-
   //FETCHING ALL PRESCRIPTIONS FROM DATABASE
   useEffect(() => {
-    db.collection(`meetings/${meetingCode}/prescriptions`)
+    db.collection(
+      `doctors/${props.doctorUID}/patients/${props.patientUID}/prescriptions`
+    )
       .orderBy("sentAt", "asc")
       .onSnapshot((snapshot) => {
         setPrescriptions(snapshot.docs.map((doc) => doc.data()));
       });
-  }, [meetingCode]);
+  }, [props.meetingID]);
 
   //FUNCTIONS TO OPEN AND CLOSE DIALOG BOX
   const handleClickOpen = () => {
@@ -57,12 +52,18 @@ const Prescription = () => {
     e.preventDefault();
 
     //PUSHING MESSAGE IN DATABASE
-    db.collection("meetings").doc(meetingCode).collection("prescriptions").add({
-      prescription: prescription,
-      senderEmail: currentUser.email,
-      senderUid: currentUser.uid,
-      sentAt: new Date(),
-    });
+    db.collection("doctors")
+      .doc(`${props.doctorUID}`)
+      .collection("patients")
+      .doc(`${props.patientUID}`)
+      .collection("prescriptions")
+      .add({
+        prescription: prescription,
+        senderUid: props.doctorUID,
+        senderEmail: currentUser.email,
+        sentAt: new Date(),
+        appointmentID: props.meetingID,
+      });
 
     setPrescription("");
   };
@@ -103,19 +104,20 @@ const Prescription = () => {
         <DialogContent>
           <DialogContentText>
             <List>
+              <ListItem style={{ margin: "0" }}>
+                <Typography sx={{ fontWeight: "bold" }}>
+                  {currentUser.email}
+                </Typography>
+              </ListItem>
               {prescriptions.map((prescript) => {
-                return (
-                  <>
-                    <ListItem style={{ margin: "0" }}>
-                      <Typography>
-                        {prescript.senderEmail}
-                        <p>
-                          <b>{prescript.prescription}</b>
-                        </p>
-                      </Typography>
-                    </ListItem>
-                  </>
-                );
+                if (prescript.appointmentID === props.meetingID)
+                  return (
+                    <>
+                      <ListItem style={{ margin: "0" }}>
+                        <Typography>{prescript.prescription}</Typography>
+                      </ListItem>
+                    </>
+                  );
               })}
             </List>
           </DialogContentText>
@@ -124,10 +126,9 @@ const Prescription = () => {
 
           <form onSubmit={sendPrescription}>
             <TextField
-              id="outlined-multiline-flexible"
+              id="outlined"
+              required
               label="Prescription"
-              multiline
-              maxRows={4}
               color="primary"
               placeholder="Enter prescription..."
               value={prescription}
@@ -140,7 +141,6 @@ const Prescription = () => {
         </DialogContent>
         <DialogActions>
           {/* DOWNLOAD REPORT BUTTON */}
-
           <Button
             onClick={downloadPrescription}
             style={{

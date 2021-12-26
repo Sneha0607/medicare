@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { db } from "../../firebase";
+import { useAuth } from "../../contexts/AuthContext";
 import {
   IconButton,
   Button,
+  TextField,
   Dialog,
   DialogActions,
   DialogContent,
@@ -15,14 +17,18 @@ import {
   Tooltip,
 } from "@mui/material";
 import MedicationIcon from "@mui/icons-material/Medication";
+import SendIcon from "@mui/icons-material/Send";
 import DownloadIcon from "@mui/icons-material/Download";
 import { jsPDF } from "jspdf";
+import MonitorHeartIcon from "@mui/icons-material/MonitorHeart";
 
-const Prescription = (props) => {
+const Update = (props) => {
   const [open, setOpen] = useState(false);
+  const { currentUser } = useAuth();
+  const [prescription, setPrescription] = useState("");
   const [prescriptions, setPrescriptions] = useState([]);
 
-  ///FETCHING ALL PRESCRIPTIONS FROM DATABASE
+  //FETCHING ALL PRESCRIPTIONS FROM DATABASE
   useEffect(() => {
     db.collection(
       `doctors/${props.doctorUID}/patients/${props.patientUID}/prescriptions`
@@ -42,6 +48,27 @@ const Prescription = (props) => {
     setOpen(false);
   };
 
+  //SEND PRESCRIPTION FUNCTION
+  const sendPrescription = (e) => {
+    e.preventDefault();
+
+    //PUSHING MESSAGE IN DATABASE
+    db.collection("doctors")
+      .doc(`${props.doctorUID}`)
+      .collection("patients")
+      .doc(`${props.patientUID}`)
+      .collection("prescriptions")
+      .add({
+        prescription: prescription,
+        senderUid: props.doctorUID,
+        senderEmail: currentUser.email,
+        sentAt: new Date(),
+        appointmentID: props.meetingID,
+      });
+
+    setPrescription("");
+  };
+
   //DOWNLOAD PRESCRIPTION FUNCTION
   const downloadPrescription = () => {
     var doc = new jsPDF();
@@ -58,11 +85,11 @@ const Prescription = (props) => {
 
   return (
     <div>
-      {/* PRESCRIPTION BUTTON */}
+      {/* UPDATE BUTTON */}
 
       <Tooltip title="Prescription" placement="top">
         <IconButton onClick={handleClickOpen} style={{ color: "#ffffff" }}>
-          <MedicationIcon />
+          <MonitorHeartIcon />
         </IconButton>
       </Tooltip>
 
@@ -78,6 +105,11 @@ const Prescription = (props) => {
         <DialogContent>
           <DialogContentText>
             <List>
+              <ListItem style={{ margin: "0" }}>
+                <Typography sx={{ fontWeight: "bold" }}>
+                  {currentUser.email}
+                </Typography>
+              </ListItem>
               {prescriptions.map((prescript) => {
                 if (prescript.appointmentID === props.meetingID)
                   return (
@@ -90,8 +122,24 @@ const Prescription = (props) => {
               })}
             </List>
           </DialogContentText>
-        </DialogContent>
 
+          {/* FORM TO WRITE PRESCRIPTION */}
+
+          <form onSubmit={sendPrescription}>
+            <TextField
+              id="outlined"
+              required
+              label="Prescription"
+              color="primary"
+              placeholder="Enter prescription..."
+              value={prescription}
+              onChange={(e) => {
+                setPrescription(e.target.value);
+              }}
+            />
+            <Button type="submit" startIcon={<SendIcon />} />
+          </form>
+        </DialogContent>
         <DialogActions>
           {/* DOWNLOAD REPORT BUTTON */}
           <Button
@@ -113,4 +161,4 @@ const Prescription = (props) => {
   );
 };
 
-export default Prescription;
+export default Update;

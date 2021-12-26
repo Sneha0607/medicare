@@ -5,20 +5,20 @@ const theme = createTheme();
 export const container = {
   mt: "12vh",
   ml: "5vw",
-  height: "100vh",
-  backgroundColor: "#e6f7fd",
+  minHeight: "100vh",
+  background: "linear-gradient(135deg, #dff6fe 30%, #0095de 90%)",
   backgroundImage: `url('../images/blue2.jpg')`,
   backgroundPosition: "center",
-  backgroundRepeat: "no-repeat",
+  backgroundRepeat: "repeat-x",
   backgroundSize: "cover",
   [theme.breakpoints.down("md")]: {
     mt: "10vh",
     ml: "10vw",
-    width: "90vw",
+    maxWidth: "95vw",
   },
   [theme.breakpoints.down("sm")]: {
     ml: "12vw",
-    width: "80vw",
+    maxWidth: "80vw",
   },
 };
 

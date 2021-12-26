@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
-import Navbar from "./navbar";
 import { useAuth } from "../contexts/AuthContext";
 import { db } from "../firebase";
 import {
+  Alert,
   Button,
   Dialog,
   DialogActions,
@@ -22,13 +22,15 @@ const Book_Appointment = (props) => {
   const [open, setOpen] = useState(false);
   const [scroll, setScroll] = useState("");
   const [mode, setMode] = useState("");
-  const [timeSlot, setTimeSlot] = useState("");
+  const [timeSlot, setTimeSlot] = useState(new Date());
   const [symptoms, setSymptoms] = useState("");
+  const [timeError, setTimeError] = useState("");
   const { currentUser } = useAuth();
 
   const handleClickOpen = () => {
     setOpen(true);
     setScroll("paper");
+    setTimeError("");
   };
 
   const handleClose = () => {
@@ -45,22 +47,44 @@ const Book_Appointment = (props) => {
     }
   }, [open]);
 
+  const handleChangeTimeSlot = (e) => {
+    setTimeSlot(e.target.value);
+    if (
+      timeSlot.getHours() <
+        new Date(props.startTime.seconds * 1000).getHours() ||
+      timeSlot.getHours() > new Date(props.endTime.seconds * 1000).getHours()
+    ) {
+      setTimeError("Please enter time in the time slot of the doctor!");
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (
+      timeSlot.getHours() <
+        new Date(props.startTime.seconds * 1000).getHours() ||
+      timeSlot.getHours() > new Date(props.endTime.seconds * 1000).getHours()
+    ) {
+      setTimeError("Please enter time in the time slot of the doctor!");
+    } else {
+      // PUSHING APPOINTMENT DATA IN DB
+      db.collection("appointments").add({
+        mode: mode,
+        timeSlot: timeSlot,
+        symptoms: symptoms,
+        isConfirmed: "pending",
+        doctorUID: props.doctorUID,
+        patientUID: currentUser.uid,
+        bookedAt: new Date(),
+      });
 
-    //PUSHING APPOINTMENT DATA IN DB
-    db.collection("appointments").add({
-      mode: mode,
-      timeSlot: timeSlot,
-      symptoms: symptoms,
-      isConfirmed: "pending",
-      doctorUID: props.doctorUID,
-      patientUID: currentUser.uid,
-      bookedAt: new Date(),
-    });
-
-    setOpen(false);
+      setOpen(false);
+    }
   };
+
+  // console.log(timeSlot.getDay());
+  // console.log(new Date(props.startTime.seconds * 1000).getDay());
+  // console.log(new Date(props.endTime.seconds * 1000).getDay());
 
   return (
     <>
@@ -76,7 +100,8 @@ const Book_Appointment = (props) => {
         PaperProps={{ sx: { position: "fixed", top: 0, m: 0 } }}
       >
         <DialogTitle id="scroll-dialog-title">Book Appointment</DialogTitle>
-        <form onSubmit={(e) => handleSubmit()}>
+        <form onSubmit={handleSubmit}>
+          {timeError && <Alert severity="error">{timeError}</Alert>}
           <DialogContent dividers={scroll === "paper"}>
             <DialogContentText
               id="scroll-dialog-description"
@@ -120,7 +145,7 @@ const Book_Appointment = (props) => {
                           name="timeSlot"
                           fullWidth
                           size="small"
-                          onChange={(e) => setTimeSlot(e.target.value)}
+                          onChange={(e) => handleChangeTimeSlot()}
                           {...params}
                         />
                       )}

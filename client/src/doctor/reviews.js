@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { db } from "../firebase";
 import { List, ListItem, Paper, Typography } from "@mui/material";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
-import { listItem, paper, typography } from "../patient/styles";
+import { listItem, paper } from "../patient/styles";
 import Title from "./dashboard/title";
 
 const Reviews = (props) => {
@@ -16,9 +16,6 @@ const Reviews = (props) => {
         setFeedbacks(snapshot.docs.map((doc) => doc.data()));
       });
   }, []);
-
-  console.log(feedbacks);
-  console.log(props.uid);
 
   return (
     <Paper sx={paper}>
