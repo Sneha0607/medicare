@@ -16,7 +16,6 @@ import {
   Divider,
   Tooltip,
 } from "@mui/material";
-import MedicationIcon from "@mui/icons-material/Medication";
 import SendIcon from "@mui/icons-material/Send";
 import DownloadIcon from "@mui/icons-material/Download";
 import { jsPDF } from "jspdf";
@@ -25,19 +24,7 @@ import MonitorHeartIcon from "@mui/icons-material/MonitorHeart";
 const Update = (props) => {
   const [open, setOpen] = useState(false);
   const { currentUser } = useAuth();
-  const [prescription, setPrescription] = useState("");
-  const [prescriptions, setPrescriptions] = useState([]);
-
-  //FETCHING ALL PRESCRIPTIONS FROM DATABASE
-  useEffect(() => {
-    db.collection(
-      `doctors/${props.doctorUID}/patients/${props.patientUID}/prescriptions`
-    )
-      .orderBy("sentAt", "asc")
-      .onSnapshot((snapshot) => {
-        setPrescriptions(snapshot.docs.map((doc) => doc.data()));
-      });
-  }, [props.meetingID]);
+  const [sugarLevel, setSugarLevel] = useState("");
 
   //FUNCTIONS TO OPEN AND CLOSE DIALOG BOX
   const handleClickOpen = () => {
@@ -49,45 +36,44 @@ const Update = (props) => {
   };
 
   //SEND PRESCRIPTION FUNCTION
-  const sendPrescription = (e) => {
+  const updateReports = (e) => {
     e.preventDefault();
 
-    //PUSHING MESSAGE IN DATABASE
-    db.collection("doctors")
-      .doc(`${props.doctorUID}`)
-      .collection("patients")
+    //PUSHING DATA IN DATABASE
+    db.collection("patients")
       .doc(`${props.patientUID}`)
-      .collection("prescriptions")
-      .add({
-        prescription: prescription,
+      .collection("bloodSugarLevel")
+      .doc(`${props.meetingID}`)
+      .set({
+        sugarLevel: sugarLevel,
         senderUid: props.doctorUID,
         senderEmail: currentUser.email,
         sentAt: new Date(),
         appointmentID: props.meetingID,
       });
 
-    setPrescription("");
+    setSugarLevel("");
   };
 
   //DOWNLOAD PRESCRIPTION FUNCTION
   const downloadPrescription = () => {
-    var doc = new jsPDF();
-    var i = 20;
-    var j = 40;
-    doc.setFontSize("15");
-    doc.addImage("/images/Medicare.png", "PNG", 5, 10, 200, 15);
-    prescriptions.map((prescript) => {
-      doc.text(prescript.prescription, i, j);
-      j = j + 20;
-    });
-    doc.save("doctor_prescription.pdf");
+    // var doc = new jsPDF();
+    // var i = 20;
+    // var j = 40;
+    // doc.setFontSize("15");
+    // doc.addImage("/images/Medicare.png", "PNG", 5, 10, 200, 15);
+    // prescriptions.map((prescript) => {
+    //   doc.text(prescript.prescription, i, j);
+    //   j = j + 20;
+    // });
+    // doc.save("doctor_prescription.pdf");
   };
 
   return (
     <div>
       {/* UPDATE BUTTON */}
 
-      <Tooltip title="Prescription" placement="top">
+      <Tooltip title="Update Reports" placement="top">
         <IconButton onClick={handleClickOpen} style={{ color: "#ffffff" }}>
           <MonitorHeartIcon />
         </IconButton>
@@ -100,41 +86,21 @@ const Update = (props) => {
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
       >
-        <DialogTitle id="form-dialog-title">PRESCRIPTION</DialogTitle>
+        <DialogTitle id="form-dialog-title">UPDATE REPORTS</DialogTitle>
         <Divider />
         <DialogContent>
-          <DialogContentText>
-            <List>
-              <ListItem style={{ margin: "0" }}>
-                <Typography sx={{ fontWeight: "bold" }}>
-                  {currentUser.email}
-                </Typography>
-              </ListItem>
-              {prescriptions.map((prescript) => {
-                if (prescript.appointmentID === props.meetingID)
-                  return (
-                    <>
-                      <ListItem style={{ margin: "0" }}>
-                        <Typography>{prescript.prescription}</Typography>
-                      </ListItem>
-                    </>
-                  );
-              })}
-            </List>
-          </DialogContentText>
+          {/* FORM TO UPDATE REPORTS */}
 
-          {/* FORM TO WRITE PRESCRIPTION */}
-
-          <form onSubmit={sendPrescription}>
+          <form onSubmit={updateReports}>
             <TextField
               id="outlined"
               required
-              label="Prescription"
+              label="Blood-Sugar-Level (mg/dL)"
               color="primary"
-              placeholder="Enter prescription..."
-              value={prescription}
+              placeholder="Blood Sugar Level (mg/dL)"
+              value={sugarLevel}
               onChange={(e) => {
-                setPrescription(e.target.value);
+                setSugarLevel(e.target.value);
               }}
             />
             <Button type="submit" startIcon={<SendIcon />} />

@@ -26,6 +26,7 @@ export const paper = {
   p: 2,
   display: "flex",
   flexDirection: "column",
+  height: "100%",
 };
 
 export const upload = {

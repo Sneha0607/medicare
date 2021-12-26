@@ -23,6 +23,7 @@ import {
   confirmButton,
   cancelButton,
 } from "./styles";
+import Title from "./dashboard/title";
 
 const theme = createTheme();
 
@@ -84,7 +85,7 @@ const Appointments = () => {
         <Grid container spacing={3}>
           {/* LIST OF NEW APPOINTMENTS */}
           <Grid item xs={12}>
-            <Typography>New Appointments</Typography>
+            <Title>New Appointments</Title>
             <Paper sx={paper}>
               <List>
                 {appointments.map((appointment) => {
@@ -175,7 +176,7 @@ const Appointments = () => {
 
           {/* LIST OF CONFIRMED APPOINTMENTS */}
           <Grid item xs={12}>
-            <Typography>Confirmed Appointments</Typography>
+            <Title>Confirmed Appointments</Title>
             <Paper sx={paper}>
               <List>
                 {appointments.map((appointment) => {
