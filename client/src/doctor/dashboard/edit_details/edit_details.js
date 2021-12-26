@@ -5,6 +5,9 @@ import { Box, Grid, Typography } from "@mui/material";
 import Title from "../title";
 import Age from "./age";
 import Address from "./address";
+import Degree from "./degree";
+import Experience from "./experience";
+import TimeSlot from "./timeSlot";
 
 const theme = createTheme();
 
@@ -42,17 +45,41 @@ const Edit_Details = (props) => {
 
                 <Grid item xs={12}>
                   <Typography>
-                    Speciality: {doctor.medicalSpeciality}
+                    Medical Speciality: {doctor.medicalSpeciality}
                   </Typography>
                 </Grid>
 
                 <Grid item xs={12}>
                   <Grid container>
                     <Grid item xs={10}>
-                      <Typography>Age: {doctor.age}</Typography>
+                      <Typography>
+                        Experience: {doctor.experience} years
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={2}>
+                      <Experience uid={doctor.uid} />
+                    </Grid>
+                  </Grid>
+                </Grid>
+
+                <Grid item xs={12}>
+                  <Grid container>
+                    <Grid item xs={10}>
+                      <Typography>Age: {doctor.age} years</Typography>
                     </Grid>
                     <Grid item xs={2}>
                       <Age uid={doctor.uid} />
+                    </Grid>
+                  </Grid>
+                </Grid>
+
+                <Grid item xs={12}>
+                  <Grid container>
+                    <Grid item xs={10}>
+                      <Typography>Degree: {doctor.degree}</Typography>
+                    </Grid>
+                    <Grid item xs={2}>
+                      <Degree uid={doctor.uid} />
                     </Grid>
                   </Grid>
                 </Grid>
@@ -69,6 +96,24 @@ const Edit_Details = (props) => {
                     </Grid>
                     <Grid item xs={2}>
                       <Address uid={doctor.uid} />
+                    </Grid>
+                  </Grid>
+                </Grid>
+
+                <Grid item xs={12}>
+                  <Grid container>
+                    <Grid item xs={10}>
+                      <Typography>
+                        Time Slot :{" "}
+                        {new Date(doctor.startTime.seconds * 1000).getHours()}:
+                        {new Date(doctor.startTime.seconds * 1000).getMinutes()}
+                        0 - {new Date(doctor.endTime.seconds * 1000).getHours()}
+                        :{new Date(doctor.endTime.seconds * 1000).getMinutes()}0
+                        hrs
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={2}>
+                      <TimeSlot uid={doctor.uid} />
                     </Grid>
                   </Grid>
                 </Grid>

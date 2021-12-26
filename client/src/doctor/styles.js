@@ -29,6 +29,7 @@ export const paper = {
 };
 
 export const upload = {
+  height: "100%",
   p: 2,
   display: "flex",
   flexDirection: "column",

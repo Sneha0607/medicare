@@ -61,9 +61,17 @@ const Doctor_Profile = () => {
                     <Typography>Degree: {doctor.degree}</Typography>
                     <Typography>
                       Address: {doctor.address1}, {doctor.address2},{" "}
-                      {doctor.city}, {doctor.state}, {doctor.country}
+                      {doctor.city}, {doctor.state}, {doctor.country},{" "}
+                      {doctor.pincode}
                     </Typography>
-                    <Typography>Pincode: {doctor.pincode}</Typography>
+                    <Typography>
+                      Time Slot :{" "}
+                      {new Date(doctor.startTime.seconds * 1000).getHours()}:
+                      {new Date(doctor.startTime.seconds * 1000).getMinutes()}0
+                      - {new Date(doctor.endTime.seconds * 1000).getHours()}:
+                      {new Date(doctor.endTime.seconds * 1000).getMinutes()}0
+                      hrs
+                    </Typography>
                     <Typography variant="subtitle2">
                       Last updated at:{" "}
                       {new Date(
