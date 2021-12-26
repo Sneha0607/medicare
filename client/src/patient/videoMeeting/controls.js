@@ -32,10 +32,6 @@ const Controls = () => {
     });
   }
 
-  //   console.log(props.meetingID);
-  //   console.log(props.patientUID);
-  //   console.log(props.doctorUID);
-
   return (
     <>
       {meetings.map((meeting) => {

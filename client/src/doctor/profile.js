@@ -5,6 +5,8 @@ import { db } from "../firebase";
 import { Avatar, Container, Grid, Paper, Typography } from "@mui/material";
 import Title from "./dashboard/title";
 import { container, paper, avatar, upload } from "./styles";
+import Ratings from "./ratings";
+import Reviews from "./reviews";
 
 const Doctor_Profile = () => {
   const { currentUser } = useAuth();
@@ -73,6 +75,16 @@ const Doctor_Profile = () => {
                       hrs
                     </Typography>
                   </Paper>
+                </Grid>
+
+                {/* RATINGS */}
+                <Grid item xs={12}>
+                  <Ratings uid={currentUser.uid} />
+                </Grid>
+
+                {/* REVIEWS */}
+                <Grid item xs={12}>
+                  <Reviews uid={currentUser.uid} />
                 </Grid>
               </Grid>
             );

@@ -12,6 +12,8 @@ import {
 } from "@mui/material";
 import Book_Appointment from "./book_appointment";
 import { container, paper, typography } from "./styles";
+import Ratings from "../doctor/ratings";
+import Reviews from "../doctor/reviews";
 
 const Doctor = () => {
   const [doctors, setDoctors] = useState([]);
@@ -68,6 +70,14 @@ const Doctor = () => {
                       </Typography>
                     </>
                   </Paper>
+                </Grid>
+
+                <Grid item xs={12}>
+                  <Ratings uid={doctor.uid} />
+                </Grid>
+
+                <Grid item xs={12}>
+                  <Reviews uid={doctor.uid} />
                 </Grid>
               </Grid>
             );
