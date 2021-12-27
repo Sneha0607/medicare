@@ -9,6 +9,7 @@ import {
   Grid,
   List,
   ListItem,
+  TextField,
   Typography,
 } from "@mui/material";
 import { container, listItem, typography } from "./styles";
@@ -17,6 +18,7 @@ import Title from "./dashboard/title";
 const View_Doctors = () => {
   const [doctors, setDoctors] = useState([]);
   const [patients, setPatients] = useState([]);
+  const [search, setSearch] = useState("");
   const { currentUser } = useAuth();
 
   // FETCHING PATIENT'S DATA FROM DB
@@ -33,6 +35,10 @@ const View_Doctors = () => {
     });
   }, []);
 
+  useEffect(() => {
+    setSearch("");
+  }, []);
+
   return (
     <>
       <Navbar />
@@ -40,13 +46,47 @@ const View_Doctors = () => {
         <Typography align="center" variant="h4" sx={typography}>
           Book Appointment with any Doctor - Click on See More
         </Typography>
+
+        {/* SEARCH BAR */}
+        <TextField
+          margin="normal"
+          fullWidth
+          id="search"
+          label="Search by Name/Speciality/City"
+          name="search"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
         {patients.map((patient) => {
           if (patient.uid === currentUser.uid)
             if (patient.isVerified === "true") {
               return (
                 <List>
-                  {doctors.map((doctor) => {
-                    if (doctor.isVerified === "true")
+                  {doctors
+                    .filter((doctor) => {
+                      if (doctor.isVerified === "true") {
+                        if (search == "") return doctor;
+                        else if (
+                          doctor.name
+                            .toLowerCase()
+                            .includes(search.toLocaleLowerCase())
+                        )
+                          return doctor;
+                        else if (
+                          doctor.medicalSpeciality
+                            .toLowerCase()
+                            .includes(search.toLowerCase())
+                        )
+                          return doctor;
+                        else if (
+                          doctor.city
+                            .toLowerCase()
+                            .includes(search.toLowerCase())
+                        )
+                          return doctor;
+                      }
+                    })
+                    .map((doctor) => {
                       return (
                         <ListItem sx={listItem}>
                           <Grid container spacing={3}>
@@ -65,7 +105,24 @@ const View_Doctors = () => {
                             <Grid item xs={12} sm={6} md={6}>
                               <Title>
                                 {doctor.name} <br />
-                                {doctor.medicalSpeciality}
+                                {doctor.medicalSpeciality} <br />
+                                Time Slot :{" "}
+                                {new Date(
+                                  doctor.startTime.seconds * 1000
+                                ).getHours()}
+                                :
+                                {new Date(
+                                  doctor.startTime.seconds * 1000
+                                ).getMinutes()}
+                                0 -{" "}
+                                {new Date(
+                                  doctor.endTime.seconds * 1000
+                                ).getHours()}
+                                :
+                                {new Date(
+                                  doctor.endTime.seconds * 1000
+                                ).getMinutes()}
+                                0 hrs
                               </Title>
                             </Grid>
 
@@ -81,7 +138,7 @@ const View_Doctors = () => {
                           </Grid>
                         </ListItem>
                       );
-                  })}
+                    })}
                 </List>
               );
             } else {
