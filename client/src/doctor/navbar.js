@@ -151,18 +151,6 @@ const Navbar = () => {
             <ListItemText>Scheduled Meetings</ListItemText>
           </ListItem>
 
-          {/* PAST MEETINGS */}
-
-          {/* QUICK NOTES */}
-          <ListItem button component="a" href="/doctor/notes">
-            <Tooltip title="Quick Notes" placement="right">
-              <ListItemIcon>
-                <CreateIcon />
-              </ListItemIcon>
-            </Tooltip>
-            <ListItemText>Quick Notes</ListItemText>
-          </ListItem>
-
           {/* LATEST UPDATES */}
           <ListItem button component="a" href="/doctor/latest_updates">
             <Tooltip title="Latest Updates" placement="right">

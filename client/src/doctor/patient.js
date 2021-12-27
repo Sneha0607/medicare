@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 import Navbar from "./navbar";
 import { db } from "../firebase";
 import { Avatar, Container, Grid, Paper, Typography } from "@mui/material";
 import Title from "./dashboard/title";
 import { container, paper, avatar, upload } from "./styles";
 import Graph from "./graph";
+import Past_Appointments from "./past_appointments";
 
 const Patient = () => {
   const [patients, setPatients] = useState([]);
+  const { currentUser } = useAuth();
 
   const location = useLocation();
   const uid = location.pathname.substring(
@@ -76,6 +79,15 @@ const Patient = () => {
                     }}
                   >
                     <Graph uid={patient.uid} />
+                  </Paper>
+                </Grid>
+
+                <Grid item xs={12}>
+                  <Paper sx={paper}>
+                    <Past_Appointments
+                      patientUID={patient.uid}
+                      doctorUID={currentUser.uid}
+                    />
                   </Paper>
                 </Grid>
               </Grid>
