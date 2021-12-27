@@ -11,7 +11,7 @@ import {
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Navbar from "./navbar";
 import { db } from "../firebase";
-import { container, paper, typography } from "./styles";
+import { container, paper, transparentPaper, typography } from "./styles";
 
 const Doctor_Latest_Updates = () => {
   const [posts, setPosts] = useState([]);
@@ -34,7 +34,7 @@ const Doctor_Latest_Updates = () => {
             <Typography variant="h4" align="center" sx={typography}>
               Latest Updates
             </Typography>
-            <Paper sx={paper}>
+            <Paper sx={transparentPaper}>
               {posts.map((post) => {
                 return (
                   <div sx={{ width: "100%" }}>

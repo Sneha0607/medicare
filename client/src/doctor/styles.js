@@ -28,6 +28,13 @@ export const paper = {
   flexDirection: "column",
 };
 
+export const transparentPaper = {
+  p: 2,
+  display: "flex",
+  flexDirection: "column",
+  background: "transparent",
+};
+
 export const upload = {
   height: "100%",
   p: 2,

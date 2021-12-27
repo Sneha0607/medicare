@@ -57,10 +57,22 @@ const Appointments = () => {
         patientUID: patientUID,
       });
 
+    db.collection("patients")
+      .doc(patientUID)
+      .collection("doctors")
+      .doc(currentUser.uid)
+      .set({
+        doctorUID: currentUser.uid,
+      });
+
     db.collection("patients").doc(patientUID).collection("notifications").add({
       message:
         "Your appointment has been confirmed! You can check its details in the scheduled meetings section.",
       sentAt: new Date(),
+    });
+
+    db.collection("patients").doc(patientUID).update({
+      unreadCount: 1,
     });
 
     history.push("/doctor/scheduled_meetings");

@@ -29,6 +29,7 @@ import Patient_Notifications from "./patient/patient_notifications";
 import Patient_Scheduled_Meetings from "./patient/scheduled_meetings";
 import Patient_Room from "./patient/videoMeeting/room";
 import Patient_Latest_Updates from "./patient/latest_updates";
+import Past_Appointments from "./patient/past_appointments";
 // ADMIN'S PAGES
 import Admin_Signin from "./admin/signin";
 import Admin_Dashboard from "./admin/dashboard";
@@ -152,6 +153,11 @@ const App = () => {
                     exact
                     path="/patient/latest_updates"
                     component={Patient_Latest_Updates}
+                  />
+                  <Route
+                    exact
+                    path="/patient/past_appointments"
+                    component={Past_Appointments}
                   />
 
                   {/* ADMIN ROUTES */}
