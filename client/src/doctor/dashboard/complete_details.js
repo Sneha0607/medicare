@@ -10,6 +10,9 @@ import {
   MenuItem,
   Typography,
 } from "@mui/material";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import TimePicker from "@mui/lab/TimePicker";
 import { db } from "../../firebase";
 import Title from "./title";
 
@@ -31,34 +34,25 @@ const Complete_Details = (props) => {
   const [state, setState] = useState("");
   const [pincode, setPincode] = useState("");
   const [country, setCountry] = useState("");
-  const [nameError, setNameError] = useState("");
-  const [medicalSpecialityError, setMedicalSpecialityError] = useState("");
-  const [ageError, setAgeError] = useState("");
-  const [genderError, setGenderError] = useState("");
-  const [addressError, setAddressError] = useState("");
-  const [cityError, setCityError] = useState("");
-  const [stateError, setStateError] = useState("");
-  const [pincodeError, setPincodeError] = useState("");
-  const [countryError, setCountryError] = useState("");
-  const history = useHistory();
+  const [startTime, setStartTime] = useState(new Date());
+  const [endTime, setEndTime] = useState(new Date());
+
+  const handleStartTimeChange = (newValue) => {
+    setStartTime(newValue);
+  };
+
+  const handleEndTimeChange = (newValue) => {
+    setEndTime(newValue);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setNameError("");
-    setMedicalSpeciality("");
-    setAgeError();
-    setGenderError("");
-    setCityError("");
-    setStateError("");
-    setPincodeError();
-    setCountryError("");
 
     //PUSHING USER DATA IN DATABASE
-    const doctorRef = db.doc("doctors/props.uid");
+    const doctorRef = db.doc(`doctors/${props.uid}`);
     doctorRef.set({
       uid: props.uid,
       name,
-      email: props.email,
       medicalSpeciality,
       age,
       regNumber,
@@ -72,12 +66,12 @@ const Complete_Details = (props) => {
       country,
       pincode,
       imageURL: null,
+      startTime: startTime,
+      endTime: endTime,
       isVerified: "pending",
       unreadCount: 0,
       updatedAt: new Date(),
     });
-
-    history.push("/doctor/profile");
   };
 
   const handleChangeGender = (e) => {
@@ -88,14 +82,6 @@ const Complete_Details = (props) => {
     <ThemeProvider theme={theme}>
       <form onSubmit={handleSubmit}>
         <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-          {nameError && <Alert severity="error">{nameError}</Alert>}
-          {ageError && <Alert severity="error">{ageError}</Alert>}
-          {genderError && <Alert severity="error">{genderError}</Alert>}
-          {addressError && <Alert severity="error">{addressError}</Alert>}
-          {cityError && <Alert severity="error">{cityError}</Alert>}
-          {stateError && <Alert severity="error">{stateError}</Alert>}
-          {countryError && <Alert severity="error">{countryError}</Alert>}
-          {pincodeError && <Alert severity="error">{pincodeError}</Alert>}
           <Grid container spacing={1}>
             <Grid item xs={12}>
               <Title>Complete/Edit Your Details</Title>
@@ -112,7 +98,6 @@ const Complete_Details = (props) => {
                 fullWidth
                 size="small"
                 onChange={(e) => setName(e.target.value)}
-                error={nameError}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -136,7 +121,6 @@ const Complete_Details = (props) => {
                 autoComplete="age"
                 size="small"
                 onChange={(e) => setAge(e.target.value)}
-                error={ageError}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -150,7 +134,6 @@ const Complete_Details = (props) => {
                 autoComplete="gender"
                 size="small"
                 onChange={handleChangeGender}
-                error={genderError}
               >
                 <MenuItem value="Female">Female</MenuItem>
                 <MenuItem value="Male">Male</MenuItem>
@@ -166,7 +149,6 @@ const Complete_Details = (props) => {
                 fullWidth
                 size="small"
                 onChange={(e) => setDegree(e.target.value)}
-                error={ageError}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -178,7 +160,6 @@ const Complete_Details = (props) => {
                 fullWidth
                 size="small"
                 onChange={(e) => setRegNumber(e.target.value)}
-                error={ageError}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -190,7 +171,6 @@ const Complete_Details = (props) => {
                 fullWidth
                 size="small"
                 onChange={(e) => setYearOfReg(e.target.value)}
-                error={ageError}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -202,7 +182,6 @@ const Complete_Details = (props) => {
                 fullWidth
                 size="small"
                 onChange={(e) => setStateMedicalCouncil(e.target.value)}
-                error={ageError}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -214,7 +193,6 @@ const Complete_Details = (props) => {
                 fullWidth
                 size="small"
                 onChange={(e) => setExperience(e.target.value)}
-                error={ageError}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -227,7 +205,6 @@ const Complete_Details = (props) => {
                 autoComplete="shipping address-line1"
                 size="small"
                 onChange={(e) => setAddress1(e.target.value)}
-                error={addressError}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -240,7 +217,6 @@ const Complete_Details = (props) => {
                 autoComplete="shipping address-line2"
                 size="small"
                 onChange={(e) => setAddress2(e.target.value)}
-                error={addressError}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -253,7 +229,6 @@ const Complete_Details = (props) => {
                 autoComplete="shipping address-level2"
                 size="small"
                 onChange={(e) => setCity(e.target.value)}
-                error={cityError}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -265,7 +240,6 @@ const Complete_Details = (props) => {
                 fullWidth
                 size="small"
                 onChange={(e) => setState(e.target.value)}
-                error={stateError}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -278,7 +252,6 @@ const Complete_Details = (props) => {
                 autoComplete="shipping country"
                 size="small"
                 onChange={(e) => setCountry(e.target.value)}
-                error={countryError}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -291,8 +264,52 @@ const Complete_Details = (props) => {
                 autoComplete="shipping postal-code"
                 size="small"
                 onChange={(e) => setPincode(e.target.value)}
-                error={pincodeError}
               />
+            </Grid>
+            {/* EDIT START TIME */}
+            <Grid item xs={12} sm={6}>
+              <LocalizationProvider dateAdapter={AdapterDateFns}>
+                <TimePicker
+                  label="Start-Time"
+                  value={startTime}
+                  onChange={handleStartTimeChange}
+                  renderInput={(params) => (
+                    <TextField
+                      required
+                      id="StartTime"
+                      name="StartTime"
+                      label="Start-Time"
+                      fullWidth
+                      size="small"
+                      {...params}
+                      onChange={(e) => setStartTime(e.target.value)}
+                    />
+                  )}
+                />
+              </LocalizationProvider>
+            </Grid>
+
+            {/* EDIT END TIME */}
+            <Grid item xs={12} sm={6}>
+              <LocalizationProvider dateAdapter={AdapterDateFns}>
+                <TimePicker
+                  label="End-Time"
+                  value={endTime}
+                  onChange={handleEndTimeChange}
+                  renderInput={(params) => (
+                    <TextField
+                      required
+                      id="EndTime"
+                      name="EndTime"
+                      label="End-Time"
+                      fullWidth
+                      size="small"
+                      {...params}
+                      onChange={(e) => setEndTime(e.target.value)}
+                    />
+                  )}
+                />
+              </LocalizationProvider>
             </Grid>
             <Grid item xs={12}>
               <Button type="submit" variant="contained">

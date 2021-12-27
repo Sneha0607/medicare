@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Avatar, Button, LinearProgress } from "@mui/material";
+import { Alert, Avatar, Button, LinearProgress } from "@mui/material";
 import Title from "./title";
 import { db, storage } from "../../firebase";
 import { avatar } from "../styles";
@@ -9,6 +9,7 @@ const Upload = (props) => {
   const [image, setImage] = useState(null);
   const [url, setUrl] = useState("");
   const [progress, setProgress] = useState(0);
+  const [imageError, setImageError] = useState("");
 
   // FETCHING DOCTOR'S DATA FROM DB
   useEffect(() => {
@@ -26,36 +27,41 @@ const Upload = (props) => {
 
   // FUNCTION TO HANDLE UPLOAD OF IMAGE TO DB AND STORAGE
   const handleUpload = () => {
-    const uploadTask = storage
-      .ref(`doctor_profile_images/${image.name}`)
-      .put(image);
+    if (image == null) {
+      setImageError("Choose file before uploading!");
+    } else {
+      const uploadTask = storage
+        .ref(`doctor_profile_images/${image.name}`)
+        .put(image);
 
-    uploadTask.on(
-      "state_changed",
-      (snapshot) => {
-        const progress = Math.round(
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-        );
-        setProgress(progress);
-      },
-      (error) => {
-        console.log(error);
-      },
-      () => {
-        storage
-          .ref("doctor_profile_images")
-          .child(image.name)
-          .getDownloadURL()
-          .then((url) => {
-            setUrl(url);
-            db.collection("doctors")
-              .doc(props.uid)
-              .update({
-                imageURL: `${url}`,
-              });
-          });
-      }
-    );
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          const progress = Math.round(
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+          );
+          setProgress(progress);
+        },
+        (error) => {
+          console.log(error);
+        },
+        () => {
+          storage
+            .ref("doctor_profile_images")
+            .child(image.name)
+            .getDownloadURL()
+            .then((url) => {
+              setUrl(url);
+              db.collection("doctors")
+                .doc(props.uid)
+                .update({
+                  imageURL: `${url}`,
+                });
+            });
+        }
+      );
+      setImageError("");
+    }
   };
 
   return (
@@ -73,7 +79,8 @@ const Upload = (props) => {
                 src={`${doctor.imageURL}`}
                 sx={avatar}
               />
-
+              <br />
+              {imageError && <Alert severity="error">{imageError}</Alert>}
               <br />
               {/* UPLOADING IMAGE PROGRESS BAR */}
               <LinearProgress variant="determinate" value={progress} />

@@ -103,9 +103,15 @@ const View_Doctors = () => {
                             </Grid>
 
                             <Grid item xs={12} sm={6} md={6}>
-                              <Title>
+                              <Typography
+                                variant="h6"
+                                color="primary"
+                                gutterBottom
+                                sx={{ fontWeight: "bold" }}
+                              >
                                 {doctor.name} <br />
                                 {doctor.medicalSpeciality} <br />
+                                {doctor.city} <br />
                                 Time Slot :{" "}
                                 {new Date(
                                   doctor.startTime.seconds * 1000
@@ -123,7 +129,7 @@ const View_Doctors = () => {
                                   doctor.endTime.seconds * 1000
                                 ).getMinutes()}
                                 0 hrs
-                              </Title>
+                              </Typography>
                             </Grid>
 
                             <Grid item xs={12} sm={3} md={3}>
