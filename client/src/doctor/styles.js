@@ -106,7 +106,7 @@ export const box = {
 export const controls = {
   top: "auto",
   bottom: 0,
-  backgroundColor: "#393838",
+  backgroundColor: "#021117",
   alignItems: "center",
 };
 

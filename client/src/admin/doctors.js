@@ -69,8 +69,20 @@ const Doctors = () => {
                           <Grid item xs={12} sm={9}>
                             <Typography>
                               Name: {doctor.name} <br />
-                              Age: {doctor.age} <br />
-                              Gender: {doctor.gender}
+                              Age: {doctor.age} years <br />
+                              Gender: {doctor.gender} <br />
+                              Medical Speciality: {
+                                doctor.medicalSpeciality
+                              }{" "}
+                              <br />
+                              Degree: {doctor.degree} <br />
+                              Experience: {doctor.experience} years <br />
+                              Reg. No.: {doctor.regNumber} <br />
+                              State Medical Council:{" "}
+                              {doctor.stateMedicalCouncil} <br />
+                              Address: {doctor.address1}, {doctor.address2},{" "}
+                              {doctor.city}, {doctor.state}, {doctor.country},{" "}
+                              {doctor.pincode}
                             </Typography>
                           </Grid>
                           <Grid item xs={12} sm={3}>
@@ -104,8 +116,20 @@ const Doctors = () => {
                           <Grid item xs={12} sm={9}>
                             <Typography>
                               Name: {doctor.name} <br />
-                              Age: {doctor.age} <br />
-                              Gender: {doctor.gender}
+                              Age: {doctor.age} years <br />
+                              Gender: {doctor.gender} <br />
+                              Medical Speciality: {
+                                doctor.medicalSpeciality
+                              }{" "}
+                              <br />
+                              Degree: {doctor.degree} <br />
+                              Experience: {doctor.experience} years <br />
+                              Reg. No.: {doctor.regNumber} <br />
+                              State Medical Council:{" "}
+                              {doctor.stateMedicalCouncil} <br />
+                              Address: {doctor.address1}, {doctor.address2},{" "}
+                              {doctor.city}, {doctor.state}, {doctor.country},{" "}
+                              {doctor.pincode}
                             </Typography>
                           </Grid>
                           <Grid item xs={12} sm={3}>

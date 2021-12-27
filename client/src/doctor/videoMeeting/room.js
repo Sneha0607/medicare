@@ -220,7 +220,7 @@ const Doctor_Room = (props) => {
   };
 
   return (
-    <Container style={{ backgroundColor: "#1b1a1a", width: "100vw" }}>
+    <Container style={{ backgroundColor: "#063547", width: "100vw" }}>
       <StyledVideo controls muted ref={userVideo} autoPlay playsInline />
       {peers.map((peer) => {
         return <Video key={peer.peerID} peer={peer.peer} />;
@@ -239,7 +239,7 @@ const Doctor_Room = (props) => {
           <Tooltip title="End Call" placement="top">
             <IconButton
               onClick={leaveMeeting}
-              href="/doctor/profile"
+              href="/doctor/your_patients"
               style={{ color: "#9d2f42" }}
             >
               <CallEndIcon />

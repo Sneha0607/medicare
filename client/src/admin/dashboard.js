@@ -14,18 +14,18 @@ const Admin_Dashboard = () => {
               ADMIN DASHBOARD
             </Typography>
           </Grid>
-          <Grid item xs={12} md={8} lg={9}>
+          <Grid item xs={12}>
             <Paper sx={paper}>
-              <Typography>
-                Your job is to: verify doctors by visiting the National Medical
-                Council Page, keep a check on patients, create new posts/updates
-                for all users, read feedbacks and respond to them!
+              <Typography variant="h6">
+                <b>Your job is to: </b>
+                <br />
+                Verify doctors by visiting the National Medical Council Page{" "}
+                <br />
+                Keep a check on patients <br />
+                Create new posts/updates for all users <br />
+                Read feedbacks and respond to them!
               </Typography>
             </Paper>
-          </Grid>
-
-          <Grid item xs={12} md={4} lg={3}>
-            <Paper sx={paper}></Paper>
           </Grid>
         </Grid>
       </Container>
