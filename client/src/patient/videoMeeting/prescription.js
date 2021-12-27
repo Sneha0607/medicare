@@ -20,7 +20,31 @@ import { jsPDF } from "jspdf";
 
 const Prescription = (props) => {
   const [open, setOpen] = useState(false);
+  const [doctors, setDoctors] = useState([]);
+  const [patients, setPatients] = useState([]);
   const [prescriptions, setPrescriptions] = useState([]);
+
+  var doctorName = "";
+  var doctorSpeciality = "";
+  var patientName = "";
+  var patientAge = "";
+  var patientGender = "";
+
+  var date = new Date().toLocaleDateString("en-US");
+
+  // FETCH DOCTOR'S DATA FROM DB
+  useEffect(() => {
+    db.collection("doctors").onSnapshot((snapshot) => {
+      setDoctors(snapshot.docs.map((doc) => doc.data()));
+    });
+  }, []);
+
+  // FETCH PATIENT'S DATA FROM DB
+  useEffect(() => {
+    db.collection("patients").onSnapshot((snapshot) => {
+      setPatients(snapshot.docs.map((doc) => doc.data()));
+    });
+  }, []);
 
   ///FETCHING ALL PRESCRIPTIONS FROM DATABASE
   useEffect(() => {
@@ -32,6 +56,25 @@ const Prescription = (props) => {
         setPrescriptions(snapshot.docs.map((doc) => doc.data()));
       });
   }, [props.meetingID]);
+
+  {
+    doctors.map((doctor) => {
+      if (doctor.uid === props.doctorUID) {
+        doctorName = doctor.name;
+        doctorSpeciality = doctor.medicalSpeciality;
+      }
+    });
+  }
+
+  {
+    patients.map((patient) => {
+      if (patient.uid === props.patientUID) {
+        patientName = patient.name;
+        patientAge = patient.age;
+        patientGender = patient.gender;
+      }
+    });
+  }
 
   //FUNCTIONS TO OPEN AND CLOSE DIALOG BOX
   const handleClickOpen = () => {
@@ -46,12 +89,25 @@ const Prescription = (props) => {
   const downloadPrescription = () => {
     var doc = new jsPDF();
     var i = 20;
-    var j = 40;
+    var j = 120;
     doc.setFontSize("15");
-    doc.addImage("/images/Medicare.png", "PNG", 5, 10, 200, 15);
+    doc.addImage("/images/Medicare.png", "PNG", 5, 5, 200, 15);
+    doc.text("Date: ", 20, 30);
+    doc.text(date, 50, 30);
+    doc.text("Doctor: ", 20, 40);
+    doc.text(doctorName, 50, 40);
+    doc.text("Medical Speciality: ", 20, 50);
+    doc.text(doctorSpeciality, 70, 50);
+    doc.text("Patient: ", 20, 70);
+    doc.text(patientName, 50, 70);
+    doc.text("Age: ", 20, 80);
+    doc.text(patientAge, 50, 80);
+    doc.text("Gender: ", 20, 90);
+    doc.text(patientGender, 50, 90);
+    doc.text("Prescription: ", 20, 110);
     prescriptions.map((prescript) => {
       doc.text(prescript.prescription, i, j);
-      j = j + 20;
+      j = j + 10;
     });
     doc.save("doctor_prescription.pdf");
   };
