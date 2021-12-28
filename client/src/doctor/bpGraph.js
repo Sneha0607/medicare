@@ -18,7 +18,7 @@ function createData(date, sugarLevel) {
   return { date, sugarLevel };
 }
 
-const Graph = (props) => {
+const BPGraph = (props) => {
   const theme = useTheme();
   const [sugarLevels, setSugarLevels] = useState([]);
 
@@ -86,4 +86,4 @@ const Graph = (props) => {
   );
 };
 
-export default Graph;
+export default BPGraph;

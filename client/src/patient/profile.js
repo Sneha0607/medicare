@@ -5,7 +5,8 @@ import { db } from "../firebase";
 import { Avatar, Container, Grid, Paper, Typography } from "@mui/material";
 import Title from "./dashboard/title";
 import { container, paper, avatar, upload } from "./styles";
-import Graph from "./graph";
+import BPGraph from "./bpGraph";
+import WeightGraph from "./weightGraph";
 
 const Patient_Profile = () => {
   const { currentUser } = useAuth();
@@ -78,7 +79,20 @@ const Patient_Profile = () => {
                       height: 275,
                     }}
                   >
-                    <Graph uid={patient.uid} />
+                    <BPGraph uid={patient.uid} />
+                  </Paper>
+                </Grid>
+
+                <Grid item xs={12}>
+                  <Paper
+                    sx={{
+                      p: 2,
+                      display: "flex",
+                      flexDirection: "column",
+                      height: 275,
+                    }}
+                  >
+                    <WeightGraph uid={patient.uid} />
                   </Paper>
                 </Grid>
               </Grid>

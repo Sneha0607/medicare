@@ -20,7 +20,7 @@ const Your_Patients = () => {
       });
   }, []);
 
-  console.log(yourPatients);
+  // console.log(yourPatients);
 
   return (
     <>

@@ -54,6 +54,8 @@ const Complete_Details = (props) => {
       uid: props.uid,
       name,
       medicalSpeciality,
+      degree,
+      yearOfReg,
       age,
       regNumber,
       experience,

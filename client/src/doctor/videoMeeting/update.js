@@ -8,23 +8,19 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
-  DialogContentText,
+  Grid,
   DialogTitle,
-  List,
-  ListItem,
-  Typography,
   Divider,
   Tooltip,
 } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
-import DownloadIcon from "@mui/icons-material/Download";
-import { jsPDF } from "jspdf";
 import MonitorHeartIcon from "@mui/icons-material/MonitorHeart";
 
 const Update = (props) => {
   const [open, setOpen] = useState(false);
   const { currentUser } = useAuth();
   const [sugarLevel, setSugarLevel] = useState("");
+  const [weight, setWeight] = useState("");
 
   //FUNCTIONS TO OPEN AND CLOSE DIALOG BOX
   const handleClickOpen = () => {
@@ -39,7 +35,7 @@ const Update = (props) => {
   const updateReports = (e) => {
     e.preventDefault();
 
-    //PUSHING DATA IN DATABASE
+    //PUSHING BP DATA IN DATABASE
     db.collection("patients")
       .doc(`${props.patientUID}`)
       .collection("bloodSugarLevel")
@@ -52,21 +48,21 @@ const Update = (props) => {
         appointmentID: props.meetingID,
       });
 
-    setSugarLevel("");
-  };
+    //PUSHING BP DATA IN DATABASE
+    db.collection("patients")
+      .doc(`${props.patientUID}`)
+      .collection("weight")
+      .doc(`${props.meetingID}`)
+      .set({
+        weight: weight,
+        senderUid: props.doctorUID,
+        senderEmail: currentUser.email,
+        sentAt: new Date(),
+        appointmentID: props.meetingID,
+      });
 
-  //DOWNLOAD PRESCRIPTION FUNCTION
-  const downloadPrescription = () => {
-    // var doc = new jsPDF();
-    // var i = 20;
-    // var j = 40;
-    // doc.setFontSize("15");
-    // doc.addImage("/images/Medicare.png", "PNG", 5, 10, 200, 15);
-    // prescriptions.map((prescript) => {
-    //   doc.text(prescript.prescription, i, j);
-    //   j = j + 20;
-    // });
-    // doc.save("doctor_prescription.pdf");
+    setWeight("");
+    setSugarLevel("");
   };
 
   return (
@@ -92,32 +88,44 @@ const Update = (props) => {
           {/* FORM TO UPDATE REPORTS */}
 
           <form onSubmit={updateReports}>
-            <TextField
-              id="outlined"
-              required
-              label="Blood-Sugar-Level (mg/dL)"
-              color="primary"
-              placeholder="Blood Sugar Level (mg/dL)"
-              value={sugarLevel}
-              onChange={(e) => {
-                setSugarLevel(e.target.value);
-              }}
-            />
-            <Button type="submit" startIcon={<SendIcon />} />
+            <Grid container spacing={1}>
+              <Grid item xs={12}>
+                <TextField
+                  id="outlined"
+                  required
+                  label="Blood-Sugar-Level (mg/dL)"
+                  color="primary"
+                  placeholder="Blood Sugar Level (mg/dL)"
+                  value={sugarLevel}
+                  onChange={(e) => {
+                    setSugarLevel(e.target.value);
+                  }}
+                />
+              </Grid>
+
+              <Grid item xs={12}>
+                <TextField
+                  id="outlined"
+                  required
+                  label="Weight"
+                  color="primary"
+                  placeholder="Weight (kg)"
+                  value={weight}
+                  onChange={(e) => {
+                    setWeight(e.target.value);
+                  }}
+                />
+              </Grid>
+
+              <Grid item xs={12}>
+                <Button type="submit" startIcon={<SendIcon />}>
+                  Update
+                </Button>
+              </Grid>
+            </Grid>
           </form>
         </DialogContent>
         <DialogActions>
-          {/* DOWNLOAD REPORT BUTTON */}
-          <Button
-            onClick={downloadPrescription}
-            style={{
-              textTransform: "none",
-              margin: "2%",
-            }}
-            startIcon={<DownloadIcon />}
-          >
-            Download Prescription
-          </Button>
           <Button onClick={handleClose} color="primary">
             Close
           </Button>
