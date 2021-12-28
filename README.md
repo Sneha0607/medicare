@@ -59,3 +59,14 @@ npm start
 ```
 To get the database working, the firebase configuration needs to be added in client/src/firebase.js file after cloning the repository.
 
+### Demo Images
+![home](https://github.com/Sneha0607/medicare/blob/master/images/1.png)
+<br/>
+![doctor dashboard](https://github.com/Sneha0607/medicare/blob/master/images/2.png)
+<br/>
+![view doctors](https://github.com/Sneha0607/medicare/blob/master/images/3.png)
+<br/>
+![book appointment](https://github.com/Sneha0607/medicare/blob/master/images/4.png)
+<br/>
+![prescription](https://github.com/Sneha0607/medicare/blob/master/images/5.png)
+<br/>
