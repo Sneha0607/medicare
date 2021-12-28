@@ -18,6 +18,7 @@ app.get("/", (req, res) => {
 //SOCKET CONFIGURATION
 
 io.on("connection", (socket) => {
+  // JOIN ROOM EVENT
   socket.on("join room", (roomID) => {
     if (users[roomID]) {
       const length = users[roomID].length;
@@ -49,10 +50,7 @@ io.on("connection", (socket) => {
     });
   });
 
-  socket.on("whiteboard", (data) => {
-    socket.broadcast.emit("whiteboard", data);
-  });
-
+  // DISCONNECT EVENT
   socket.on("disconnect", () => {
     const roomID = socketToRoom[socket.id];
     let room = users[roomID];
