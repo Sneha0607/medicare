@@ -5,6 +5,9 @@
 ## Introduction
 It is an online medical appointments and consultation website, built using NodeJS in backend and ReactJS in frontend. 
 
+## Demo Video
+<a href='https://drive.google.com/drive/folders/1qIo6VMNnSflvXpAh7ofNDfmw-nApK_xW?usp=sharing'>Demo Video</a>
+
 ## Table of Contents
 - [Problem Statement](#problem-statement)
 - [Description](#description)
@@ -62,11 +65,19 @@ To get the database working, the firebase configuration needs to be added in cli
 ### Demo Images
 ![home](https://github.com/Sneha0607/medicare/blob/master/images/1.png)
 <br/>
+![doctor signup](https://github.com/Sneha0607/medicare/blob/master/images/6.png)
+<br/>
 ![doctor dashboard](https://github.com/Sneha0607/medicare/blob/master/images/2.png)
 <br/>
 ![view doctors](https://github.com/Sneha0607/medicare/blob/master/images/3.png)
 <br/>
 ![book appointment](https://github.com/Sneha0607/medicare/blob/master/images/4.png)
 <br/>
+![meeting](https://github.com/Sneha0607/medicare/blob/master/images/8.png)
+<br/>
 ![prescription](https://github.com/Sneha0607/medicare/blob/master/images/5.png)
+<br/>
+![graphs](https://github.com/Sneha0607/medicare/blob/master/images/7.png)
+<br/>
+![admin](https://github.com/Sneha0607/medicare/blob/master/images/9.png)
 <br/>
