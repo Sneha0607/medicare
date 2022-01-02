@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import {
-  Alert,
   Button,
   Grid,
   Box,
@@ -88,7 +86,7 @@ const Complete_Details = (props) => {
             <Grid item xs={12}>
               <Title>Complete/Edit Your Details</Title>
               <Typography variant="subtitle1" gutterBottom>
-                Changes will be reflected in your profile
+                Be careful while editing the important details!
               </Typography>
             </Grid>
             <Grid item xs={12} sm={6}>
